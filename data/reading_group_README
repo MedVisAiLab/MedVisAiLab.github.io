@@ -1,0 +1,47 @@
+Please contact Laura Biester (lbiester@umich.edu) with questions, clarifications, or suggestions.
+
+The reading group page is managed differently from the other pages. Instead of reading from a CSV, we read from a google doc that can be updated easily by presenters. The google doc is published as a CSV at the URL listed in `data/reading_group.url`.
+
+Entries are "activated" on the website by setting the `LiveFlag` to `TRUE` in the google doc. Only Laura Biester (webmaster) and Oana Ignat (reading group coordinator) have permission to update this flag. When updating this flag, the website should always be viewed to ensure that no errors are caused when the entry is added.
+
+Here are the descriptions of what columns are included in reading group csv (refer to when adding a new row to the datafile):
+
+----------
+
+Date (required) - date of the reading group meeting
+
+Time (required) - time of the reading group meeting
+
+Presenters (required) - presenters for the reading group meeting (Multiple presenters should be separated by a semi-colon and a space)
+
+PresentersWebsites (required) - websites for the presenters (If you have multiple presenters, separate their websites by a semi-colon and a space; if a presenter does not have a website, include a blank string in the list)
+
+PaperAuthors (required) - the authors of the paper being presented (If there are multiple papers being presented, separate the lists of authors by a semi-colon and a space)
+
+PaperTitles (required) - the titles of the paper being presented (If there are multiple papers being presented, separate the titles by a semi-colon and a space)
+
+PaperConferences (required) - the conferences that the papers were published in (If there are multiple papers being presented, separate the conferences by a semi-colon and space)
+
+PaperLinks (optional) - links to the papers being presented (If there are multiple papers being presented, separate the links by a semi-colon and a space)
+
+Slides (optional) - links to the slides used in reading group (If there are multiple sets of slides, separate the links by a semi-colon and a space; It will be assumed that the order of the slides corresponds to the order of the papers being presented)
+
+Location (required) - location of the reading group meeting
+
+MeetingLink (optional) - the link to join the meeting, if it is virtual
+
+Category (required) - which website this publication should appear on (ie. "LIT","Girls Encoded"; Multiple categories should be separated by a comma and a space)
+
+Semester (required) - what semester reading group this is (in the format "Winter 20XX" or "Fall 20XX")
+
+Past (required) - boolean - is this a previous semester?
+
+AltDisplayNote (required) - default "TBD" - what is displayed if there is no entry but later entries are provided
+
+LiveFlag (required) - boolean - should this entry be displayed on the website?
+
+LiveOK - computed by google sheet based off of other columns (validation that required columns are present and LiveFlag is true)
+
+----------
+
+NOTE: The order that reading group meetings appear in the google doc will be the order that they appear on the website (sorted by semester).
