@@ -1,0 +1,60 @@
+############# English navigation ##############
+
+# main menu
+[[main]]
+name = "MVAIT"
+url = "/"
+weight = 1
+
+[[main]]
+name = "Team"
+url = "team"
+weight = 2
+
+[[main]]
+name = "Research"
+url = "research/"
+weight = 3
+
+[[main]]
+name = "Project Funding"
+url = "projects"
+weight = 4
+
+
+
+[[main]]
+name = "Positions"
+url = "pos/"
+weight = 5
+
+
+
+[[main]]
+name = "Publications"
+url = "pblctns"
+weight = 6
+
+
+#[[main]]
+#name = "Elements"
+#url = "elements/"
+#weight = 3
+
+
+# footer menu
+[[footer]]
+name = "About"
+url = "about/"
+weight = 1
+
+
+[[footer]]
+name = "Contact"
+url = "eml"
+weight = 2
+
+[[footer]]
+name = "Location"
+url = "location/"
+weight = 3
