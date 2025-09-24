@@ -60,43 +60,20 @@
         box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     }
 
-    /* Image container for consistent sizing */
-    .member-image-container {
-        width: 148px;
-        height: 148px;
-        margin: 0 auto 1.5rem auto;
-        border-radius: 50%;
-        padding: 4px;
-        background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
-        transition: all 0.3s ease;
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
     .member img {
         width: 140px;
         height: 140px;
         border-radius: 50%;
         object-fit: cover;
-        object-position: center;
-        margin: 0;
-        border: none;
-        transition: transform 0.3s ease;
+        margin: 0 auto 1.5rem auto;
+        border: 4px solid #e5e7eb;
+        transition: border-color 0.3s ease;
         flex-shrink: 0;
         display: block;
-        background-color: #f3f4f6;
-    }
-
-    .member:hover .member-image-container {
-        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-        transform: scale(1.05);
     }
 
     .member:hover img {
-        transform: scale(0.98);
+        border-color: #3b82f6;
     }
 
     .member h4 {
@@ -400,20 +377,16 @@
                                 <h3 id=director-of-mvait>Director of MVAIT</h3>
                             </div>
 
-                            <div class="members-grid">
+                            <div class="director-section">
                                 <div class="member">
-                                    <div class="member-image-container">
-                                        <img title="S. Y. Yeo" loading="lazy" decoding="async"
-                                             src="/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_194x194_fill_q100_lanczos_smart1_3.png"
-                                             alt="Si Yong Yeo - Director"
-                                             onerror='this.onerror="null",this.src="/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_194x194_fill_q100_lanczos_smart1_3.png"'>
-                                    </div>
-                                    <div class="member-content">
-                                        <h4><a href="mailto:siyong.yeo@ntu.edu.sg">Si Yong Yeo</a></h4>
-                                        <h5>Director of MVAIT</h5>
-                                        <h5>Assistant Professor</h5>
-                                        <h5>Nanyang Technological University</h5>
-                                    </div>
+                                  <img title="S. Y. Yeo" loading=lazy decoding=async
+                                     src="/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_194x194_fill_q100_lanczos_smart1_3.png"
+                                     alt="Si Yong Yeo - Director">
+                                  <div class="member-content">
+                                      <h4><a href="mailto:siyong.yeo@ntu.edu.sg">Si Yong Yeo</a></h4>
+                                      <h5>Assistant Professor</h5>
+                                      <h5>Nanyang Technological University</h5>
+                                  </div>
                                 </div>
                             </div>
                             <!-- Adjunct Faculty Section -->
@@ -423,11 +396,9 @@
 
                             <div class="members-grid">
                                 <div class="member">
-                                    <div class="member-image-container">
-                                        <img title="Liu Jun" loading="lazy" decoding="async"
-                                             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTT73XSm4mPKnDrEA2y6SPnVHOa-YZXS5eaEZWHmwGR&s"
-                                             alt="Liu Jun">
-                                    </div>
+                                    <img title="Liu Jun" loading="lazy" decoding="async"
+                                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTT73XSm4mPKnDrEA2y6SPnVHOa-YZXS5eaEZWHmwGR&s"
+                                         alt="Liu Jun">
                                     <div class="member-content">
                                         <h4><a href="mailto:j.liu81@lancaster.ac.uk">Liu Jun</a></h4>
                                         <h5>Professor</h5>
@@ -436,11 +407,9 @@
                                 </div>
 
                                 <div class="member">
-                                    <div class="member-image-container">
-                                        <img title="H. L. Leo" loading="lazy" decoding="async"
-                                             src="https://cde.nus.edu.sg/bme/wp-content/uploads/sites/8/2019/02/DrLeo.jpg"
-                                             alt="H. L. Leo">
-                                    </div>
+                                    <img title="H. L. Leo" loading="lazy" decoding="async"
+                                         src="https://cde.nus.edu.sg/bme/wp-content/uploads/sites/8/2019/02/DrLeo.jpg"
+                                         alt="H. L. Leo">
                                     <div class="member-content">
                                         <h4><a href="https://cde.nus.edu.sg/bme/staff/dr-leo/" target="_blank">Hwa Liang Leo</a></h4>
                                         <h5>Associate Professor</h5>
@@ -458,147 +427,110 @@
                             <div class="members-grid">
                                 <!-- Postdocs -->
                                 <div class="member">
-                                    <div class="member-image-container">
-                                        <img title="Liu Jinhua" loading="lazy" decoding="async"
-                                             src="/stdnts/liujinhua_1350_1650.jpg" alt="Liu Jinhua"
-                                             onerror="this.onerror=null;this.src='/stdnts/liujinhua_1350_1650.jpg'">
-                                    </div>
+                                    <img title="Liu Jinhua" loading="lazy" decoding="async"
+                                         src="/stdnts/liujinhua_1350_1650.jpg" alt="Liu Jinhua"
+                                         onerror="this.onerror=null;this.src='/stdnts/liujinhua_1350_1650.jpg'">
                                     <div class="member-content">
                                         <h4>Liu Jinhua</h4>
                                         <h5>Postdoc</h5>
-                                        <h5>Medical AI Research</h5>
                                     </div>
                                 </div>
 
                                 <!-- Research Engineers -->
                                 <div class="member">
-                                    <div class="member-image-container">
-                                        <img title="Fu Chao" loading="lazy" decoding="async"
-                                             src="/stdnts/fuchao_1350_1650.jpg" alt="Fu Chao"
-                                             onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'">
-                                    </div>
+                                    <img title="Fu Chao" loading="lazy" decoding="async"
+                                         src="/stdnts/fuchao_1350_1650.jpg" alt="Fu Chao"
+                                         onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'">
                                     <div class="member-content">
                                         <h4>Fu Chao</h4>
                                         <h5>Research Engineer</h5>
-                                        <h5>Computer Vision</h5>
                                     </div>
                                 </div>
 
                                 <div class="member">
-                                    <div class="member-image-container">
-                                        <img title="Zhang Yinglu" loading="lazy" decoding="async"
-                                             src="/stdnts/ZhangYinglu_1350_1650.jpg" alt="Zhang Yinglu"
-                                             onerror="this.onerror=null;this.src='/stdnts/ZhangYinglu_1350_1650.jpg'">
-                                    </div>
+                                    <img title="Zhang Yinglu" loading="lazy" decoding="async"
+                                         src="/stdnts/ZhangYinglu_1350_1650.jpg" alt="Zhang Yinglu"
+                                         onerror="this.onerror=null;this.src='/stdnts/ZhangYinglu_1350_1650.jpg'">
                                     <div class="member-content">
                                         <h4>Zhang Yinglu</h4>
                                         <h5>Research Engineer</h5>
-                                        <h5>Deep Learning</h5>
                                     </div>
                                 </div>
 
                                 <!-- Doctoral Students -->
                                 <div class="member">
-                                    <div class="member-image-container">
-                                        <img title="Kritsanavis Chongsrid" loading="lazy" decoding="async"
-                                             src="/stdnts/Kritsanavis_hubce8575ae0555b6ffd85258511e6ea59_1892597_135x165_fill_q100_h2_lanczos_smart1_3.webp"
-                                             alt="Kritsanavis Chongsrid"
-                                             onerror="this.onerror=null;this.src='/stdnts/Kritsanavis_hubce8575ae0555b6ffd85258511e6ea59_1892597_135x165_fill_q100_h2_lanczos_smart1_3.png'">
-                                    </div>
+                                    <img title="Kritsanavis Chongsrid" loading="lazy" decoding="async"
+                                         src="/stdnts/Kritsanavis_hubce8575ae0555b6ffd85258511e6ea59_1892597_135x165_fill_q100_h2_lanczos_smart1_3.webp"
+                                         alt="Kritsanavis Chongsrid"
+                                         onerror="this.onerror=null;this.src='/stdnts/Kritsanavis_hubce8575ae0555b6ffd85258511e6ea59_1892597_135x165_fill_q100_h2_lanczos_smart1_3.png'">
                                     <div class="member-content">
                                         <h4>Kritsanavis Chongsrid</h4>
                                         <h5>Doctoral Student</h5>
-                                        <h5>Medical Imaging</h5>
                                     </div>
                                 </div>
 
                                 <div class="member">
-                                    <div class="member-image-container">
-                                        <img title="Chen Yucheng" loading="lazy" decoding="async"
-                                             src="/stdnts/chenyucheng_1350_1650.jpg" alt="Chen Yucheng"
-                                             onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'">
-                                    </div>
+                                    <img title="Chen Yucheng" loading="lazy" decoding="async"
+                                         src="/stdnts/chenyucheng_1350_1650.jpg" alt="Chen Yucheng"
+                                         onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'">
                                     <div class="member-content">
                                         <h4>Chen Yucheng</h4>
                                         <h5>Doctoral Student</h5>
-                                        <h5>AI in Healthcare</h5>
                                     </div>
                                 </div>
 
                                 <div class="member">
-                                    <div class="member-image-container">
-                                        <img title="Shi Yufei" loading="lazy" decoding="async"
-                                             src="/stdnts/YF_hufb29641214417de440a8c2a6156c5942_48963_135x165_fill_q100_h2_lanczos_smart1.webp"
-                                             alt="Shi Yufei"
-                                             onerror="this.onerror=null;this.src='/stdnts/YF_hufb29641214417de440a8c2a6156c5942_48963_135x165_fill_q100_h2_lanczos_smart1.jpeg'">
-                                    </div>
+                                    <img title="Shi Yufei" loading="lazy" decoding="async"
+                                         src="/stdnts/YF_hufb29641214417de440a8c2a6156c5942_48963_135x165_fill_q100_h2_lanczos_smart1.webp"
+                                         alt="Shi Yufei"
+                                         onerror="this.onerror=null;this.src='/stdnts/YF_hufb29641214417de440a8c2a6156c5942_48963_135x165_fill_q100_h2_lanczos_smart1.jpeg'">
                                     <div class="member-content">
                                         <h4>Shi Yufei</h4>
                                         <h5>Doctoral Student</h5>
-                                        <h5>Neural Networks</h5>
                                     </div>
                                 </div>
 
                                 <div class="member">
-                                    <div class="member-image-container">
-                                        <img title="Hane Naghshbandi" loading="lazy" decoding="async"
-                                             src="/stdnts/Hane_hu90458346cda87c3d17a7b93ba7678f41_5250436_135x165_fill_q100_h2_lanczos_smart1.webp"
-                                             alt="Hane Naghshbandi"
-                                             onerror="this.onerror=null;this.src='/stdnts/Hane_hu90458346cda87c3d17a7b93ba7678f41_5250436_135x165_fill_q100_h2_lanczos_smart1.jpg'">
-                                    </div>
+                                    <img title="Hane Naghshbandi" loading="lazy" decoding="async"
+                                         src="/stdnts/Hane_hu90458346cda87c3d17a7b93ba7678f41_5250436_135x165_fill_q100_h2_lanczos_smart1.webp"
+                                         alt="Hane Naghshbandi"
+                                         onerror="this.onerror=null;this.src='/stdnts/Hane_hu90458346cda87c3d17a7b93ba7678f41_5250436_135x165_fill_q100_h2_lanczos_smart1.jpg'">
                                     <div class="member-content">
                                         <h4>Hane Naghshbandi</h4>
                                         <h5>Doctoral Student</h5>
-                                        <h5>Machine Learning</h5>
                                     </div>
                                 </div>
 
                                 <div class="member">
-                                    <div class="member-image-container">
-                                        <img title="Yang Enyu" loading="lazy" decoding="async"
-                                             src="/stdnts/yangenyu_1350_1650.jpg" alt="Yang Enyu"
-                                             onerror="this.onerror=null;this.src='/stdnts/yangenyu_1350_1650.jpg'">
-                                    </div>
-                                    <div class="member-content">
-                                        <h4>Yang Enyu</h4>
-                                        <h5>Doctoral Student</h5>
-                                        <h5>Co-supervised with Dr Hwa Liang Leo</h5>
-                                    </div>
+                                    <img title="Yang Enyu" loading="lazy" decoding="async"
+                                         src="/stdnts/yangenyu_1350_1650.jpg" alt="Yang Enyu"
+                                         onerror="this.onerror=null;this.src='/stdnts/yangenyu_1350_1650.jpg'">
+                                    <h4>Yang Enyu</h4>
+                                    <h5>Doctoral Student</h5>
+                                    <h5>Co-supervised with Dr Hwa Liang Leo</h5>
                                 </div>
 
                                 <div class="member">
-                                    <div class="member-image-container">
-                                        <img title="Huang Naixuan" loading="lazy" decoding="async"
-                                             src="/stdnts/huangnaixuan_1350_1650.jpg" alt="Huang Naixuan"
-                                             onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'">
-                                    </div>
-                                    <div class="member-content">
-                                        <h4>Huang Naixuan</h4>
-                                        <h5>Doctoral Student</h5>
-                                        <h5>Biomedical Engineering</h5>
-                                    </div>
+                                    <img title="Huang Naixuan" loading="lazy" decoding="async"
+                                         src="/stdnts/huangnaixuan_1350_1650.jpg" alt="Huang Naixuan"
+                                         onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'">
+                                    <h4>Huang Naixuan</h4>
+                                    <h5>Doctoral Student</h5>
                                 </div>
 
                                 <div class="member">
-                                    <div class="member-image-container">
-                                        <img title="Zhang Yichi" loading="lazy" decoding="async"
-                                             src="/stdnts/zhangyichi_1350_1650.jpg" alt="Zhang Yichi"
-                                             onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'">
-                                    </div>
-                                    <div class="member-content">
-                                        <h4>Zhang Yichi</h4>
-                                        <h5>Doctoral Student</h5>
-                                        <h5>Data Science</h5>
-                                    </div>
+                                    <img title="Zhang Yichi" loading="lazy" decoding="async"
+                                         src="/stdnts/zhangyichi_1350_1650.jpg" alt="Zhang Yichi"
+                                         onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'">
+                                    <h4>Zhang Yichi</h4>
+                                    <h5>Doctoral Student</h5>
                                 </div>
 
                             <div class="member">
-                                <div class="member-image-container">
-                                    <img title="J. Fan" loading="lazy" decoding="async"
-                                         src="/stdnts/fanjiansong_1350_1650.jpg"
-                                         alt="Fan Jiansong"
-                                         onerror="this.onerror=null;this.src='/stdnts/fanjiansong_1350_1650.jpg'">
-                                </div>
+                                <img title="J. Fan" loading="lazy" decoding="async"
+                                     src="/stdnts/fanjiansong_1350_1650.jpg"
+                                     alt="Fan Jiansong"
+                                     onerror="this.onerror=null;this.src='/stdnts/fanjiansong_1350_1650.jpg'">
                                 <div class="member-content">
                                     <h4 id="fanjiansong">Fan Jiansong</h4>
                                     <h5>Visiting Researcher</h5>
@@ -606,12 +538,10 @@
                             </div>
 
                             <div class="member">
-                                <div class="member-image-container">
-                                    <img title="J. Zhang" loading="lazy" decoding="async"
-                                         src="/stdnts/zhangjinshuo_1350_1650.jpg"
-                                         alt="Zhang Jinshuo"
-                                         onerror="this.onerror=null;this.src='/stdnts/zhangjinshuo_1350_1650.jpg'">
-                                </div>
+                                <img title="J. Zhang" loading="lazy" decoding="async"
+                                     src="/stdnts/zhangjinshuo_1350_1650.jpg"
+                                     alt="Zhang Jinshuo"
+                                     onerror="this.onerror=null;this.src='/stdnts/zhangjinshuo_1350_1650.jpg'">
                                 <div class="member-content">
                                     <h4 id="zhangjinshuo">Zhang Jinshuo</h4>
                                     <h5>Visiting Researcher</h5>
@@ -619,12 +549,10 @@
                             </div>
 
                             <div class="member">
-                                <div class="member-image-container">
-                                    <img title="J. Xu" loading="lazy" decoding="async"
-                                         src="/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.webp"
-                                         alt="Xu Jing"
-                                         onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.webp'">
-                                </div>
+                                <img title="J. Xu" loading="lazy" decoding="async"
+                                     src="/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.webp"
+                                     alt="Xu Jing"
+                                     onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.webp'">
                                 <div class="member-content">
                                     <h4 id="xujing">Xu Jing</h4>
                                     <h5>Visiting Researcher</h5>
@@ -638,31 +566,27 @@
                             <div class="members-grid">
 
                             <div class="member">
-                                <img
-                                title="S. Tan"
-                                loading="lazy"
-                                decoding="async"
-                                                                                                src="data:image/jpeg;base64,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"
-                                alt="Dr Tan Shu Yun"
-                                onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'"
-                                >
-                                <h4 id="dr-tan-shu-yun">Dr Tan Shu Yun</h4>
-                                <h5>Senior Consultant</h5>
-                                <h5>NHGP</h5>
+                                <img title="S. Tan" loading="lazy" decoding="async"
+                                     src="data:image/jpeg;base64,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"
+                                     alt="Dr Tan Shu Yun"
+                                     onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'">
+                                <div class="member-content">
+                                    <h4 id="dr-tan-shu-yun">Dr Tan Shu Yun</h4>
+                                    <h5>Senior Consultant</h5>
+                                    <h5>NHGP</h5>
+                                </div>
                             </div>
 
                             <div class="member">
-                                <img
-                                title="G. How"
-                                loading="lazy"
-                                decoding="async"
-                                                                                                src="https://i1.rgstatic.net/ii/profile.image/902340219531267-1592146081938_Q512/Guo-Yuan-How.jpg"
-                                alt="Dr How Guo Yuan"
-                                onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'"
-                                >
-                                <h4 id="dr-how-guo-yuan">Dr How Guo Yuan</h4>
-                                <h5>Interventional Radiologist</h5>
-                                <h5>NHG</h5>
+                                <img title="G. How" loading="lazy" decoding="async"
+                                     src="https://i1.rgstatic.net/ii/profile.image/902340219531267-1592146081938_Q512/Guo-Yuan-How.jpg"
+                                     alt="Dr How Guo Yuan"
+                                     onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'">
+                                <div class="member-content">
+                                     <h4 id="dr-how-guo-yuan">Dr How Guo Yuan</h4>
+                                     <h5>Interventional Radiologist</h5>
+                                     <h5>NHG</h5>
+                                </div>     
                             </div>
                             </div>
 
@@ -672,200 +596,128 @@
                             <div class="members-grid">
 
                             <div class="member">
-                                <div class="member-image-container">
-                                    <img
-                                    title="S. Nejad"
-                                    loading="lazy"
-                                    decoding="async"
-                                                                    src="/stdnts/Shayan_1350_1650.jpg"
-                                    alt="Shayan Baghayi Nejad"
-                                    onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'"
-                                    >
-                                </div>
+                                <img title="S. Nejad" loading="lazy" decoding="async" 
+                                     src="/stdnts/Shayan_1350_1650.jpg"
+                                     alt="Shayan Baghayi Nejad"
+                                     onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'">
                                 <div class="member-content">
-                                    <h4 id="shayan-baghayi-nejad-sharif-university-of-technology">
-                                    Shayan Baghayi Nejad
-                                    </h4>
+                                     <h4 id="shayan-baghayi-nejad-sharif-university-of-technology">Shayan Baghayi Nejad</h4>
+                                </div>          
+                                
+                            </div>
+
+                            <div class="member">
+                                <img title="A. Khosravi" loading="lazy" decoding="async"
+                                       src="/stdnts/armin_1350_1650.jpg"
+                                       alt="Armin Khosravi"
+                                       onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'">
+                                <div class="member-content">
+                                      <h4 id="armin-khosravi-sharif-university-of-technology">Armin Khosravi</h4>
+                                </div> 
+                            </div>
+
+                            <div class="member">
+                                <img title="A.Khan" loading="lazy" decoding="async"
+                                       src="/stdnts/AdrianK_1350_1650.jpg"
+                                       alt="Adrian Khan"
+                                       onerror="this.onerror=null;this.src='/stdnts/AdrianK_1350_1650.jpg'">
+                                <div class="member-content">
+                                      <h4 id="Adrian-Khan-UCL">Adrian Khan</h4>
                                 </div>
                             </div>
 
                             <div class="member">
-                                <div class="member-image-container">
-                                    <img
-                                    title="A. Khosravi"
-                                    loading="lazy"
-                                    decoding="async"
-                                                                                                    src="/stdnts/armin_1350_1650.jpg"
-                                    alt="Armin Khosravi"
-                                    onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'"
-                                    >
-                                </div>
+                                <img title="H. Zhu" loading="lazy" decoding="async"
+                                       src="/stdnts/ZhuHanQing-1092_1335.jpg"
+                                       alt="Zhu Hanqing"
+                                       onerror="this.onerror=null;this.src='/stdnts/ZhuHanQing-1092_1335.jpg'">
                                 <div class="member-content">
-                                    <h4 id="armin-khosravi-sharif-university-of-technology">
-                                    Armin Khosravi
-                                    </h4>
-                                </div>
-                            </div>
-
-
-                            <div class="member">
-                                <div class="member-image-container">
-                                    <img
-                                    title="A.Khan"
-                                    loading="lazy"
-                                    decoding="async"
-                                                                                                    src="/stdnts/AdrianK_1350_1650.jpg"
-                                    alt="Adrian Khan"
-                                    onerror="this.onerror=null;this.src='/stdnts/AdrianK_1350_1650.jpg'"
-                                    >
-                                </div>
-                                <div class="member-content">
-                                    <h4 id="Adrian-Khan-UCL">
-                                    Adrian Khan
-                                    </h4>
+                                      <h4 id="zhu-hanqing-yong-yoo-lin-school-of-medicine">Zhu Hanqing</h4>
                                 </div>
                             </div>
 
                             <div class="member">
-                                <div class="member-image-container">
-                                    <img
-                                    title="H. Zhu"
-                                    loading="lazy"
-                                    decoding="async"
-                                                                    src="/stdnts/ZhuHanQing-1092_1335.jpg"
-                                    alt="Zhu Hanqing"
-                                    onerror="this.onerror=null;this.src='/stdnts/ZhuHanQing-1092_1335.jpg'"
-                                    >
-                                </div>
+                                <img title="Y. Ji" loading="lazy" decoding="async"
+                                       src="/stdnts/jiyixin_1350_1650.jpg"
+                                       alt="jiyixin"
+                                       onerror="this.onerror=null;this.src='/stdnts/jiyixin_1350_1650.jpg'">
                                 <div class="member-content">
-                                    <h4 id="zhu-hanqing-yong-yoo-lin-school-of-medicine">
-                                    Zhu Hanqing
-                                    </h4>
+                                      <h4 id="jiyixin-NUAA">Ji Yixin</h4>
                                 </div>
                             </div>
 
                             <div class="member">
-                                <div class="member-image-container">
-                                    <img
-                                    title="Y. Ji"
-                                    loading="lazy"
-                                    decoding="async"
-                                                                                                    src="/stdnts/jiyixin_1350_1650.jpg"
-                                    alt="jiyixin"
-                                    onerror="this.onerror=null;this.src='/stdnts/jiyixin_1350_1650.jpg'"
-                                    >
-                                </div>
+                                <img title="Z. Jiang" loading="lazy" decoding="async"
+                                       src="/stdnts/jiangzhencun_1350_1650.jpg"
+                                       alt="Jiangzhencun"
+                                       onerror="this.onerror=null;this.src='/stdnts/jiangzhencun_1350_1650.jpg'">
                                 <div class="member-content">
-                                    <h4 id="jiyixin-NUAA">
-                                    Ji Yixin
-                                    </h4>
+                                      <h4 id="jiangzhencun-Tongji University">Jiang Zhencun</h4>
                                 </div>
                             </div>
 
                             <div class="member">
-                                <div class="member-image-container">
-                                    <img
-                                    title="Z. Jiang"
-                                    loading="lazy"
-                                    decoding="async"
-                                                                                                    src="/stdnts/jiangzhencun_1350_1650.jpg"
-                                    alt="Jiangzhencun"
-                                    onerror="this.onerror=null;this.src='/stdnts/jiangzhencun_1350_1650.jpg'"
-                                    >
-                                </div>
+                                <img title="Y. Yuan" loading="lazy" decoding="async"
+                                       src="/stdnts/yuanyue_1350_1650.jpg"
+                                       alt="Yuan Yue"
+                                       onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'">
                                 <div class="member-content">
-                                    <h4 id="jiangzhencun-Tongji University">
-                                    Jiang Zhencun
-                                    </h4>
-                                </div>
-                            </div>
-
-
-
-                            <div class="member">
-                                <div class="member-image-container">
-                                    <img
-                                    title="Y. Yuan"
-                                    loading="lazy"
-                                    decoding="async"
-                                                                                                    src="/stdnts/yuanyue_1350_1650.jpg"
-                                    alt="Yuan Yue"
-                                    onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'"
-                                    >
-                                </div>
-                                <div class="member-content">
-                                    <h4 id="yuan-yue-hunan-university">
-                                    Yuan Yue
-                                    </h4>
+                                       <h4 id="yuan-yue-hunan-university">Yuan Yue</h4>
                                 </div>
                             </div>
 
 
                             <div class="member">
-                                <div class="member-image-container">
-                                    <img
-                                    title="C. Capobianco"
-                                    loading="lazy"
-                                    decoding="async"
-                                                                                                    src="/stdnts/Chiara_1350_1650.jpg"
-                                    alt="Zhengcun Jiang"
-                                    onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'"
-                                    >
-                                </div>
+                                <img title="C. Capobianco" loading="lazy" decoding="async"
+                                       src="/stdnts/Chiara_1350_1650.jpg"
+                                       alt="Zhengcun Jiang"
+                                       onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'">
                                 <div class="member-content">
-                                    <h4 id="Chiara Capobianco-ETH Zurich">
-                                    Chiara Capobianco
-                                    </h4>
+                                       <h4 id="Chiara Capobianco-ETH Zurich">Chiara Capobianco</h4>
                                 </div>
                             </div>
                             </div>
 
                             <hr>
 
-
-                            <h3 id=alumni>Alumni</h3>
-                            <h5 id=sun-kaiwei-visiting-student-university-of-illinois-urbana-champaign>Sun Kaiwei
+                            <h3 id="alumni">Alumni</h3>
+                            <h5 id="sun-kaiwei-visiting-student-university-of-illinois-urbana-champaign">Sun Kaiwei
                                 (Visiting Student, University of Illinois Urbana-Champaign)</h5>
-                            <h5 id=ruijia-tian-cornell-university>Ruijia Tian (Cornell University)</h5>
-                            <h5 id=yan-dong-visiting-student-tianjin-university>Yan Dong (Visiting Student, Tianjin
+                            <h5 id="ruijia-tian-cornell-university">Ruijia Tian (Cornell University)</h5>
+                            <h5 id="yan-dong-visiting-student-tianjin-university">Yan Dong (Visiting Student, Tianjin
                                 University)</h5>
-                            <h5 id=li-yumeng-visiting-student-nankai-university>Li Yumeng (Visiting Student, Nankai
+                            <h5 id="li-yumeng-visiting-student-nankai-university">Li Yumeng (Visiting Student, Nankai
                                 University)</h5>
-                            <h5 id=ong-kian-eng-doctoral-student>Ong Kian Eng (Doctoral Student)</h5>
+                            <h5 id="ong-kian-eng-doctoral-student">Ong Kian Eng (Doctoral Student)</h5>
                             <hr>
                             <!-- Clinical Partners Section -->
                             <div class="team-section-header">
-                                <h3 id=clinical-partners>Clinical Partners</h3>
+                                <h3 id="clinical-partners">Clinical Partners</h3>
                             </div>
 
                             <div class="members-grid">
                                 <div class="member">
-                                    <div class="member-image-container">
-                                        <img title="Hong Liang Tey" loading="lazy"
-                                         decoding=async
-                                         src=/stdnts/TeyHongLiang_hu74a14d4e534f5f446ae9ad87e09c9a89_24034_135x155_fill_q100_h2_lanczos_smart1.webp
+                                    <img title="Hong Liang Tey" loading="lazy" decoding="async"
+                                         src="/stdnts/TeyHongLiang_hu74a14d4e534f5f446ae9ad87e09c9a89_24034_135x155_fill_q100_h2_lanczos_smart1.webp"
                                          alt="Tey Hong Liang"
-                                onerror='this.onerror="null",this.src="/stdnts/TeyHongLiang_hu74a14d4e534f5f446ae9ad87e09c9a89_24034_135x155_fill_q100_lanczos_smart1.jpg"'>
-                                    </div>
+                                         onerror='this.onerror="null",this.src="/stdnts/TeyHongLiang_hu74a14d4e534f5f446ae9ad87e09c9a89_24034_135x155_fill_q100_lanczos_smart1.jpg"'>
                                     <div class="member-content">
-                                        <h4 id=tey-hong-liang>Tey Hong Liang</h4>
-                                        <h5>Head of Research Division and Senior Consultant</h5>
-                                        <h5>National Skin Centre, Singapore</h5>
-                                        <h5>Clinical Director, Centre for Medtech and Innovations, National Healthcare Group, Singapore</h5>
+                                         <h4 id="tey-hong-liang">Tey Hong Liang</h4>
+                                         <h5>Head of Research Division and Senior Consultant</h5>
+                                         <h5>National Skin Centre, Singapore</h5>
+                                         <h5>Clinical Director, Centre for Medtech and Innovations, National Healthcare Group, Singapore</h5>
                                     </div>
                                 </div>
 
                                 <div class="member">
-                                    <div class="member-image-container">
-                                        <img title="S. M. Koh" loading=lazy decoding=async
-                                             src=https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=yj7KUTUAAAAJ&citpid=1
-                                             alt="Angela S. Koh">
-                                    </div>
+                                    <img title="S. M. Koh" loading="lazy" decoding="async"
+                                         src="https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=yj7KUTUAAAAJ&citpid=1"
+                                         alt="Angela S. Koh">
                                     <div class="member-content">
-                                        <h4><a href=https://www.nhcs.com.sg/profile/koh-su-mei-angela target=_blank>Angela S. Koh</a></h4>
-                                        <h5>Associate Professor</h5>
-                                        <h5>Senior Consultant, Department of Cardiology</h5>
-                                        <h5>National Heart Centre, Singapore</h5>
+                                         <h4><a href="https://www.nhcs.com.sg/profile/koh-su-mei-angela" target="_blank">Angela S. Koh</a></h4>
+                                         <h5>Associate Professor</h5>
+                                         <h5>Senior Consultant, Department of Cardiology</h5>
+                                         <h5>National Heart Centre, Singapore</h5>
                                     </div>
                                 </div>
                             </div>
@@ -877,35 +729,35 @@
         </section>
     </main>
     <footer class="bg-theme-light dark:bg-darkmode-theme-light">
-        <div class=container>
+        <div class="container">
             <div class="row items-center py-10">
                 <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:text-left"><a class="navbar-brand inline-block"
-                        href= /><img fetchpriority=high decoding=async class="img logo-light" width=160 height=32
-                        src=/imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp
-                        alt=MedVisAITechnologies
+                        href= /><img fetchpriority="high" decoding="async" class="img logo-light" width=160 height=32
+                        src="/imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                        alt="MedVisAITechnologies"
                         onerror='this.onerror=null,this.src="/imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
-                    <img fetchpriority=high decoding=async class="img logo-dark" width=160 height=32
-                        src=/imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp
-                        alt=MedVisAITechnologies
+                    <img fetchpriority="high" decoding="async" class="img logo-dark" width=160 height=32
+                        src="/imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                        alt="MedVisAITechnologies"
                         onerror='this.onerror=null,this.src="/imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'></a>
                 </div>
                 <div class="lg:col-6 mb-8 text-center lg:mb-0">
                     <ul>
-                        <li class="m-3 inline-block"><a href=/about />About</a></li>
-                        <li class="m-3 inline-block"><a href=/eml>Contact</a></li>
-                        <li class="m-3 inline-block"><a href=/location />Location</a></li>
+                        <li class="m-3 inline-block"><a href="/about" />About</a></li>
+                        <li class="m-3 inline-block"><a href="/eml">Contact</a></li>
+                        <li class="m-3 inline-block"><a href="/location" />Location</a></li>
                     </ul>
                 </div>
                 <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:mt-0 lg:text-right">
-                    <ul class=social-icons>
-                        <li><a target=_blank aria-label=facebook rel="nofollow noopener"
-                                href=https://www.facebook.com /><i class="fab fa-facebook"></i></a></li>
-                        <li><a target=_blank aria-label=twitter rel="nofollow noopener" href=https://twitter.com /><i
+                    <ul class="social-icons">
+                        <li><a target="_blank" aria-label="facebook" rel="nofollow noopener"
+                                href="https://www.facebook.com" /><i class="fab fa-facebook"></i></a></li>
+                        <li><a target="_blank" aria-label="twitter" rel="nofollow noopener" href="https://twitter.com" /><i
                                 class="fab fa-twitter"></i></a></li>
-                        <li><a target=_blank aria-label=github rel="nofollow noopener" href=https://www.github.com /><i
+                        <li><a target="_blank" aria-label="github" rel="nofollow noopener" href="https://www.github.com" /><i
                                 class="fab fa-github"></i></a></li>
-                        <li><a target=_blank aria-label=linkedin rel="nofollow noopener"
-                                href=https://www.linkedin.com /><i class="fab fa-linkedin"></i></a></li>
+                        <li><a target="_blank" aria-label="linkedin" rel="nofollow noopener"
+                                href="https://www.linkedin.com" /><i class="fab fa-linkedin"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -916,8 +768,8 @@
             </div>
         </div>
     </footer>
-    <script crossorigin=anonymous integrity="sha256-HNvx23yefzYJie2GA7dzwBeKevXtramA+LX4E7XFReM="
-        src=/js/script.min.1cdbf1db7c9e7f360989ed8603b773c0178a7af5edada980f8b5f813b5c545e3.js></script>
+    <script crossorigin="anonymous" integrity="sha256-HNvx23yefzYJie2GA7dzwBeKevXtramA+LX4E7XFReM="
+        src="/js/script.min.1cdbf1db7c9e7f360989ed8603b773c0178a7af5edada980f8b5f813b5c545e3.js"></script>
 
     <!-- Team Page Enhancements -->
     <script>
