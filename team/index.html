@@ -60,20 +60,43 @@
         box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     }
 
+    /* Image container for consistent sizing */
+    .member-image-container {
+        width: 148px;
+        height: 148px;
+        margin: 0 auto 1.5rem auto;
+        border-radius: 50%;
+        padding: 4px;
+        background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
     .member img {
         width: 140px;
         height: 140px;
         border-radius: 50%;
         object-fit: cover;
-        margin: 0 auto 1.5rem auto;
-        border: 4px solid #e5e7eb;
-        transition: border-color 0.3s ease;
+        object-position: center;
+        margin: 0;
+        border: none;
+        transition: transform 0.3s ease;
         flex-shrink: 0;
         display: block;
+        background-color: #f3f4f6;
+    }
+
+    .member:hover .member-image-container {
+        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        transform: scale(1.05);
     }
 
     .member:hover img {
-        border-color: #3b82f6;
+        transform: scale(0.98);
     }
 
     .member h4 {
@@ -379,10 +402,12 @@
 
                             <div class="members-grid">
                                 <div class="member">
-                                    <img title="S. Y. Yeo" loading="lazy" decoding="async"
-                                         src="/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_194x194_fill_q100_lanczos_smart1_3.png"
-                                         alt="Si Yong Yeo - Director"
-                                         onerror='this.onerror="null",this.src="/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_194x194_fill_q100_lanczos_smart1_3.png"'>
+                                    <div class="member-image-container">
+                                        <img title="S. Y. Yeo" loading="lazy" decoding="async"
+                                             src="/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_194x194_fill_q100_lanczos_smart1_3.png"
+                                             alt="Si Yong Yeo - Director"
+                                             onerror='this.onerror="null",this.src="/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_194x194_fill_q100_lanczos_smart1_3.png"'>
+                                    </div>
                                     <div class="member-content">
                                         <h4><a href="mailto:siyong.yeo@ntu.edu.sg">Si Yong Yeo</a></h4>
                                         <h5>Director of MVAIT</h5>
@@ -398,9 +423,11 @@
 
                             <div class="members-grid">
                                 <div class="member">
-                                    <img title="Liu Jun" loading="lazy" decoding="async"
-                                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTT73XSm4mPKnDrEA2y6SPnVHOa-YZXS5eaEZWHmwGR&s"
-                                         alt="Liu Jun">
+                                    <div class="member-image-container">
+                                        <img title="Liu Jun" loading="lazy" decoding="async"
+                                             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTT73XSm4mPKnDrEA2y6SPnVHOa-YZXS5eaEZWHmwGR&s"
+                                             alt="Liu Jun">
+                                    </div>
                                     <div class="member-content">
                                         <h4><a href="mailto:j.liu81@lancaster.ac.uk">Liu Jun</a></h4>
                                         <h5>Professor</h5>
@@ -409,9 +436,11 @@
                                 </div>
 
                                 <div class="member">
-                                    <img title="H. L. Leo" loading="lazy" decoding="async"
-                                         src="https://cde.nus.edu.sg/bme/wp-content/uploads/sites/8/2019/02/DrLeo.jpg"
-                                         alt="H. L. Leo">
+                                    <div class="member-image-container">
+                                        <img title="H. L. Leo" loading="lazy" decoding="async"
+                                             src="https://cde.nus.edu.sg/bme/wp-content/uploads/sites/8/2019/02/DrLeo.jpg"
+                                             alt="H. L. Leo">
+                                    </div>
                                     <div class="member-content">
                                         <h4><a href="https://cde.nus.edu.sg/bme/staff/dr-leo/" target="_blank">Hwa Liang Leo</a></h4>
                                         <h5>Associate Professor</h5>
@@ -429,9 +458,11 @@
                             <div class="members-grid">
                                 <!-- Postdocs -->
                                 <div class="member">
-                                    <img title="Liu Jinhua" loading="lazy" decoding="async"
-                                         src="/stdnts/liujinhua_1350_1650.jpg" alt="Liu Jinhua"
-                                         onerror="this.onerror=null;this.src='/stdnts/liujinhua_1350_1650.jpg'">
+                                    <div class="member-image-container">
+                                        <img title="Liu Jinhua" loading="lazy" decoding="async"
+                                             src="/stdnts/liujinhua_1350_1650.jpg" alt="Liu Jinhua"
+                                             onerror="this.onerror=null;this.src='/stdnts/liujinhua_1350_1650.jpg'">
+                                    </div>
                                     <div class="member-content">
                                         <h4>Liu Jinhua</h4>
                                         <h5>Postdoc</h5>
@@ -441,9 +472,11 @@
 
                                 <!-- Research Engineers -->
                                 <div class="member">
-                                    <img title="Fu Chao" loading="lazy" decoding="async"
-                                         src="/stdnts/fuchao_1350_1650.jpg" alt="Fu Chao"
-                                         onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'">
+                                    <div class="member-image-container">
+                                        <img title="Fu Chao" loading="lazy" decoding="async"
+                                             src="/stdnts/fuchao_1350_1650.jpg" alt="Fu Chao"
+                                             onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'">
+                                    </div>
                                     <div class="member-content">
                                         <h4>Fu Chao</h4>
                                         <h5>Research Engineer</h5>
@@ -452,9 +485,11 @@
                                 </div>
 
                                 <div class="member">
-                                    <img title="Zhang Yinglu" loading="lazy" decoding="async"
-                                         src="/stdnts/ZhangYinglu_1350_1650.jpg" alt="Zhang Yinglu"
-                                         onerror="this.onerror=null;this.src='/stdnts/ZhangYinglu_1350_1650.jpg'">
+                                    <div class="member-image-container">
+                                        <img title="Zhang Yinglu" loading="lazy" decoding="async"
+                                             src="/stdnts/ZhangYinglu_1350_1650.jpg" alt="Zhang Yinglu"
+                                             onerror="this.onerror=null;this.src='/stdnts/ZhangYinglu_1350_1650.jpg'">
+                                    </div>
                                     <div class="member-content">
                                         <h4>Zhang Yinglu</h4>
                                         <h5>Research Engineer</h5>
@@ -464,10 +499,12 @@
 
                                 <!-- Doctoral Students -->
                                 <div class="member">
-                                    <img title="Kritsanavis Chongsrid" loading="lazy" decoding="async"
-                                         src="/stdnts/Kritsanavis_hubce8575ae0555b6ffd85258511e6ea59_1892597_135x165_fill_q100_h2_lanczos_smart1_3.webp"
-                                         alt="Kritsanavis Chongsrid"
-                                         onerror="this.onerror=null;this.src='/stdnts/Kritsanavis_hubce8575ae0555b6ffd85258511e6ea59_1892597_135x165_fill_q100_h2_lanczos_smart1_3.png'">
+                                    <div class="member-image-container">
+                                        <img title="Kritsanavis Chongsrid" loading="lazy" decoding="async"
+                                             src="/stdnts/Kritsanavis_hubce8575ae0555b6ffd85258511e6ea59_1892597_135x165_fill_q100_h2_lanczos_smart1_3.webp"
+                                             alt="Kritsanavis Chongsrid"
+                                             onerror="this.onerror=null;this.src='/stdnts/Kritsanavis_hubce8575ae0555b6ffd85258511e6ea59_1892597_135x165_fill_q100_h2_lanczos_smart1_3.png'">
+                                    </div>
                                     <div class="member-content">
                                         <h4>Kritsanavis Chongsrid</h4>
                                         <h5>Doctoral Student</h5>
@@ -476,9 +513,11 @@
                                 </div>
 
                                 <div class="member">
-                                    <img title="Chen Yucheng" loading="lazy" decoding="async"
-                                         src="/stdnts/chenyucheng_1350_1650.jpg" alt="Chen Yucheng"
-                                         onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'">
+                                    <div class="member-image-container">
+                                        <img title="Chen Yucheng" loading="lazy" decoding="async"
+                                             src="/stdnts/chenyucheng_1350_1650.jpg" alt="Chen Yucheng"
+                                             onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'">
+                                    </div>
                                     <div class="member-content">
                                         <h4>Chen Yucheng</h4>
                                         <h5>Doctoral Student</h5>
@@ -487,10 +526,12 @@
                                 </div>
 
                                 <div class="member">
-                                    <img title="Shi Yufei" loading="lazy" decoding="async"
-                                         src="/stdnts/YF_hufb29641214417de440a8c2a6156c5942_48963_135x165_fill_q100_h2_lanczos_smart1.webp"
-                                         alt="Shi Yufei"
-                                         onerror="this.onerror=null;this.src='/stdnts/YF_hufb29641214417de440a8c2a6156c5942_48963_135x165_fill_q100_h2_lanczos_smart1.jpeg'">
+                                    <div class="member-image-container">
+                                        <img title="Shi Yufei" loading="lazy" decoding="async"
+                                             src="/stdnts/YF_hufb29641214417de440a8c2a6156c5942_48963_135x165_fill_q100_h2_lanczos_smart1.webp"
+                                             alt="Shi Yufei"
+                                             onerror="this.onerror=null;this.src='/stdnts/YF_hufb29641214417de440a8c2a6156c5942_48963_135x165_fill_q100_h2_lanczos_smart1.jpeg'">
+                                    </div>
                                     <div class="member-content">
                                         <h4>Shi Yufei</h4>
                                         <h5>Doctoral Student</h5>
@@ -499,10 +540,12 @@
                                 </div>
 
                                 <div class="member">
-                                    <img title="Hane Naghshbandi" loading="lazy" decoding="async"
-                                         src="/stdnts/Hane_hu90458346cda87c3d17a7b93ba7678f41_5250436_135x165_fill_q100_h2_lanczos_smart1.webp"
-                                         alt="Hane Naghshbandi"
-                                         onerror="this.onerror=null;this.src='/stdnts/Hane_hu90458346cda87c3d17a7b93ba7678f41_5250436_135x165_fill_q100_h2_lanczos_smart1.jpg'">
+                                    <div class="member-image-container">
+                                        <img title="Hane Naghshbandi" loading="lazy" decoding="async"
+                                             src="/stdnts/Hane_hu90458346cda87c3d17a7b93ba7678f41_5250436_135x165_fill_q100_h2_lanczos_smart1.webp"
+                                             alt="Hane Naghshbandi"
+                                             onerror="this.onerror=null;this.src='/stdnts/Hane_hu90458346cda87c3d17a7b93ba7678f41_5250436_135x165_fill_q100_h2_lanczos_smart1.jpg'">
+                                    </div>
                                     <div class="member-content">
                                         <h4>Hane Naghshbandi</h4>
                                         <h5>Doctoral Student</h5>
@@ -511,9 +554,11 @@
                                 </div>
 
                                 <div class="member">
-                                    <img title="Yang Enyu" loading="lazy" decoding="async"
-                                         src="/stdnts/yangenyu_1350_1650.jpg" alt="Yang Enyu"
-                                         onerror="this.onerror=null;this.src='/stdnts/yangenyu_1350_1650.jpg'">
+                                    <div class="member-image-container">
+                                        <img title="Yang Enyu" loading="lazy" decoding="async"
+                                             src="/stdnts/yangenyu_1350_1650.jpg" alt="Yang Enyu"
+                                             onerror="this.onerror=null;this.src='/stdnts/yangenyu_1350_1650.jpg'">
+                                    </div>
                                     <div class="member-content">
                                         <h4>Yang Enyu</h4>
                                         <h5>Doctoral Student</h5>
@@ -522,9 +567,11 @@
                                 </div>
 
                                 <div class="member">
-                                    <img title="Huang Naixuan" loading="lazy" decoding="async"
-                                         src="/stdnts/huangnaixuan_1350_1650.jpg" alt="Huang Naixuan"
-                                         onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'">
+                                    <div class="member-image-container">
+                                        <img title="Huang Naixuan" loading="lazy" decoding="async"
+                                             src="/stdnts/huangnaixuan_1350_1650.jpg" alt="Huang Naixuan"
+                                             onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'">
+                                    </div>
                                     <div class="member-content">
                                         <h4>Huang Naixuan</h4>
                                         <h5>Doctoral Student</h5>
@@ -533,9 +580,11 @@
                                 </div>
 
                                 <div class="member">
-                                    <img title="Zhang Yichi" loading="lazy" decoding="async"
-                                         src="/stdnts/zhangyichi_1350_1650.jpg" alt="Zhang Yichi"
-                                         onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'">
+                                    <div class="member-image-container">
+                                        <img title="Zhang Yichi" loading="lazy" decoding="async"
+                                             src="/stdnts/zhangyichi_1350_1650.jpg" alt="Zhang Yichi"
+                                             onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.png'">
+                                    </div>
                                     <div class="member-content">
                                         <h4>Zhang Yichi</h4>
                                         <h5>Doctoral Student</h5>
@@ -544,10 +593,12 @@
                                 </div>
 
                             <div class="member">
-                                <img title="J. Fan" loading="lazy" decoding="async"
-                                     src="/stdnts/fanjiansong_1350_1650.jpg"
-                                     alt="Fan Jiansong"
-                                     onerror="this.onerror=null;this.src='/stdnts/fanjiansong_1350_1650.jpg'">
+                                <div class="member-image-container">
+                                    <img title="J. Fan" loading="lazy" decoding="async"
+                                         src="/stdnts/fanjiansong_1350_1650.jpg"
+                                         alt="Fan Jiansong"
+                                         onerror="this.onerror=null;this.src='/stdnts/fanjiansong_1350_1650.jpg'">
+                                </div>
                                 <div class="member-content">
                                     <h4 id="fanjiansong">Fan Jiansong</h4>
                                     <h5>Visiting Researcher</h5>
@@ -555,10 +606,12 @@
                             </div>
 
                             <div class="member">
-                                <img title="J. Zhang" loading="lazy" decoding="async"
-                                     src="/stdnts/zhangjinshuo_1350_1650.jpg"
-                                     alt="Zhang Jinshuo"
-                                     onerror="this.onerror=null;this.src='/stdnts/zhangjinshuo_1350_1650.jpg'">
+                                <div class="member-image-container">
+                                    <img title="J. Zhang" loading="lazy" decoding="async"
+                                         src="/stdnts/zhangjinshuo_1350_1650.jpg"
+                                         alt="Zhang Jinshuo"
+                                         onerror="this.onerror=null;this.src='/stdnts/zhangjinshuo_1350_1650.jpg'">
+                                </div>
                                 <div class="member-content">
                                     <h4 id="zhangjinshuo">Zhang Jinshuo</h4>
                                     <h5>Visiting Researcher</h5>
@@ -566,10 +619,12 @@
                             </div>
 
                             <div class="member">
-                                <img title="J. Xu" loading="lazy" decoding="async"
-                                     src="/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.webp"
-                                     alt="Xu Jing"
-                                     onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.webp'">
+                                <div class="member-image-container">
+                                    <img title="J. Xu" loading="lazy" decoding="async"
+                                         src="/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.webp"
+                                         alt="Xu Jing"
+                                         onerror="this.onerror=null;this.src='/images/avatar_hu2fb2c1ffbbc34375e1753f29fe535e66_2271_135x165_fill_q100_h2_lanczos_smart1_3.webp'">
+                                </div>
                                 <div class="member-content">
                                     <h4 id="xujing">Xu Jing</h4>
                                     <h5>Visiting Researcher</h5>
@@ -753,7 +808,8 @@
 
                             <div class="members-grid">
                                 <div class="member">
-                                    <img title="Hong Liang Tey" loading=lazy
+                                    <div class="member-image-container">
+                                        <img title="Hong Liang Tey" loading="lazy"
                                          decoding=async
                                          src=/stdnts/TeyHongLiang_hu74a14d4e534f5f446ae9ad87e09c9a89_24034_135x155_fill_q100_h2_lanczos_smart1.webp
                                          alt="Tey Hong Liang"
