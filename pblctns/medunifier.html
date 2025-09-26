@@ -170,6 +170,22 @@
             color: #ecf0f1;
         }
 
+        .citation-box {
+            background: #f8f9fa !important;
+        }
+
+        .dark .citation-box {
+            background: #2c3e50 !important;
+        }
+
+        .citation-box pre {
+            color: #000 !important;
+        }
+
+        .dark .citation-box pre {
+            color: #ecf0f1 !important;
+        }
+
         .contributions {
             background: #f8f9fa;
             padding: 1.5rem;
@@ -350,7 +366,7 @@
 
             <!-- Method figure -->
             <div class="method-figure">
-                <img src="imgs/MedUnifier-Figure 1.png" alt="MedUnifier Framework Architecture" style="max-width: 50%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <img src="imgs/MedUnifier-Figure 1.png" alt="MedUnifier Framework Architecture" style="max-width: 50%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
                 <div class="figure-caption">
                     <strong>Figure 1.</strong> Our MedUnifier framework incorporates learnable embeddings to enable multi-modal interactions. The red components focus on the initial extraction of visual features and the reconstruction of medical images. The green elements are dedicated to the modelling and interpretation of medical reports. Meanwhile, the blue components apply a range of attention-masking strategies to achieve a comprehensive fusion of image and text representations.
                 </div>
@@ -380,7 +396,7 @@
 
             <!-- Results figure -->
             <div class="results-figure">
-                <img src="imgs/MedUnifier-Figure 3.png" alt="MedUnifier Generated vs Ground Truth Reports" style="max-width: 100%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <img src="imgs/MedUnifier-Figure 3.png" alt="MedUnifier Generated vs Ground Truth Reports" style="max-width: 50%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
                 <div class="figure-caption">
                     <strong>Figure 3.</strong> Comparison of ground truth and generated radiology reports reveals strong semantic alignment. In the top figure, both reports describe normal heart size, no pneumothorax or pleural effusion, and a normal cardiomediastinal silhouette, with the generated text adding details on osseous structures/intrathoracic processes. In the bottom figure, both reports align on pneumothorax and cardiomegaly. The same colours denote matched content between the generated sequences and the ground truth report.
                 </div>
@@ -399,8 +415,8 @@
             </div>
 
             <h2 class="section-title">Citation</h2>
-            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; font-family: monospace; font-size: 0.9rem; overflow-x: auto;">
-<pre style="margin: 0;">@inproceedings{zhang2025medunifier,
+            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; font-family: monospace; font-size: 0.9rem; overflow-x: auto;" class="citation-box">
+<pre style="margin: 0; color: #000;">@inproceedings{zhang2025medunifier,
   title={MedUnifier: Unifying Vision-and-Language Pre-training on Medical Data with Vision Generation Task using Discrete Visual Representations},
   author={Zhang, Ziyang and Yu, Yang and Chen, Yucheng and Yang, Xulei and Yeo, Si Yong},
   booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
