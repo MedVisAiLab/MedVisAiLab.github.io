@@ -293,14 +293,18 @@
             </h1>
 
             <div class="authors">
-                <div class="author-name">Ziyang Zhang<sup>1</sup></div>
-                <div class="author-name">Yang Yu<sup>1</sup></div>
-                <div class="author-name">Yucheng Chen<sup>1</sup></div>
-                <div class="author-name">Xulei Yang<sup>1</sup></div>
-                <div class="author-name">Si Yong Yeo<sup>1</sup></div>
+                <div class="author-name">Ziyang Zhang<sup>1,2</sup></div>
+                <div class="author-name">Yang Yu<sup>3</sup></div>
+                <div class="author-name">Yucheng Chen<sup>1,4</sup></div>
+                <div class="author-name">Xulei Yang<sup>3,*</sup></div>
+                <div class="author-name">Si Yong Yeo<sup>1,4,*</sup></div>
 
                 <div class="affiliation">
-                    <sup>1</sup>Nanyang Technological University, Singapore
+                    <sup>1</sup>MedVisAI Lab<br>
+                    <sup>2</sup>ECE, Northwestern University<br>
+                    <sup>3</sup>Institute for Infocomm Research (I2R), A*STAR, Singapore<br>
+                    <sup>4</sup>Lee Kong Chian School of Medicine, Nanyang Technological University<br>
+                    <sup>*</sup>Corresponding authors
                 </div>
             </div>
 
@@ -343,14 +347,19 @@
                 <p>The framework utilizes <span class="highlight">vector quantization</span> to learn discrete visual representations, which facilitates more effective cross-modal alignment and enables the generation of high-quality medical images guided by textual descriptions.</p>
             </div>
 
-            <!-- Placeholder for method figure -->
+            <!-- Method figure -->
             <div class="method-figure">
-                <div style="background: #f8f9fa; padding: 3rem; text-align: center; border-radius: 0.5rem; border: 2px dashed #dee2e6;">
-                    <p style="color: #6c757d; margin: 0; font-style: italic;">Method Architecture Figure</p>
-                    <p style="color: #6c757d; margin: 0.5rem 0 0 0; font-size: 0.9rem;">Detailed architecture diagram showing the four learning objectives and vector quantization process</p>
-                </div>
+                <img src="imgs/MedUnifier-Figure 1.png" alt="MedUnifier Framework Architecture" style="max-width: 100%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                 <div class="figure-caption">
-                    Figure 1: MedUnifier framework architecture showing the integration of vision-language pre-training with text-grounded image generation capabilities.
+                    <strong>Figure 1.</strong> Our MedUnifier framework incorporates learnable embeddings to enable multi-modal interactions. The red components focus on the initial extraction of visual features and the reconstruction of medical images. The green elements are dedicated to the modelling and interpretation of medical reports. Meanwhile, the blue components apply a range of attention-masking strategies to achieve a comprehensive fusion of image and text representations.
+                </div>
+            </div>
+
+            <!-- Detailed architecture figure -->
+            <div class="method-figure">
+                <img src="imgs/MedUnifier-Figure 2.png" alt="MedUnifier Model Architecture and Learning Objectives" style="max-width: 100%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <div class="figure-caption">
+                    <strong>Figure 2.</strong> Left: model architecture consists of an image-text encoder, a text generator, and an image generator to extract the most relevant visual and textual representations by optimizing four distinctive loss functions (ITM, ITC, ITG, TIG). Right: self-attention masking strategies for different learning objectives. Bottom: detailed learning objectives. Integrating visual and textual information enables deep fusion through cross-modal interaction and allows each modality to be processed independently for uni-modal generation.
                 </div>
             </div>
 
@@ -368,14 +377,11 @@
                 <p>The model's ability to both understand and generate medical content positions it as a significant advancement toward an <span class="highlight">"all-in-one" VLP model</span> for medical applications.</p>
             </div>
 
-            <!-- Placeholder for results figure -->
+            <!-- Results figure -->
             <div class="results-figure">
-                <div style="background: #f8f9fa; padding: 3rem; text-align: center; border-radius: 0.5rem; border: 2px dashed #dee2e6;">
-                    <p style="color: #6c757d; margin: 0; font-style: italic;">Results Comparison Figure</p>
-                    <p style="color: #6c757d; margin: 0.5rem 0 0 0; font-size: 0.9rem;">Performance comparison across different medical imaging tasks and benchmarks</p>
-                </div>
+                <img src="imgs/MedUnifier-Figure 3.png" alt="MedUnifier Generated vs Ground Truth Reports" style="max-width: 100%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                 <div class="figure-caption">
-                    Figure 2: Comprehensive evaluation results showing MedUnifier's superior performance across uni-modal, cross-modal, and multi-modal medical tasks.
+                    <strong>Figure 3.</strong> Comparison of ground truth and generated radiology reports reveals strong semantic alignment. In the top figure, both reports describe normal heart size, no pneumothorax or pleural effusion, and a normal cardiomediastinal silhouette, with the generated text adding details on osseous structures/intrathoracic processes. In the bottom figure, both reports align on pneumothorax and cardiomegaly. The same colours denote matched content between the generated sequences and the ground truth report.
                 </div>
             </div>
 
