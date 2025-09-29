@@ -1,0 +1,502 @@
+<!doctype html>
+<html itemscope lang="en-us" itemtype="http://schema.org/WebPage">
+
+<head>
+    <meta charset="utf-8">
+    <title>ColonNeRF: High-fidelity neural reconstruction of long colonoscopy</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+    <meta name="theme-name" content="hugoplate">
+    <link rel="shortcut icon" href="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_96x0_resize_lanczos_3.png" type="image/x-icon">
+    <link rel="icon" href="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_96x0_resize_lanczos_3.png" type="image/x-icon">
+    <base href="https://medvisailab.github.io/pblctns/">
+
+    <meta name="description" content="ColonNeRF: High-fidelity neural reconstruction of long colonoscopy using Neural Radiance Fields for comprehensive colon structure modeling">
+    <meta name="keywords" content="Computer Vision, Medical AI, Neural Radiance Fields, NeRF, Colonoscopy, Medical Imaging, 3D Reconstruction">
+    <meta name="author" content="MedVisAI Lab">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="ColonNeRF: High-fidelity neural reconstruction of long colonoscopy">
+    <meta property="og:description" content="High-fidelity neural reconstruction of long colonoscopy using Neural Radiance Fields for comprehensive colon structure modeling">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://medvisailab.github.io/pblctns/colonnerf.html">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:title" content="ColonNeRF: High-fidelity neural reconstruction of long colonoscopy">
+    <meta name="twitter:description" content="High-fidelity neural reconstruction of long colonoscopy using Neural Radiance Fields for comprehensive colon structure modeling">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600&family=Signika:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link href="../css/style.min.80b93bb3a795f7194d0ca0c445309f1547c3c019264bfd28165ca93c97401b5d.css" rel="stylesheet">
+    <link href="../css/mvait-enhancements.css" rel="stylesheet">
+    <link href="../css/theme-fixes.css" rel="stylesheet">
+
+    <style>
+        .project-page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .project-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+
+        .dark .project-title {
+            color: #ecf0f1;
+        }
+
+        .authors {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #34495e;
+        }
+
+        .dark .authors {
+            color: #bdc3c7;
+        }
+
+        .author-name {
+            margin: 0 0.5rem;
+        }
+
+        .affiliation {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 0.5rem;
+        }
+
+        .dark .affiliation {
+            color: #95a5a6;
+        }
+
+        .links {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .link-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            margin: 0.5rem;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: background 0.3s ease;
+            font-weight: 600;
+        }
+
+        .link-btn:hover {
+            background: #2980b9;
+            color: white;
+        }
+
+        .link-btn.arxiv {
+            background: #e74c3c;
+        }
+
+        .link-btn.arxiv:hover {
+            background: #c0392b;
+        }
+
+        .link-btn.video {
+            background: #9b59b6;
+        }
+
+        .link-btn.video:hover {
+            background: #8e44ad;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1rem 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        .dark .section-title {
+            color: #ecf0f1;
+        }
+
+        .abstract, .method-section, .results-section {
+            margin-bottom: 2rem;
+            text-align: justify;
+        }
+
+        .method-figure, .results-figure {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .method-figure img, .results-figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .figure-caption {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .dark .figure-caption {
+            color: #95a5a6;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8e6cf 0%, #dcedc1 100%);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+        }
+
+        .dark .highlight {
+            background: linear-gradient(120deg, #2c3e50 0%, #34495e 100%);
+            color: #ecf0f1;
+        }
+
+        .citation-box {
+            background: #f8f9fa !important;
+        }
+
+        .dark .citation-box {
+            background: #2c3e50 !important;
+        }
+
+        .citation-box pre {
+            color: #000 !important;
+        }
+
+        .dark .citation-box pre {
+            color: #ecf0f1 !important;
+        }
+
+        .contributions {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #3498db;
+            margin: 1.5rem 0;
+        }
+
+        .dark .contributions {
+            background: #2c3e50;
+            color: #ecf0f1;
+        }
+
+        .contributions ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+
+        .contributions li {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .project-page {
+                padding: 1rem;
+            }
+
+            .project-title {
+                font-size: 2rem;
+            }
+
+            .link-btn {
+                display: block;
+                margin: 0.5rem auto;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header sticky top-0 z-30">
+        <nav class="navbar container">
+            <div class="order-0">
+                <a class="navbar-brand block" href="../">
+                    <img fetchpriority="high" decoding="async" class="img logo-light" width="160" height="32"
+                        src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                        alt="MedVisAITechnologies"
+                        onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                    <img fetchpriority="high" decoding="async" class="img logo-dark" width="160" height="32"
+                        src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                        alt="MedVisAITechnologies"
+                        onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                </a>
+            </div>
+
+            <input id="nav-toggle" type="checkbox" class="hidden">
+            <label id="show-button" for="nav-toggle" class="order-2 flex cursor-pointer items-center md:order-1 md:hidden">
+                <svg class="h-6 fill-current" viewBox="0 0 20 20">
+                    <title>Menu Open</title>
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0V0z" />
+                </svg>
+            </label>
+
+            <label id="hide-button" for="nav-toggle" class="order-2 hidden cursor-pointer items-center md:order-1">
+                <svg class="h-6 fill-current" viewBox="0 0 20 20">
+                    <title>Menu Close</title>
+                    <polygon points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2" transform="rotate(45 10 10)" />
+                </svg>
+            </label>
+
+            <ul id="nav-menu" class="navbar-nav order-3 hidden w-full pb-6 lg:order-1 lg:flex lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8">
+                <li class="nav-item"><a class="nav-link" href="../">MVAIT</a></li>
+                <li class="nav-item"><a class="nav-link" href="../team">Team</a></li>
+                <li class="nav-item"><a class="nav-link" href="../research/">Research</a></li>
+                <li class="nav-item"><a class="nav-link" href="../projects">Project Funding</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pos/">Positions</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pblctns">Publications</a></li>
+                <li class="mt-4 inline-block lg:hidden"><a class="btn btn-outline-primary btn-sm" href="../eml">Contact</a></li>
+            </ul>
+
+            <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
+                <div class="theme-switcher mr-5">
+                    <input id="theme-switcher" data-theme-switcher type="checkbox">
+                    <label for="theme-switcher">
+                        <span class="sr-only">theme switcher</span>
+                        <span>
+                            <svg class="absolute left-[4px] top-[4px] z-10 opacity-100 dark:opacity-0" viewBox="0 0 56 56" fill="#fff" height="16" width="16">
+                                <path d="M30 4.6c0-1-.9-2-2-2a2 2 0 00-2 2v5c0 1 .9 2 2 2s2-1 2-2zm9.6 9a2 2 0 000 2.8c.8.8 2 .8 2.9.0L46 13a2 2 0 000-2.9 2 2 0 00-3 0zm-26 2.8c.7.8 2 .8 2.8.0.8-.7.8-2 0-2.9L13 10c-.7-.7-2-.8-2.9.0-.7.8-.7 2.1.0 3zM28 16A12 12 0 0016 28a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0028 16zm23.3 14c1.1.0 2-.9 2-2s-.9-2-2-2h-4.9a2 2 0 00-2 2c0 1.1 1 2 2 2zM4.7 26a2 2 0 00-2 2c0 1.1.9 2 2 2h4.9c1 0 2-.9 2-2s-1-2-2-2zm37.8 13.6a2 2 0 00-3 0 2 2 0 000 2.9l3.6 3.5a2 2 0 002.9.0c.8-.8.8-2.1.0-3zM10 43.1a2 2 0 000 2.9c.8.7 2.1.8 3 0l3.4-3.5c.8-.8.8-2.1.0-2.9s-2-.8-2.9.0zm20 3.4c0-1.1-.9-2-2-2a2 2 0 00-2 2v4.9c0 1 .9 2 2 2s2-1 2-2z" />
+                            </svg>
+                            <svg class="absolute left-[4px] top-[4px] z-10 opacity-0 dark:opacity-100" viewBox="0 0 24 24" fill="none" height="16" width="16">
+                                <path fill="#000" fill-rule="evenodd" clip-rule="evenodd" d="M8.2 2.2c1-.4 2 .6 1.6 1.5-1 3-.4 6.4 1.8 8.7a8.4 8.4.0 008.7 1.8c1-.3 2 .5 1.5 1.5v.1A10.3 10.3.0 0112.4 22 10.3 10.3.0 013.2 6.7c1-2 2.9-3.5 4.9-4.4z" />
+                            </svg>
+                        </span>
+                    </label>
+                </div>
+                <script>
+                    var themeSwitch, darkMode = !0;
+                    localStorage.getItem("theme") === "dark" ? darkMode = !0 : localStorage.getItem("theme") === "light" && (darkMode = !1);
+                    darkMode && document.documentElement.classList.toggle("dark");
+                    themeSwitch = document.querySelectorAll("[data-theme-switcher]");
+                    document.addEventListener("DOMContentLoaded", () => {
+                        [].forEach.call(themeSwitch, function (e) {
+                            e.checked = !!darkMode;
+                            e.addEventListener("click", () => {
+                                document.documentElement.classList.toggle("dark");
+                                localStorage.setItem("theme", document.documentElement.classList.contains("dark") ? "dark" : "light")
+                            })
+                        })
+                    });
+                </script>
+                <a href="../eml" class="btn btn-outline-primary btn-sm hidden lg:inline-block">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="project-page">
+            <h1 class="project-title">
+                ColonNeRF: High-fidelity neural reconstruction of long colonoscopy
+            </h1>
+
+            <div class="authors">
+                <div style="margin-bottom: 1rem;">
+                    <span class="author-name">Yufei Shi<sup>1,*</sup></span>
+                    <span class="author-name">Beijia Lu<sup>1,*</sup></span>
+                    <span class="author-name">Jia-Wei Liu<sup>2,†</sup></span>
+                    <span class="author-name">Ming Li<sup>3</sup></span>
+                    <span class="author-name">Si Yong Yeo<sup>4</sup></span>
+                    <span class="author-name">Mike Zheng Shou<sup>1,✉</sup></span>
+                </div>
+
+                <div class="affiliation">
+                    <sup>1</sup>Show Lab, National University of Singapore &nbsp;&nbsp;
+                    <sup>2</sup>Institute of Data Science, National University of Singapore &nbsp;&nbsp;
+                    <sup>3</sup>Northwestern University &nbsp;&nbsp;
+                    <sup>4</sup>MedVisAI Lab, Lee Kong Chian School of Medicine, Nanyang Technological University
+                </div>
+            </div>
+
+            <div class="links">
+                <a href="https://arxiv.org/abs/2312.02015" class="link-btn arxiv" target="_blank">📚 arXiv</a>
+                <a href="https://showlab.github.io/ColonNeRF/" class="link-btn" target="_blank">🌐 Original Project Page</a>
+            </div>
+
+            <h2 class="section-title">Abstract</h2>
+            <div class="abstract">
+                <p>ColonNeRF introduces a novel approach to <span class="highlight">high-fidelity neural reconstruction of long colonoscopy sequences</span> using Neural Radiance Fields (NeRF). Traditional colonoscopy reconstruction methods face significant challenges due to the complex geometric structures of the colon, dissimilarity among colon segments, and sparse viewpoint constraints.</p>
+
+                <p>Our method leverages <span class="highlight">Neural Radiance Fields</span> to achieve comprehensive 3D reconstruction of the entire colon structure from endoscopic video sequences. The approach incorporates region division and integration modules, multi-level fusion techniques, and semantic consistency-guided pose densification to overcome the inherent challenges in colonoscopy reconstruction.</p>
+
+                <p>ColonNeRF demonstrates superior performance on benchmark datasets, achieving significant improvements in reconstruction quality and providing detailed geometric and texture representation of colon structures for enhanced medical diagnosis and surgical planning.</p>
+            </div>
+
+            <h2 class="section-title">Key Contributions</h2>
+            <div class="contributions">
+                <ul>
+                    <li><strong>Novel NeRF-based Framework:</strong> First neural radiance field approach specifically designed for comprehensive colonoscopy reconstruction</li>
+                    <li><strong>Piecewise Colon Reconstruction:</strong> Innovative region division and integration strategy to handle dissimilar colon segments</li>
+                    <li><strong>Progressive Geometry Modeling:</strong> Multi-level fusion module for handling complex geometric structures</li>
+                    <li><strong>DensiNet Integration:</strong> Semantic consistency-guided pose densification for improved reconstruction quality</li>
+                </ul>
+            </div>
+
+            <h2 class="section-title">Method Overview</h2>
+            <div class="method-section">
+                <p>ColonNeRF employs a <span class="highlight">Neural Radiance Field (NeRF) architecture</span> specifically adapted for the unique challenges of colonoscopy reconstruction:</p>
+
+                <!-- ColonNeRF Architecture Overview -->
+                <div class="method-figure">
+                    <img src="imgs/colonnerf--Figure 1.png" alt="ColonNeRF Architecture Overview" style="max-width: 100%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                    <div class="figure-caption">
+                        <strong>Figure 1.</strong> Overview of ColonNeRF. The architecture comprises a region division module, depicted in the upper section, where orange areas illustrate transition zones between adjacent regions. Each region includes a core area (red) and an adjacent transition zone, processed through various sparsity levels to produce coarse, medium, and fine data. These data feed into a multi-level fusion module, with each stage containing a DensiNet module for data augmentation. Within DensiNet module, we input the helix rotating pose, original pose, and spinning around pose into the MipNeRF to optimize intestinal geometry learning. A DINO-ViT module is included for supervised training. Following processing through this module, final color, density, and transparency are determined, and the region integration module executes information filtering, fusion, and rendering across all blocks.
+                    </div>
+                </div>
+
+                <p>The framework incorporates the following key components:</p>
+
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>Region Division Module:</strong> Segments the colon into manageable regions to handle structural dissimilarity</li>
+                    <li><strong>Integration Framework:</strong> Combines multiple region reconstructions into a coherent 3D model</li>
+                    <li><strong>Multi-level Fusion:</strong> Addresses complex geometric structures through progressive modeling</li>
+                    <li><strong>DensiNet:</strong> Densifies camera poses using semantic consistency guidance</li>
+                </ul>
+
+                <!-- Intestinal Integration Module -->
+                <div class="method-figure">
+                    <img src="imgs/colonnerf--Figure 2.png" alt="Intestinal Seamless Integration Module" style="max-width: 80%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
+                    <div class="figure-caption">
+                        <strong>Figure 2.</strong> Detailed depiction of our intestinal seamless integration module. The module first evaluates the distance from the line connecting the centers of two blocks to the target view. Blocks exceeding the specified distance threshold, represented by the red area, are filtered out. The remaining blocks undergo visibility prediction, with blocks demonstrating visibility below a certain threshold excluded. The final remaining blocks are seamlessly integrated using Inverse Distance Weighting (IDW), producing our final results.
+                    </div>
+                </div>
+
+                <p>The framework addresses three key challenges in colonoscopy reconstruction: <span class="highlight">dissimilarity among colon segments</span>, <span class="highlight">complex geometric structures</span>, and <span class="highlight">sparse viewpoint constraints</span>. By leveraging the implicit representation capabilities of NeRF, ColonNeRF achieves high-fidelity reconstruction of the entire colon structure.</p>
+            </div>
+
+            <h2 class="section-title">Results & Performance</h2>
+            <div class="results-section">
+                <p>ColonNeRF demonstrates <span class="highlight">state-of-the-art performance</span> on colonoscopy reconstruction benchmarks:</p>
+
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>SimCol-to-3D Dataset:</strong> LPIPS-ALEX scores improved by 67%-85% compared to existing methods</li>
+                    <li><strong>Texture Quality:</strong> Significant enhancement in texture clarity and detail preservation</li>
+                    <li><strong>Geometric Accuracy:</strong> Superior reconstruction of complex colon geometric structures</li>
+                    <li><strong>Long-sequence Handling:</strong> Robust performance on extended colonoscopy sequences</li>
+                </ul>
+
+                <!-- Comparative Results Figure 3 -->
+                <div class="results-figure">
+                    <img src="imgs/colonnerf--Figure 3.png" alt="ColonNeRF Comparative Results" style="max-width: 100%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                    <div class="figure-caption">
+                        <strong>Figure 3.</strong> Novel view synthesis RGB and depth results of different methods, including five different baselines on the three datasets. The 1, 4, 7 rows display the depth images, and 2, 5, 8 rows display the corresponding RGB images. The 3, 6, 9 lines show the enlarged details of the rendered image. ColonNeRF consistently outperforms baseline methods by providing reliably constructed details, textures, and a better understanding of geometry.
+                    </div>
+                </div>
+
+                <!-- Additional Comparative Results Figure 4 -->
+                <div class="results-figure">
+                    <img src="imgs/colonnerf--Figure 4.png" alt="ColonNeRF Additional Comparative Results" style="max-width: 100%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                    <div class="figure-caption">
+                        <strong>Figure 4.</strong> Novel view synthesis RGB and depth results of different methods, including five different baselines on the three different datasets Sigmoid, Cecum, and transcending colon. The 1, 4, 7 rows display the depth images, and 2, 5, 8 rows display the corresponding RGB images. The 3, 6, and 9 lines show the enlarged details of the rendered image. ColonNeRF consistently outperforms baseline methods by providing reliably constructed details, textures, and a better understanding of geometry.
+                    </div>
+                </div>
+
+                <p>The method's ability to achieve <span class="highlight">high-fidelity reconstruction of long colonoscopy sequences</span> makes it particularly valuable for medical applications requiring detailed 3D visualization of colon structures for diagnosis and surgical planning.</p>
+            </div>
+
+            <h2 class="section-title">Technical Innovation</h2>
+            <div class="abstract">
+                <p>ColonNeRF introduces several technical innovations to address the unique challenges of colonoscopy reconstruction:</p>
+
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>Adaptive Region Processing:</strong> Handles varying colon segment characteristics through intelligent region division</li>
+                    <li><strong>Semantic Pose Densification:</strong> Improves viewpoint coverage using semantic consistency guidance</li>
+                    <li><strong>Progressive Reconstruction:</strong> Multi-level approach to handle complex anatomical structures</li>
+                    <li><strong>Integration Strategy:</strong> Seamless combination of region-based reconstructions into unified models</li>
+                </ul>
+            </div>
+
+            <h2 class="section-title">Impact & Applications</h2>
+            <div class="abstract">
+                <p>ColonNeRF represents a significant advancement in medical imaging and 3D reconstruction, with applications including:</p>
+
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>Medical Diagnosis:</strong> Enhanced visualization for improved polyp detection and diagnosis</li>
+                    <li><strong>Surgical Planning:</strong> Detailed 3D models for pre-operative planning and simulation</li>
+                    <li><strong>Medical Education:</strong> High-fidelity 3D reconstructions for training and educational purposes</li>
+                    <li><strong>Clinical Documentation:</strong> Comprehensive 3D records of colonoscopy examinations</li>
+                </ul>
+            </div>
+
+            <h2 class="section-title">Citation</h2>
+            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; font-family: monospace; font-size: 0.9rem; overflow-x: auto;" class="citation-box">
+<pre style="margin: 0; color: #000;">@article{shi2025colonnerf,
+  title={ColonNeRF: High-fidelity neural reconstruction of long colonoscopy},
+  author={Shi, Yufei and Lu, Beijia and Liu, Jia-Wei and Li, Ming and Yeo, Si Yong and Shou, Mike Zheng},
+  journal={Neurocomputing},
+  pages={131445},
+  year={2025},
+  publisher={Elsevier}
+}</pre>
+            </div>
+
+            <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 1rem;">
+                <h3 style="margin-bottom: 1rem;">Published in Neurocomputing 2025</h3>
+                <p style="margin: 0; font-size: 1.1rem;">High-impact journal in computational neuroscience and artificial intelligence</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-theme-light dark:bg-darkmode-theme-light">
+        <div class="container">
+            <div class="row items-center py-10">
+                <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:text-left">
+                    <a class="navbar-brand inline-block" href="../">
+                        <img fetchpriority="high" decoding="async" class="img logo-light" width="160" height="32"
+                            src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                            alt="MedVisAITechnologies"
+                            onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                        <img fetchpriority="high" decoding="async" class="img logo-dark" width="160" height="32"
+                            src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                            alt="MedVisAITechnologies"
+                            onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                    </a>
+                </div>
+                <div class="lg:col-6 mb-8 text-center lg:mb-0">
+                    <ul>
+                        <li class="m-3 inline-block"><a href="../about/">About</a></li>
+                        <li class="m-3 inline-block"><a href="../eml">Contact</a></li>
+                        <li class="m-3 inline-block"><a href="../location/">Location</a></li>
+                    </ul>
+                </div>
+                <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:mt-0 lg:text-right">
+                    <ul class="social-icons">
+                        <li><a target="_blank" aria-label="facebook" rel="nofollow noopener" href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a></li>
+                        <li><a target="_blank" aria-label="twitter" rel="nofollow noopener" href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
+                        <li><a target="_blank" aria-label="github" rel="nofollow noopener" href="https://www.github.com/"><i class="fab fa-github"></i></a></li>
+                        <li><a target="_blank" aria-label="linkedin" rel="nofollow noopener" href="https://www.linkedin.com/"><i class="fab fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="border-border dark:border-darkmode-border border-t py-7">
+            <div class="text-light dark:text-darkmode-light container text-center">
+                <p></p>
+            </div>
+        </div>
+    </footer>
+
+    <script crossorigin="anonymous" integrity="sha256-HNvx23yefzYJie2GA7dzwBeKevXtramA+LX4E7XFReM="
+        src="../js/script.min.1cdbf1db7c9e7f360989ed8603b773c0178a7af5edada980f8b5f813b5c545e3.js"></script>
+    <script>"serviceWorker" in navigator && navigator.serviceWorker.register("../service-worker.js")</script>
+</body>
+
+</html>
