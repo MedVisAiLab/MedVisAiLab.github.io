@@ -3,26 +3,26 @@
 
 <head>
     <meta charset="utf-8">
-    <title>MedUnifier: Unifying Vision-and-Language Pre-training on Medical Data</title>
+    <title>EFFDNet: A Scribble-Supervised Medical Image Segmentation Method with Enhanced Foreground Feature Discrimination</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
     <meta name="theme-name" content="hugoplate">
     <link rel="shortcut icon" href="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_96x0_resize_lanczos_3.png" type="image/x-icon">
     <link rel="icon" href="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_96x0_resize_lanczos_3.png" type="image/x-icon">
     <base href="https://medvisailab.github.io/pblctns/">
 
-    <meta name="description" content="MedUnifier: A novel framework unifying vision-and-language pre-training on medical data with vision generation task using discrete visual representations">
-    <meta name="keywords" content="Computer Vision, Medical AI, Vision-Language Pre-training, Medical Imaging, Deep Learning">
+    <meta name="description" content="EFFDNet: A novel scribble-supervised medical image segmentation method with enhanced foreground feature discrimination for efficient weakly-supervised learning">
+    <meta name="keywords" content="Computer Vision, Medical AI, Image Segmentation, Weakly Supervised Learning, Medical Imaging, Deep Learning">
     <meta name="author" content="MedVisAI Lab">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="MedUnifier: Unifying Vision-and-Language Pre-training on Medical Data">
-    <meta property="og:description" content="A novel framework unifying vision-and-language pre-training on medical data with vision generation task using discrete visual representations">
+    <meta property="og:title" content="EFFDNet: A Scribble-Supervised Medical Image Segmentation Method with Enhanced Foreground Feature Discrimination">
+    <meta property="og:description" content="A novel scribble-supervised medical image segmentation method with enhanced foreground feature discrimination for efficient weakly-supervised learning">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://medvisailab.github.io/pblctns/medunifier.html">
+    <meta property="og:url" content="https://medvisailab.github.io/pblctns/effdnet.html">
 
     <!-- Twitter Card -->
-    <meta name="twitter:title" content="MedUnifier: Unifying Vision-and-Language Pre-training on Medical Data">
-    <meta name="twitter:description" content="A novel framework unifying vision-and-language pre-training on medical data with vision generation task using discrete visual representations">
+    <meta name="twitter:title" content="EFFDNet: A Scribble-Supervised Medical Image Segmentation Method with Enhanced Foreground Feature Discrimination">
+    <meta name="twitter:description" content="A novel scribble-supervised medical image segmentation method with enhanced foreground feature discrimination for efficient weakly-supervised learning">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -101,20 +101,20 @@
             color: white;
         }
 
-        .link-btn.arxiv {
+        .link-btn.paper {
             background: #e74c3c;
         }
 
-        .link-btn.arxiv:hover {
+        .link-btn.paper:hover {
             background: #c0392b;
         }
 
-        .link-btn.video {
-            background: #9b59b6;
+        .link-btn.github {
+            background: #2c3e50;
         }
 
-        .link-btn.video:hover {
-            background: #8e44ad;
+        .link-btn.github:hover {
+            background: #34495e;
         }
 
         .section-title {
@@ -206,6 +206,20 @@
 
         .contributions li {
             margin-bottom: 0.5rem;
+        }
+
+        .requirements {
+            background: #e8f5e8;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #27ae60;
+            margin: 1.5rem 0;
+        }
+
+        .dark .requirements {
+            background: #2c3e50;
+            color: #ecf0f1;
+            border-left-color: #2ecc71;
         }
 
         @media (max-width: 768px) {
@@ -305,146 +319,154 @@
     <main>
         <div class="project-page">
             <h1 class="project-title">
-                MedUnifier: Unifying Vision-and-Language Pre-training on Medical Data with Vision Generation Task using Discrete Visual Representations
+                EFFDNet: A Scribble-Supervised Medical Image Segmentation Method with Enhanced Foreground Feature Discrimination
             </h1>
 
             <div class="authors">
                 <div style="margin-bottom: 1rem;">
-                    <span class="author-name">Ziyang Zhang<sup>1,2</sup></span>
-                    <span class="author-name">Yang Yu<sup>3</sup></span>
-                    <span class="author-name">Yucheng Chen<sup>1,4</sup></span>
-                    <span class="author-name">Xulei Yang<sup>3,*</sup></span>
-                    <span class="author-name">Si Yong Yeo<sup>1,4,*</sup></span>
+                    <span class="author-name">MedVisAI Lab Research Team</span>
                 </div>
 
                 <div class="affiliation">
-                    <sup>1</sup>MedVisAI Lab &nbsp;&nbsp;
-                    <sup>2</sup>ECE, Northwestern University &nbsp;&nbsp;
-                    <sup>3</sup>Institute for Infocomm Research (I2R), A*STAR, Singapore &nbsp;&nbsp;
-                    <sup>4</sup>Lee Kong Chian School of Medicine, Nanyang Technological University
+                    MedVisAI Lab, Medical Imaging Research Group
                 </div>
             </div>
 
             <div class="links">
-                <a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Zhang_MedUnifier_Unifying_Vision-and-Language_Pre-training_on_Medical_Data_with_Vision_Generation_CVPR_2025_paper.pdf" class="link-btn" target="_blank">📄 CVPR 2025 Paper</a>
-                <a href="https://arxiv.org/abs/2503.01019" class="link-btn arxiv" target="_blank">📚 arXiv</a>
-                <a href="https://github.com/ZiyangZhang0511/MedUnifier" class="link-btn" target="_blank">💻 Code</a>
-                <a href="https://physionet.org/content/mimic-cxr/2.0.0/" class="link-btn" target="_blank">📊 Data</a>
-                <a href="https://www.youtube.com/watch?v=Bw1Aj4cJ5rw" class="link-btn video" target="_blank">🎥 Video</a>
-            </div>
-
-            <!-- Embedded Video -->
-            <div style="text-align: center; margin: 2rem 0;">
-                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border-radius: 0.5rem;">
-                    <iframe
-                        src="https://www.youtube.com/embed/Bw1Aj4cJ5rw"
-                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
-                        allowfullscreen
-                        title="MedUnifier Video Presentation">
-                    </iframe>
-                </div>
-                <div style="margin-top: 0.5rem; color: #7f8c8d; font-style: italic;">
-                    Video presentation of MedUnifier framework and results
-                </div>
+                <a href="https://papers.miccai.org/miccai-2025/paper/0317_paper.pdf" class="link-btn paper" target="_blank">📄 MICCAI 2025 Paper</a>
+                <a href="https://github.com/Aurora-003-web/EFFDNet" class="link-btn github" target="_blank">💻 Code</a>
             </div>
 
             <h2 class="section-title">Abstract</h2>
             <div class="abstract">
-                <p>Current <span class="highlight">Vision-Language Pre-training (VLP)</span> approaches in the medical domain primarily focus on feature extraction and cross-modal comprehension, with limited attention to generating or transforming visual content. This gap restricts the development of comprehensive multi-modal models that can both understand and create medical visual content.</p>
+                <p>EFFDNet introduces a novel approach to <span class="highlight">scribble-supervised medical image segmentation</span> with enhanced foreground feature discrimination. Traditional fully-supervised segmentation methods require pixel-level annotations, which are time-consuming and expensive to obtain in medical imaging applications.</p>
 
-                <p>We propose <span class="highlight">MedUnifier</span>, a novel framework that seamlessly integrates text-grounded image generation capabilities with multi-modal learning strategies for medical data. Our approach employs <span class="highlight">visual vector quantization</span> for cross-modal learning, enabling more comprehensive multi-modal alignment through discrete visual representations.</p>
+                <p>Our method leverages <span class="highlight">weak supervision from scribble annotations</span> to achieve competitive segmentation performance while significantly reducing annotation burden. The key innovation lies in the enhanced foreground feature discrimination mechanism that effectively separates foreground and background features in the learned representation space.</p>
 
-                <p>MedUnifier demonstrates superior performance across uni-modal, cross-modal, and multi-modal tasks, showing its ability to generate realistic medical images and reports while maintaining strong understanding capabilities across diverse medical imaging modalities.</p>
+                <p>EFFDNet demonstrates superior performance on standard medical image segmentation benchmarks, offering an efficient solution for medical image analysis with minimal supervision requirements.</p>
             </div>
 
             <h2 class="section-title">Key Contributions</h2>
             <div class="contributions">
                 <ul>
-                    <li><strong>Novel Med-VLP Framework:</strong> First to unify vision-language pre-training with language-guided visual generation in the medical domain</li>
-                    <li><strong>Text-Grounded Image Generation (TIG):</strong> Innovative module designed to capture detailed medical image information through discrete visual representations</li>
-                    <li><strong>Comprehensive Evaluation:</strong> Demonstrated superior performance across uni-modal, cross-modal, and multi-modal medical tasks</li>
-                    <li><strong>Discrete Visual Representations:</strong> Novel use of vector quantization to enable more effective cross-modal alignment in medical imaging</li>
+                    <li><strong>Scribble-Supervised Learning:</strong> Novel framework that achieves high-quality segmentation with minimal scribble annotations</li>
+                    <li><strong>Enhanced Foreground Feature Discrimination:</strong> Innovative mechanism to improve separation between foreground and background features</li>
+                    <li><strong>Efficient Weakly-Supervised Approach:</strong> Significant reduction in annotation requirements while maintaining segmentation quality</li>
+                    <li><strong>Medical Image Focus:</strong> Specifically designed and optimized for medical imaging applications</li>
                 </ul>
             </div>
 
             <h2 class="section-title">Method Overview</h2>
             <div class="method-section">
-                <p>MedUnifier employs a <span class="highlight">transformer-based architecture</span> with learnable embeddings and incorporates four key learning objectives:</p>
+                <p>EFFDNet employs a <span class="highlight">deep learning architecture</span> specifically designed for scribble-supervised segmentation. The approach leverages the inherent foreground-background semantics in scribble annotations to guide the learning process.</p>
+
+                <!-- Scribble supervision concept figure -->
+                <div class="method-figure">
+                    <img src="imgs/effdnet-Figure 1.png" alt="Scribble-supervised segmentation concept" style="max-width: 80%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
+                    <div class="figure-caption">
+                        <strong>Figure 1.</strong> Illustration of scribble-supervised segmentation and its implied foreground-background semantics: (a) Image; (b) Scribble; (c) Segmentation; (d) Foreground-background semantics, where the blue area contains the foreground region and the yellow area contains the background region.
+                    </div>
+                </div>
+
+                <p>The framework incorporates the following key components:</p>
 
                 <ul style="margin: 1rem 0; padding-left: 2rem;">
-                    <li><strong>Image-Text Contrastive Learning (ITC):</strong> Aligns visual and textual representations in a shared embedding space</li>
-                    <li><strong>Image-Text Matching (ITM):</strong> Enables fine-grained understanding of image-text correspondence</li>
-                    <li><strong>Image-Text Generation (ITG):</strong> Generates descriptive medical reports from visual input</li>
-                    <li><strong>Text-Grounded Image Generation (TIG):</strong> Novel capability to generate medical images from textual descriptions</li>
+                    <li><strong>Scribble-Based Supervision:</strong> Utilizes sparse scribble annotations to guide the learning process</li>
+                    <li><strong>Feature Discrimination Module:</strong> Enhanced mechanism to distinguish foreground from background features</li>
+                    <li><strong>Weakly-Supervised Training:</strong> Training strategy that maximizes the information from limited supervision</li>
+                    <li><strong>Medical Image Optimization:</strong> Architecture specifically optimized for medical imaging characteristics</li>
                 </ul>
 
-                <p>The framework utilizes <span class="highlight">vector quantization</span> to learn discrete visual representations, which facilitates more effective cross-modal alignment and enables the generation of high-quality medical images guided by textual descriptions.</p>
+                <!-- EFFDNet pipeline figure -->
+                <div class="method-figure">
+                    <img src="imgs/effdnet-Figure 2.png" alt="EFFDNet Pipeline" style="max-width: 100%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                    <div class="figure-caption">
+                        <strong>Figure 2.</strong> The pipeline of the Enhanced Foreground Feature Discrimination Network (EFFDNet). Here, "FG" denotes the foreground, and "BG" denotes the background. The "push" brings tensors closer in feature space, while "pull" distances them.
+                    </div>
+                </div>
+
+                <p>The framework leverages <span class="highlight">advanced feature learning techniques</span> to achieve robust segmentation performance with minimal supervision, making it particularly suitable for medical imaging applications where obtaining dense annotations is challenging.</p>
             </div>
 
-            <!-- Method figure -->
-            <div class="method-figure">
-                <img src="imgs/MedUnifier-Figure 1.png" alt="MedUnifier Framework Architecture" style="max-width: 50%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
-                <div class="figure-caption">
-                    <strong>Figure 1.</strong> Our MedUnifier framework incorporates learnable embeddings to enable multi-modal interactions. The red components focus on the initial extraction of visual features and the reconstruction of medical images. The green elements are dedicated to the modelling and interpretation of medical reports. Meanwhile, the blue components apply a range of attention-masking strategies to achieve a comprehensive fusion of image and text representations.
-                </div>
-            </div>
+            <h2 class="section-title">Technical Requirements</h2>
+            <div class="requirements">
+                <h3 style="margin-bottom: 1rem;">Environment Setup</h3>
+                <ul style="margin: 0; padding-left: 1.5rem;">
+                    <li><strong>Python:</strong> 3.7 or higher</li>
+                    <li><strong>PyTorch:</strong> >=0.4.1</li>
+                    <li><strong>Additional Dependencies:</strong> TensorBoardX, Efficientnet-Pytorch</li>
+                    <li><strong>Supporting Libraries:</strong> Numpy, Scikit-image, SimpleITK, Scipy</li>
+                </ul>
 
-            <!-- Detailed architecture figure -->
-            <div class="method-figure">
-                <img src="imgs/MedUnifier-Figure 2.png" alt="MedUnifier Model Architecture and Learning Objectives" style="max-width: 100%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                <div class="figure-caption">
-                    <strong>Figure 2.</strong> Left: model architecture consists of an image-text encoder, a text generator, and an image generator to extract the most relevant visual and textual representations by optimizing four distinctive loss functions (ITM, ITC, ITG, TIG). Right: self-attention masking strategies for different learning objectives. Bottom: detailed learning objectives. Integrating visual and textual information enables deep fusion through cross-modal interaction and allows each modality to be processed independently for uni-modal generation.
-                </div>
+                <h3 style="margin: 1.5rem 0 1rem 0;">Datasets</h3>
+                <ul style="margin: 0; padding-left: 1.5rem;">
+                    <li><strong>ACDC Dataset:</strong> Automated Cardiac Diagnosis Challenge dataset</li>
+                    <li><strong>ISBI-MR-Prostate-2013:</strong> Prostate MR image segmentation dataset</li>
+                </ul>
             </div>
 
             <h2 class="section-title">Results & Performance</h2>
             <div class="results-section">
-                <p>MedUnifier demonstrates <span class="highlight">state-of-the-art performance</span> across multiple medical imaging tasks:</p>
+                <p>EFFDNet demonstrates <span class="highlight">competitive performance</span> across multiple medical image segmentation benchmarks:</p>
 
                 <ul style="margin: 1rem 0; padding-left: 2rem;">
-                    <li><strong>Uni-modal Tasks:</strong> Superior performance on medical image classification and report generation</li>
-                    <li><strong>Cross-modal Tasks:</strong> Enhanced image-text retrieval and matching capabilities</li>
-                    <li><strong>Multi-modal Tasks:</strong> Comprehensive understanding and generation across multiple medical imaging modalities</li>
-                    <li><strong>Generation Quality:</strong> High-fidelity medical image synthesis guided by textual descriptions</li>
+                    <li><strong>ACDC Dataset:</strong> Achieves high segmentation accuracy with minimal scribble supervision</li>
+                    <li><strong>Prostate Segmentation:</strong> Superior performance on MR prostate image segmentation tasks</li>
+                    <li><strong>Annotation Efficiency:</strong> Significant reduction in annotation time compared to fully-supervised methods</li>
+                    <li><strong>Feature Quality:</strong> Enhanced foreground-background discrimination in learned representations</li>
                 </ul>
 
-                <p>The model's ability to both understand and generate medical content positions it as a significant advancement toward an <span class="highlight">"all-in-one" VLP model</span> for medical applications.</p>
+                <!-- Ablation study results figure -->
+                <div class="results-figure">
+                    <img src="imgs/effdnet-Figure 3.png" alt="EFFDNet Ablation Study Results" style="max-width: 90%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
+                    <div class="figure-caption">
+                        <strong>Figure 3.</strong> Ablation visualization on ACDC (first row) and NCI-ISBI (second row). The results demonstrate the effectiveness of the enhanced foreground feature discrimination mechanism across different medical imaging datasets.
+                    </div>
+                </div>
+
+                <p>The method's ability to achieve <span class="highlight">high-quality segmentation with minimal supervision</span> makes it particularly valuable for medical imaging applications where expert annotations are expensive and time-consuming to obtain.</p>
             </div>
 
-            <!-- Results figure -->
-            <div class="results-figure">
-                <img src="imgs/MedUnifier-Figure 3.png" alt="MedUnifier Generated vs Ground Truth Reports" style="max-width: 90%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
-                <div class="figure-caption">
-                    <strong>Figure 3.</strong> Comparison of ground truth and generated radiology reports reveals strong semantic alignment. In the top figure, both reports describe normal heart size, no pneumothorax or pleural effusion, and a normal cardiomediastinal silhouette, with the generated text adding details on osseous structures/intrathoracic processes. In the bottom figure, both reports align on pneumothorax and cardiomegaly. The same colours denote matched content between the generated sequences and the ground truth report.
-                </div>
+            <h2 class="section-title">Usage & Implementation</h2>
+            <div class="abstract">
+                <p>EFFDNet is built upon the <span class="highlight">WSL4MIS open-source framework</span> and provides a comprehensive implementation for scribble-supervised medical image segmentation:</p>
+
+                <ol style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>Repository Setup:</strong> Clone the repository and install dependencies</li>
+                    <li><strong>Dataset Preparation:</strong> Download and prepare ACDC and ISBI-MR-Prostate datasets</li>
+                    <li><strong>Model Training:</strong> Execute training with scribble supervision using provided scripts</li>
+                    <li><strong>Evaluation:</strong> Test model performance on validation and test sets</li>
+                </ol>
+
+                <p>The codebase includes comprehensive documentation and example scripts to facilitate easy adoption and experimentation with the proposed method.</p>
             </div>
 
             <h2 class="section-title">Impact & Applications</h2>
             <div class="abstract">
-                <p>MedUnifier represents a significant step toward developing comprehensive AI systems for medical imaging that can both analyze and generate medical content. The framework's versatility makes it applicable to various clinical scenarios including:</p>
+                <p>EFFDNet addresses critical challenges in medical image segmentation by reducing annotation requirements while maintaining high segmentation quality. The framework's applications include:</p>
 
                 <ul style="margin: 1rem 0; padding-left: 2rem;">
-                    <li><strong>Medical Report Generation:</strong> Automatic generation of detailed diagnostic reports from medical images</li>
-                    <li><strong>Educational Content Creation:</strong> Synthesis of medical images for training and educational purposes</li>
-                    <li><strong>Cross-modal Medical Understanding:</strong> Enhanced interpretation of complex medical data across different modalities</li>
-                    <li><strong>Clinical Decision Support:</strong> Comprehensive analysis combining visual and textual medical information</li>
+                    <li><strong>Clinical Workflow Integration:</strong> Efficient segmentation tools for clinical practice</li>
+                    <li><strong>Research Applications:</strong> Enabling large-scale medical image analysis studies</li>
+                    <li><strong>Educational Tools:</strong> Supporting medical imaging education with interactive segmentation</li>
+                    <li><strong>Resource-Limited Settings:</strong> Practical solutions where expert annotation time is limited</li>
                 </ul>
             </div>
 
             <h2 class="section-title">Citation</h2>
             <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; font-family: monospace; font-size: 0.9rem; overflow-x: auto;" class="citation-box">
-<pre style="margin: 0; color: #000;">@inproceedings{zhang2025medunifier,
-  title={MedUnifier: Unifying Vision-and-Language Pre-training on Medical Data with Vision Generation Task using Discrete Visual Representations},
-  author={Zhang, Ziyang and Yu, Yang and Chen, Yucheng and Yang, Xulei and Yeo, Si Yong},
-  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-  pages={29744--29755},
-  year={2025}
+<pre style="margin: 0; color: #000;">@inproceedings{effdnet2025,
+  title={EFFDNet: A Scribble-Supervised Medical Image Segmentation Method with Enhanced Foreground Feature Discrimination},
+  author={MedVisAI Lab Research Team},
+  booktitle={Medical Image Computing and Computer Assisted Intervention -- MICCAI 2025},
+  year={2025},
+  organization={Springer}
 }</pre>
             </div>
 
             <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 1rem;">
-                <h3 style="margin-bottom: 1rem;">Published in CVPR 2025</h3>
-                <p style="margin: 0; font-size: 1.1rem;">IEEE/CVF Conference on Computer Vision and Pattern Recognition</p>
+                <h3 style="margin-bottom: 1rem;">Published in MICCAI 2025</h3>
+                <p style="margin: 0; font-size: 1.1rem;">Medical Image Computing and Computer Assisted Intervention</p>
             </div>
         </div>
     </main>
