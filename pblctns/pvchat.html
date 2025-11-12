@@ -224,10 +224,61 @@
             margin: 2rem 0;
         }
 
-        .poster-container embed {
+        .poster-view-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 3rem 2rem;
+            border-radius: 1rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .poster-view-card h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .poster-view-card p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .poster-view-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .poster-view-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            color: #667eea;
+        }
+
+        .poster-iframe-container {
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .poster-iframe-container iframe {
             max-width: 100%;
             border-radius: 0.5rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (min-width: 768px) {
+            .poster-iframe-container {
+                display: block;
+            }
         }
 
         @media (max-width: 768px) {
@@ -467,8 +518,16 @@
 
             <h2 class="section-title">Conference Poster</h2>
             <div class="poster-container">
-                <p style="margin-bottom: 1rem;">Presented at ICCV 2025:</p>
-                <embed src="poster/PVChat-ICCV.pdf" type="application/pdf" width="100%" height="800px" style="border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <div class="poster-view-card">
+                    <h3>ICCV 2025 Conference Poster</h3>
+                    <p>View our conference poster presented at the IEEE/CVF International Conference on Computer Vision 2025</p>
+                    <a href="poster/PVChat-ICCV.pdf" class="poster-view-btn" target="_blank">View Poster PDF</a>
+                </div>
+
+                <!-- Desktop browsers: embedded PDF viewer -->
+                <div class="poster-iframe-container">
+                    <iframe src="poster/PVChat-ICCV.pdf" width="100%" height="800px" frameborder="0"></iframe>
+                </div>
             </div>
 
             <h2 class="section-title">Impact & Applications</h2>
