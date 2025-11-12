@@ -1,0 +1,552 @@
+<!doctype html>
+<html itemscope lang="en-us" itemtype="http://schema.org/WebPage">
+
+<head>
+    <meta charset="utf-8">
+    <title>PVChat: Personalized Video Chat with One-Shot Learning</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+    <meta name="theme-name" content="hugoplate">
+    <link rel="shortcut icon" href="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_96x0_resize_lanczos_3.png" type="image/x-icon">
+    <link rel="icon" href="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_96x0_resize_lanczos_3.png" type="image/x-icon">
+    <base href="https://medvisailab.github.io/pblctns/">
+
+    <meta name="description" content="PVChat: Personalized Video Chat with One-Shot Learning - ICCV 2025">
+    <meta name="keywords" content="Computer Vision, Video Understanding, Personalized AI, One-Shot Learning, Video Chat, ICCV">
+    <meta name="author" content="MedVisAI Lab">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="PVChat: Personalized Video Chat with One-Shot Learning">
+    <meta property="og:description" content="PVChat enables personalized video chat with one-shot learning for accurate identity recognition and content understanding">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://medvisailab.github.io/pblctns/pvchat.html">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:title" content="PVChat: Personalized Video Chat with One-Shot Learning">
+    <meta name="twitter:description" content="PVChat enables personalized video chat with one-shot learning for accurate identity recognition and content understanding">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600&family=Signika:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link href="../css/style.min.80b93bb3a795f7194d0ca0c445309f1547c3c019264bfd28165ca93c97401b5d.css" rel="stylesheet">
+    <link href="../css/mvait-enhancements.css" rel="stylesheet">
+    <link href="../css/theme-fixes.css" rel="stylesheet">
+
+    <style>
+        .project-page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .project-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+
+        .dark .project-title {
+            color: #ecf0f1;
+        }
+
+        .authors {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #34495e;
+        }
+
+        .dark .authors {
+            color: #bdc3c7;
+        }
+
+        .author-name {
+            margin: 0 0.5rem;
+        }
+
+        .affiliation {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 0.5rem;
+        }
+
+        .dark .affiliation {
+            color: #95a5a6;
+        }
+
+        .links {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .link-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            margin: 0.5rem;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: background 0.3s ease;
+            font-weight: 600;
+        }
+
+        .link-btn:hover {
+            background: #2980b9;
+            color: white;
+        }
+
+        .link-btn.arxiv {
+            background: #e74c3c;
+        }
+
+        .link-btn.arxiv:hover {
+            background: #c0392b;
+        }
+
+        .link-btn.video {
+            background: #9b59b6;
+        }
+
+        .link-btn.video:hover {
+            background: #8e44ad;
+        }
+
+        .link-btn.github {
+            background: #2ecc71;
+        }
+
+        .link-btn.github:hover {
+            background: #27ae60;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1rem 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        .dark .section-title {
+            color: #ecf0f1;
+        }
+
+        .abstract, .method-section, .results-section {
+            margin-bottom: 2rem;
+            text-align: justify;
+        }
+
+        .method-figure, .results-figure {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .method-figure img, .results-figure img {
+            max-width: 90%;
+            height: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: block;
+            margin: 0 auto;
+        }
+
+        .figure-caption {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        .dark .figure-caption {
+            color: #95a5a6;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8e6cf 0%, #dcedc1 100%);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+        }
+
+        .dark .highlight {
+            background: linear-gradient(120deg, #2c3e50 0%, #34495e 100%);
+            color: #ecf0f1;
+        }
+
+        .citation-box {
+            background: #f8f9fa !important;
+        }
+
+        .dark .citation-box {
+            background: #2c3e50 !important;
+        }
+
+        .citation-box pre {
+            color: #000 !important;
+        }
+
+        .dark .citation-box pre {
+            color: #ecf0f1 !important;
+        }
+
+        .contributions {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #3498db;
+            margin: 1.5rem 0;
+        }
+
+        .dark .contributions {
+            background: #2c3e50;
+            color: #ecf0f1;
+        }
+
+        .contributions ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+
+        .contributions li {
+            margin-bottom: 0.5rem;
+        }
+
+        .poster-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .poster-container embed {
+            max-width: 100%;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .project-page {
+                padding: 1rem;
+            }
+
+            .project-title {
+                font-size: 2rem;
+            }
+
+            .link-btn {
+                display: block;
+                margin: 0.5rem auto;
+                max-width: 200px;
+            }
+
+            .method-figure img, .results-figure img {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header sticky top-0 z-30">
+        <nav class="navbar container">
+            <div class="order-0">
+                <a class="navbar-brand block" href="../">
+                    <img fetchpriority="high" decoding="async" class="img logo-light" width="160" height="32"
+                        src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                        alt="MedVisAITechnologies"
+                        onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                    <img fetchpriority="high" decoding="async" class="img logo-dark" width="160" height="32"
+                        src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                        alt="MedVisAITechnologies"
+                        onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                </a>
+            </div>
+
+            <input id="nav-toggle" type="checkbox" class="hidden">
+            <label id="show-button" for="nav-toggle" class="order-2 flex cursor-pointer items-center md:order-1 md:hidden">
+                <svg class="h-6 fill-current" viewBox="0 0 20 20">
+                    <title>Menu Open</title>
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0V0z" />
+                </svg>
+            </label>
+
+            <label id="hide-button" for="nav-toggle" class="order-2 hidden cursor-pointer items-center md:order-1">
+                <svg class="h-6 fill-current" viewBox="0 0 20 20">
+                    <title>Menu Close</title>
+                    <polygon points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2" transform="rotate(45 10 10)" />
+                </svg>
+            </label>
+
+            <ul id="nav-menu" class="navbar-nav order-3 hidden w-full pb-6 lg:order-1 lg:flex lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8">
+                <li class="nav-item"><a class="nav-link" href="../">MVAIT</a></li>
+                <li class="nav-item"><a class="nav-link" href="../team">Team</a></li>
+                <li class="nav-item"><a class="nav-link" href="../research/">Research</a></li>
+                <li class="nav-item"><a class="nav-link" href="../projects">Project Funding</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pos/">Positions</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pblctns">Publications</a></li>
+                <li class="mt-4 inline-block lg:hidden"><a class="btn btn-outline-primary btn-sm" href="../eml">Contact</a></li>
+            </ul>
+
+            <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
+                <div class="theme-switcher mr-5">
+                    <input id="theme-switcher" data-theme-switcher type="checkbox">
+                    <label for="theme-switcher">
+                        <span class="sr-only">theme switcher</span>
+                        <span>
+                            <svg class="absolute left-[4px] top-[4px] z-10 opacity-100 dark:opacity-0" viewBox="0 0 56 56" fill="#fff" height="16" width="16">
+                                <path d="M30 4.6c0-1-.9-2-2-2a2 2 0 00-2 2v5c0 1 .9 2 2 2s2-1 2-2zm9.6 9a2 2 0 000 2.8c.8.8 2 .8 2.9.0L46 13a2 2 0 000-2.9 2 2 0 00-3 0zm-26 2.8c.7.8 2 .8 2.8.0.8-.7.8-2 0-2.9L13 10c-.7-.7-2-.8-2.9.0-.7.8-.7 2.1.0 3zM28 16A12 12 0 0016 28a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0028 16zm23.3 14c1.1.0 2-.9 2-2s-.9-2-2-2h-4.9a2 2 0 00-2 2c0 1.1 1 2 2 2zM4.7 26a2 2 0 00-2 2c0 1.1.9 2 2 2h4.9c1 0 2-.9 2-2s-1-2-2-2zm37.8 13.6a2 2 0 00-3 0 2 2 0 000 2.9l3.6 3.5a2 2 0 002.9.0c.8-.8.8-2.1.0-3zM10 43.1a2 2 0 000 2.9c.8.7 2.1.8 3 0l3.4-3.5c.8-.8.8-2.1.0-2.9s-2-.8-2.9.0zm20 3.4c0-1.1-.9-2-2-2a2 2 0 00-2 2v4.9c0 1 .9 2 2 2s2-1 2-2z" />
+                            </svg>
+                            <svg class="absolute left-[4px] top-[4px] z-10 opacity-0 dark:opacity-100" viewBox="0 0 24 24" fill="none" height="16" width="16">
+                                <path fill="#000" fill-rule="evenodd" clip-rule="evenodd" d="M8.2 2.2c1-.4 2 .6 1.6 1.5-1 3-.4 6.4 1.8 8.7a8.4 8.4.0 008.7 1.8c1-.3 2 .5 1.5 1.5v.1A10.3 10.3.0 0112.4 22 10.3 10.3.0 013.2 6.7c1-2 2.9-3.5 4.9-4.4z" />
+                            </svg>
+                        </span>
+                    </label>
+                </div>
+                <script>
+                    var themeSwitch, darkMode = !0;
+                    localStorage.getItem("theme") === "dark" ? darkMode = !0 : localStorage.getItem("theme") === "light" && (darkMode = !1);
+                    darkMode && document.documentElement.classList.toggle("dark");
+                    themeSwitch = document.querySelectorAll("[data-theme-switcher]");
+                    document.addEventListener("DOMContentLoaded", () => {
+                        [].forEach.call(themeSwitch, function (e) {
+                            e.checked = !!darkMode;
+                            e.addEventListener("click", () => {
+                                document.documentElement.classList.toggle("dark");
+                                localStorage.setItem("theme", document.documentElement.classList.contains("dark") ? "dark" : "light")
+                            })
+                        })
+                    });
+                </script>
+                <a href="../eml" class="btn btn-outline-primary btn-sm hidden lg:inline-block">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="project-page">
+            <h1 class="project-title">
+                PVChat: Personalized Video Chat with One-Shot Learning
+            </h1>
+
+            <div class="authors">
+                <div style="margin-bottom: 1rem;">
+                    <span class="author-name">Yufei Shi<sup>1,5</sup></span>
+                    <span class="author-name">Weilong Yan<sup>2</sup></span>
+                    <span class="author-name">Gang Xu<sup>3</sup></span>
+                    <span class="author-name">Yumeng Li<sup>4</sup></span>
+                    <span class="author-name">Yucheng Chen<sup>1</sup></span>
+                    <span class="author-name">Zhenxi Li<sup>3</sup></span>
+                    <span class="author-name">Fei Richard Yu<sup>4</sup></span>
+                    <span class="author-name">Ming Li<sup>3</sup></span>
+                    <span class="author-name">Si Yong Yeo<sup>5</sup></span>
+                </div>
+
+                <div class="affiliation">
+                    <sup>1</sup>Show Lab, National University of Singapore &nbsp;&nbsp;
+                    <sup>2</sup>Fudan University &nbsp;&nbsp;
+                    <sup>3</sup>Northwestern University &nbsp;&nbsp;
+                    <sup>4</sup>Carleton University &nbsp;&nbsp;
+                    <sup>5</sup>MedVisAI Lab, Lee Kong Chian School of Medicine, Nanyang Technological University
+                </div>
+            </div>
+
+            <div class="links">
+                <a href="https://arxiv.org/pdf/2503.17069" class="link-btn" target="_blank">📄 Paper</a>
+                <a href="https://arxiv.org/abs/2503.17069" class="link-btn arxiv" target="_blank">📚 arXiv</a>
+                <a href="https://www.youtube.com/watch?v=uoaf6NV2dus&t=273s" class="link-btn video" target="_blank">🎥 Video</a>
+                <a href="https://github.com/DavidYan2001/PVChat" class="link-btn github" target="_blank">💻 Code</a>
+                <a href="https://github.com/DavidYan2001/PVChat" class="link-btn github" target="_blank">📊 Data</a>
+            </div>
+
+            <!-- Embedded Video -->
+            <div style="text-align: center; margin: 2rem 0;">
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border-radius: 0.5rem;">
+                    <iframe
+                        src="https://www.youtube.com/embed/uoaf6NV2dus"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+                        allowfullscreen
+                        title="PVChat Video Presentation">
+                    </iframe>
+                </div>
+                <div style="margin-top: 0.5rem; color: #7f8c8d; font-style: italic;">
+                    Video demonstration of PVChat's personalized video chat capabilities
+                </div>
+            </div>
+
+            <h2 class="section-title">Abstract</h2>
+            <div class="abstract">
+                <p>PVChat introduces a novel approach to <span class="highlight">personalized video chat with one-shot learning</span>, enabling accurate identity recognition and content understanding from minimal examples. Traditional video chat systems struggle with personalized information recognition, requiring extensive training data and often failing to distinguish between similar identities.</p>
+
+                <p>Our method leverages <span class="highlight">one-shot learning</span> to achieve robust personalized video understanding, where the system can accurately recognize and respond to queries about specific individuals after seeing just a single example. The approach incorporates specialized data collection pipelines, identity-preserving video generation, and the novel ReMoH (Representation Modeling with Hierarchical features) technique for enhanced characteristic learning.</p>
+
+                <p>PVChat demonstrates superior performance on personalized video understanding benchmarks, significantly outperforming existing models in accurately answering questions about personalized information while maintaining strong general video understanding capabilities.</p>
+            </div>
+
+            <!-- Figure 1: One-Shot Learning Examples -->
+            <div class="method-figure">
+                <img src="imgs/PVChat-Figure 1.png" alt="PVChat One-Shot Learning Examples">
+                <div class="figure-caption">
+                    <strong>Figure 1.</strong> Examples of PVChat's ability with one-shot learning (e.g., &lt;Nz&gt; and &lt;Ab&gt;). PVChat can answer questions about the personalized information correctly while other models fail.
+                </div>
+            </div>
+
+            <h2 class="section-title">Key Contributions</h2>
+            <div class="contributions">
+                <ul>
+                    <li><strong>One-Shot Personalized Learning:</strong> First video chat system capable of accurate personalized understanding with just one example</li>
+                    <li><strong>Systematic Data Collection:</strong> Comprehensive pipeline for generating high-quality personalized video data with identity preservation</li>
+                    <li><strong>ReMoH Technique:</strong> Novel Representation Modeling with Hierarchical features for better specialized characteristic learning</li>
+                    <li><strong>Robust Identity Recognition:</strong> Hard negative sampling strategy ensures accurate discrimination between similar identities</li>
+                </ul>
+            </div>
+
+            <h2 class="section-title">Method Overview</h2>
+            <div class="method-section">
+                <p>PVChat employs a <span class="highlight">systematic data collection and training pipeline</span> specifically designed for personalized video understanding:</p>
+
+                <!-- Figure 2: Data Collection Pipeline -->
+                <div class="method-figure">
+                    <img src="imgs/PVChat-Figure 2.png" alt="PVChat Data Collection Pipeline">
+                    <div class="figure-caption">
+                        <strong>Figure 2.</strong> The systematic data collection pipeline. For positive data collection, the original videos are processed by DeepFaceLab for high-quality face and InterVideo2 for demographic characteristics, which boost identity preservation. ConsisID and LivePortrait with PhotoMaker utilize the identity information to generate videos of various backgrounds or different motion/expression, respectively. For model's robust perception, hard negative samples are selected from either similar face retrieval to generate negative videos, or sampled from the CelebV-HQ dataset. These negative samples guarantee the model's accurate recognition of both identity and content.
+                    </div>
+                </div>
+
+                <p>The framework incorporates the following key components:</p>
+
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>Identity-Preserving Generation:</strong> Uses DeepFaceLab and InterVideo2 for high-quality face processing and demographic characteristics</li>
+                    <li><strong>Video Variation Synthesis:</strong> Employs ConsisID, LivePortrait, and PhotoMaker to generate diverse backgrounds and expressions</li>
+                    <li><strong>Hard Negative Sampling:</strong> Selects challenging similar faces to improve discrimination capabilities</li>
+                    <li><strong>ReMoH Training:</strong> Hierarchical feature modeling for enhanced characteristic learning</li>
+                </ul>
+
+                <!-- Figure 3: Training Pipeline and ReMoH -->
+                <div class="method-figure">
+                    <img src="imgs/PVChat-Figure 3.png" alt="PVChat Training Pipeline and ReMoH">
+                    <div class="figure-caption">
+                        <strong>Figure 3.</strong> (a) The training pipeline of our method. (b) The proposed ReMoH technique for better specialized characteristics learning.
+                    </div>
+                </div>
+
+                <p>The framework addresses key challenges in personalized video chat: <span class="highlight">limited training examples</span>, <span class="highlight">identity confusion with similar faces</span>, and <span class="highlight">maintaining general video understanding</span>. By leveraging one-shot learning and sophisticated data augmentation, PVChat achieves robust personalized video understanding capabilities.</p>
+            </div>
+
+            <h2 class="section-title">Results & Performance</h2>
+            <div class="results-section">
+                <p>PVChat demonstrates <span class="highlight">state-of-the-art performance</span> on personalized video understanding tasks:</p>
+
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>One-Shot Learning:</strong> Accurately recognizes and responds to queries about specific individuals from single examples</li>
+                    <li><strong>Identity Discrimination:</strong> Successfully distinguishes between similar-looking individuals where other models fail</li>
+                    <li><strong>Robust Understanding:</strong> Maintains strong performance across diverse backgrounds and expressions</li>
+                    <li><strong>General Capability Retention:</strong> Preserves excellent general video understanding while adding personalized capabilities</li>
+                </ul>
+
+                <p>The method's ability to achieve <span class="highlight">accurate personalized video understanding with minimal examples</span> makes it particularly valuable for applications requiring personalized AI assistants, custom video analytics, and adaptive human-computer interaction systems.</p>
+            </div>
+
+            <h2 class="section-title">Technical Innovation</h2>
+            <div class="abstract">
+                <p>PVChat introduces several technical innovations to address the unique challenges of personalized video chat:</p>
+
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>One-Shot Learning Framework:</strong> Enables rapid personalization from minimal examples</li>
+                    <li><strong>Identity-Preserving Data Generation:</strong> Maintains consistent identity while varying context and expression</li>
+                    <li><strong>Hard Negative Mining:</strong> Improves discrimination through strategic selection of challenging similar identities</li>
+                    <li><strong>ReMoH Technique:</strong> Hierarchical representation modeling for enhanced characteristic learning</li>
+                    <li><strong>Balanced Training Strategy:</strong> Maintains general video understanding while adding personalized capabilities</li>
+                </ul>
+            </div>
+
+            <h2 class="section-title">Conference Poster</h2>
+            <div class="poster-container">
+                <p style="margin-bottom: 1rem;">Presented at ICCV 2025:</p>
+                <embed src="poster/PVChat-ICCV.pdf" type="application/pdf" width="100%" height="800px" style="border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <p style="margin-top: 1rem;">
+                    <a href="poster/PVChat-ICCV.pdf" class="link-btn" target="_blank" download>📥 Download Poster PDF</a>
+                </p>
+            </div>
+
+            <h2 class="section-title">Impact & Applications</h2>
+            <div class="abstract">
+                <p>PVChat represents a significant advancement in personalized AI systems, with applications including:</p>
+
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>Personalized AI Assistants:</strong> Enable AI systems to recognize and respond to specific individuals with minimal training</li>
+                    <li><strong>Video Analytics:</strong> Custom video understanding for security, monitoring, and content analysis</li>
+                    <li><strong>Education Technology:</strong> Adaptive learning systems that recognize individual students and their progress</li>
+                    <li><strong>Healthcare Applications:</strong> Patient-specific video monitoring and interaction systems</li>
+                    <li><strong>Human-Computer Interaction:</strong> Natural and personalized interactions with AI systems</li>
+                </ul>
+            </div>
+
+            <h2 class="section-title">Citation</h2>
+            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; font-family: monospace; font-size: 0.9rem; overflow-x: auto;" class="citation-box">
+<pre style="margin: 0; color: #000;">@inproceedings{shi2025pvchat,
+  title={PVChat: Personalized Video Chat with One-Shot Learning},
+  author={Shi, Yufei and Yan, Weilong and Xu, Gang and Li, Yumeng and Chen, Yucheng and Li, Zhenxi and Yu, Fei Richard and Li, Ming and Yeo, Si Yong},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+  pages={23321--23331},
+  year={2025}
+}</pre>
+            </div>
+
+            <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 1rem;">
+                <h3 style="margin-bottom: 1rem;">Published in ICCV 2025</h3>
+                <p style="margin: 0;">IEEE/CVF International Conference on Computer Vision</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-theme-light dark:bg-darkmode-theme-light">
+        <div class="container">
+            <div class="row items-center py-10">
+                <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:text-left">
+                    <a class="navbar-brand inline-block" href="../">
+                        <img fetchpriority="high" decoding="async" class="img logo-light" width="160" height="32"
+                            src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                            alt="MedVisAITechnologies"
+                            onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                        <img fetchpriority="high" decoding="async" class="img logo-dark" width="160" height="32"
+                            src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                            alt="MedVisAITechnologies"
+                            onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                    </a>
+                </div>
+                <div class="lg:col-6 mb-8 text-center lg:mb-0">
+                    <ul>
+                        <li class="m-3 inline-block"><a href="../about/">About</a></li>
+                        <li class="m-3 inline-block"><a href="../eml">Contact</a></li>
+                        <li class="m-3 inline-block"><a href="../location/">Location</a></li>
+                    </ul>
+                </div>
+                <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:mt-0 lg:text-right">
+                    <ul class="social-icons">
+                        <li><a target="_blank" aria-label="facebook" rel="nofollow noopener" href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a></li>
+                        <li><a target="_blank" aria-label="twitter" rel="nofollow noopener" href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
+                        <li><a target="_blank" aria-label="github" rel="nofollow noopener" href="https://www.github.com/"><i class="fab fa-github"></i></a></li>
+                        <li><a target="_blank" aria-label="linkedin" rel="nofollow noopener" href="https://www.linkedin.com/"><i class="fab fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="border-border dark:border-darkmode-border border-t py-7">
+            <div class="text-light dark:text-darkmode-light container text-center">
+                <p></p>
+            </div>
+        </div>
+    </footer>
+
+    <script crossorigin="anonymous" integrity="sha256-HNvx23yefzYJie2GA7dzwBeKevXtramA+LX4E7XFReM="
+        src="../js/script.min.1cdbf1db7c9e7f360989ed8603b773c0178a7af5edada980f8b5f813b5c545e3.js"></script>
+    <script>"serviceWorker" in navigator && navigator.serviceWorker.register("../service-worker.js")</script>
+</body>
+
+</html>
