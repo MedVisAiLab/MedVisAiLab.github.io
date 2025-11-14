@@ -1,0 +1,551 @@
+<!doctype html>
+<html itemscope lang="en-us" itemtype="http://schema.org/WebPage">
+
+<head>
+    <meta charset="utf-8">
+    <title>Prior-guided Prototype Aggregation Learning for Alzheimer's Disease Diagnosis</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+    <meta name="theme-name" content="hugoplate">
+    <link rel="shortcut icon" href="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_96x0_resize_lanczos_3.png" type="image/x-icon">
+    <link rel="icon" href="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_96x0_resize_lanczos_3.png" type="image/x-icon">
+    <base href="https://medvisailab.github.io/pblctns/">
+
+    <meta name="description" content="PPAL: Prior-guided Prototype Aggregation Learning for Alzheimer's Disease Diagnosis using multi-modal brain imaging">
+    <meta name="keywords" content="Alzheimer's Disease, Medical AI, Deep Learning, Multi-modal Learning, Prototype Learning, Medical Imaging">
+    <meta name="author" content="MedVisAI Lab">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Prior-guided Prototype Aggregation Learning for Alzheimer's Disease Diagnosis">
+    <meta property="og:description" content="A novel framework for Alzheimer's Disease diagnosis using prior-guided prototype aggregation learning">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://medvisailab.github.io/pblctns/ppal.html">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:title" content="Prior-guided Prototype Aggregation Learning for Alzheimer's Disease Diagnosis">
+    <meta name="twitter:description" content="A novel framework for Alzheimer's Disease diagnosis using prior-guided prototype aggregation learning">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600&family=Signika:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link href="../css/style.min.80b93bb3a795f7194d0ca0c445309f1547c3c019264bfd28165ca93c97401b5d.css" rel="stylesheet">
+    <link href="../css/mvait-enhancements.css" rel="stylesheet">
+    <link href="../css/theme-fixes.css" rel="stylesheet">
+
+    <style>
+        .project-page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .project-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+
+        .dark .project-title {
+            color: #ecf0f1;
+        }
+
+        .authors {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #34495e;
+        }
+
+        .dark .authors {
+            color: #bdc3c7;
+        }
+
+        .author-name {
+            margin: 0 0.5rem;
+        }
+
+        .affiliation {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 0.5rem;
+        }
+
+        .dark .affiliation {
+            color: #95a5a6;
+        }
+
+        .links {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .link-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            margin: 0.5rem;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: background 0.3s ease;
+            font-weight: 600;
+        }
+
+        .link-btn:hover {
+            background: #2980b9;
+            color: white;
+        }
+
+        .link-btn.paper {
+            background: #e74c3c;
+        }
+
+        .link-btn.paper:hover {
+            background: #c0392b;
+        }
+
+        .link-btn.springer {
+            background: #f39c12;
+        }
+
+        .link-btn.springer:hover {
+            background: #d68910;
+        }
+
+        .link-btn.data {
+            background: #27ae60;
+        }
+
+        .link-btn.data:hover {
+            background: #229954;
+        }
+
+        .link-btn.github {
+            background: #2c3e50;
+        }
+
+        .link-btn.github:hover {
+            background: #34495e;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1rem 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        .dark .section-title {
+            color: #ecf0f1;
+        }
+
+        .abstract, .method-section, .results-section {
+            margin-bottom: 2rem;
+            text-align: justify;
+        }
+
+        .method-figure, .results-figure {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .method-figure img, .results-figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .figure-caption {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .dark .figure-caption {
+            color: #95a5a6;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8e6cf 0%, #dcedc1 100%);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+        }
+
+        .dark .highlight {
+            background: linear-gradient(120deg, #2c3e50 0%, #34495e 100%);
+            color: #ecf0f1;
+        }
+
+        .citation-box {
+            background: #f8f9fa !important;
+        }
+
+        .dark .citation-box {
+            background: #2c3e50 !important;
+        }
+
+        .citation-box pre {
+            color: #000 !important;
+        }
+
+        .dark .citation-box pre {
+            color: #ecf0f1 !important;
+        }
+
+        .contributions {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #3498db;
+            margin: 1.5rem 0;
+        }
+
+        .dark .contributions {
+            background: #2c3e50;
+            color: #ecf0f1;
+        }
+
+        .contributions ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+
+        .contributions li {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .project-page {
+                padding: 1rem;
+            }
+
+            .project-title {
+                font-size: 2rem;
+            }
+
+            .link-btn {
+                display: block;
+                margin: 0.5rem auto;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header sticky top-0 z-30">
+        <nav class="navbar container">
+            <div class="order-0">
+                <a class="navbar-brand block" href="../">
+                    <img fetchpriority="high" decoding="async" class="img logo-light" width="160" height="32"
+                        src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                        alt="MedVisAITechnologies"
+                        onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                    <img fetchpriority="high" decoding="async" class="img logo-dark" width="160" height="32"
+                        src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.png"
+                        alt="MedVisAITechnologies"
+                        onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                </a>
+            </div>
+
+            <input id="nav-toggle" type="checkbox" class="hidden">
+            <label id="show-button" for="nav-toggle" class="order-2 flex cursor-pointer items-center md:order-1 md:hidden">
+                <svg class="h-6 fill-current" viewBox="0 0 20 20">
+                    <title>Menu Open</title>
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0V0z" />
+                </svg>
+            </label>
+
+            <label id="hide-button" for="nav-toggle" class="order-2 hidden cursor-pointer items-center md:order-1">
+                <svg class="h-6 fill-current" viewBox="0 0 20 20">
+                    <title>Menu Close</title>
+                    <polygon points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2" transform="rotate(45 10 10)" />
+                </svg>
+            </label>
+
+            <ul id="nav-menu" class="navbar-nav order-3 hidden w-full pb-6 lg:order-1 lg:flex lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8">
+                <li class="nav-item"><a class="nav-link" href="../">MVAIT</a></li>
+                <li class="nav-item"><a class="nav-link" href="../team">Team</a></li>
+                <li class="nav-item"><a class="nav-link" href="../research/">Research</a></li>
+                <li class="nav-item"><a class="nav-link" href="../projects">Project Funding</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pos/">Positions</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pblctns">Publications</a></li>
+                <li class="mt-4 inline-block lg:hidden"><a class="btn btn-outline-primary btn-sm" href="../eml">Contact</a></li>
+            </ul>
+
+            <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
+                <div class="theme-switcher mr-5">
+                    <input id="theme-switcher" data-theme-switcher type="checkbox">
+                    <label for="theme-switcher">
+                        <span class="sr-only">theme switcher</span>
+                        <span>
+                            <svg class="absolute left-[4px] top-[4px] z-10 opacity-100 dark:opacity-0" viewBox="0 0 56 56" fill="#fff" height="16" width="16">
+                                <path d="M30 4.6c0-1-.9-2-2-2a2 2 0 00-2 2v5c0 1 .9 2 2 2s2-1 2-2zm9.6 9a2 2 0 000 2.8c.8.8 2 .8 2.9.0L46 13a2 2 0 000-2.9 2 2 0 00-3 0zm-26 2.8c.7.8 2 .8 2.8.0.8-.7.8-2 0-2.9L13 10c-.7-.7-2-.8-2.9.0-.7.8-.7 2.1.0 3zM28 16A12 12 0 0016 28a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0028 16zm23.3 14c1.1.0 2-.9 2-2s-.9-2-2-2h-4.9a2 2 0 00-2 2c0 1.1 1 2 2 2zM4.7 26a2 2 0 00-2 2c0 1.1.9 2 2 2h4.9c1 0 2-.9 2-2s-1-2-2-2zm37.8 13.6a2 2 0 00-3 0 2 2 0 000 2.9l3.6 3.5a2 2 0 002.9.0c.8-.8.8-2.1.0-3zM10 43.1a2 2 0 000 2.9c.8.7 2.1.8 3 0l3.4-3.5c.8-.8.8-2.1.0-2.9s-2-.8-2.9.0zm20 3.4c0-1.1-.9-2-2-2a2 2 0 00-2 2v4.9c0 1 .9 2 2 2s2-1 2-2z" />
+                            </svg>
+                            <svg class="absolute left-[4px] top-[4px] z-10 opacity-0 dark:opacity-100" viewBox="0 0 24 24" fill="none" height="16" width="16">
+                                <path fill="#000" fill-rule="evenodd" clip-rule="evenodd" d="M8.2 2.2c1-.4 2 .6 1.6 1.5-1 3-.4 6.4 1.8 8.7a8.4 8.4.0 008.7 1.8c1-.3 2 .5 1.5 1.5v.1A10.3 10.3.0 0112.4 22 10.3 10.3.0 013.2 6.7c1-2 2.9-3.5 4.9-4.4z" />
+                            </svg>
+                        </span>
+                    </label>
+                </div>
+                <script>
+                    var themeSwitch, darkMode = !0;
+                    localStorage.getItem("theme") === "dark" ? darkMode = !0 : localStorage.getItem("theme") === "light" && (darkMode = !1);
+                    darkMode && document.documentElement.classList.toggle("dark");
+                    themeSwitch = document.querySelectorAll("[data-theme-switcher]");
+                    document.addEventListener("DOMContentLoaded", () => {
+                        [].forEach.call(themeSwitch, function (e) {
+                            e.checked = !!darkMode;
+                            e.addEventListener("click", () => {
+                                document.documentElement.classList.toggle("dark");
+                                localStorage.setItem("theme", document.documentElement.classList.contains("dark") ? "dark" : "light")
+                            })
+                        })
+                    });
+                </script>
+                <a href="../eml" class="btn btn-outline-primary btn-sm hidden lg:inline-block">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="project-page">
+            <h1 class="project-title">
+                Prior-guided Prototype Aggregation Learning for Alzheimer's Disease Diagnosis
+            </h1>
+
+            <div class="authors">
+                <div style="margin-bottom: 1rem;">
+                    <span class="author-name">Yueqin Diao<sup>1</sup></span>
+                    <span class="author-name">Huihui Fang<sup>2</sup></span>
+                    <span class="author-name">Hanyi Yu<sup>1</sup></span>
+                    <span class="author-name">Yuning Wang<sup>1</sup></span>
+                    <span class="author-name">Yaling Tao<sup>1</sup></span>
+                    <span class="author-name">Ziyan Huang<sup>3</sup></span>
+                    <span class="author-name">Si Yong Yeo<sup>3,4,*</sup></span>
+                    <span class="author-name">Yanwu Xu<sup>1,*</sup></span>
+                </div>
+
+                <div class="affiliation">
+                    <sup>1</sup>South China University of Technology, Guangdong, China &nbsp;&nbsp;
+                    <sup>2</sup>Sun Yat-sen University, Guangdong, China &nbsp;&nbsp;
+                    <sup>3</sup>Lee Kong Chian School of Medicine, Nanyang Technological University, Singapore &nbsp;&nbsp;
+                    <sup>4</sup>Centre of AI in Medicine, Singapore
+                </div>
+            </div>
+
+            <div class="links">
+                <a href="https://papers.miccai.org/miccai-2025/paper/0951_paper.pdf" class="link-btn paper" target="_blank">📄 MICCAI 2025 Paper</a>
+                <a href="https://link.springer.com/chapter/10.1007/978-3-032-05182-0_47" class="link-btn springer" target="_blank">📚 Springer Link</a>
+                <a href="https://adni.loni.usc.edu/" class="link-btn data" target="_blank">📊 ADNI Dataset</a>
+                <a href="https://github.com/diaoyq121/PPAL" class="link-btn github" target="_blank">💻 Code</a>
+            </div>
+
+            <!-- MICCAI Poster -->
+            <div class="results-figure">
+                <h3 style="text-align: center; margin-bottom: 1rem; color: #2c3e50;">MICCAI 2025 Conference Poster</h3>
+                <div style="text-align: center; margin: 2rem 0;">
+                    <embed src="poster/ppal-poster.pdf" type="application/pdf" width="100%" height="800px" style="border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+                    <div class="figure-caption">
+                        <strong>MICCAI 2025 Poster:</strong> Comprehensive overview of PPAL methodology, experimental setup, and results as presented at the Medical Image Computing and Computer Assisted Intervention conference.
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Abstract</h2>
+            <div class="abstract">
+                <p>Alzheimer's Disease (AD) is a progressive neurodegenerative disorder that represents a major global health challenge. Early and accurate diagnosis is crucial for effective intervention and treatment planning. We propose <span class="highlight">Prior-guided Prototype Aggregation Learning (PPAL)</span>, a novel framework that leverages disease-related prior knowledge to enhance AD diagnosis from multi-modal brain imaging data.</p>
+
+                <p>Our approach introduces a unique <span class="highlight">question-and-answer mechanism</span> to extract disease-related concepts from medical knowledge bases. By integrating these semantic priors with visual features through progressive prototype aggregation, PPAL achieves more robust and interpretable disease classification.</p>
+
+                <p>The framework includes a <span class="highlight">slice selection and compression module</span> to identify and integrate critical information from 3D brain scans, and a <span class="highlight">text-aggregated visual module</span> that progressively refines prototype features using text embeddings. Extensive experiments on the ADNI dataset demonstrate the effectiveness of our approach for AD diagnosis.</p>
+            </div>
+
+            <h2 class="section-title">Key Contributions</h2>
+            <div class="contributions">
+                <ul>
+                    <li><strong>Prior-guided Learning:</strong> Novel integration of medical knowledge priors through a question-and-answer mechanism for disease concept extraction</li>
+                    <li><strong>Prototype Aggregation:</strong> Progressive aggregation of visual features using text embeddings to obtain refined prototype representations</li>
+                    <li><strong>Slice Selection Module:</strong> Intelligent selection and integration of key slice information to enhance critical representations from 3D brain imaging</li>
+                    <li><strong>Semantic Similarity Classification:</strong> Classification based on semantic similarity measurements between prototypes and query samples</li>
+                    <li><strong>Multi-modal Integration:</strong> Effective fusion of visual and textual modalities for improved diagnostic performance</li>
+                </ul>
+            </div>
+
+            <h2 class="section-title">Method Overview</h2>
+            <div class="method-section">
+                <p>The PPAL framework consists of four main components working in synergy to achieve accurate and interpretable Alzheimer's Disease diagnosis:</p>
+
+                <!-- Main Pipeline Figure -->
+                <div class="method-figure">
+                    <img src="imgs/ppal-Figure 1.png" alt="PPAL Framework Pipeline" style="max-width: 95%; height: auto; display: block; margin: 0 auto;">
+                    <div class="figure-caption">
+                        <strong>Figure 1.</strong> Pipeline of the proposed PPAL framework. (a) Extract disease-related concepts through a question-and-answer mechanism. (b) Select and integrate key slice information to enhance critical representations. (c) Progressively aggregate visual features using text embeddings to obtain more refined prototype feature representations. (d) Classify based on semantic similarity measurements.
+                    </div>
+                </div>
+
+                <h3 style="font-size: 1.3rem; font-weight: 600; margin: 2rem 0 1rem 0; color: #34495e;">1. Disease Concept Extraction</h3>
+                <p>The first component employs a <span class="highlight">question-and-answer mechanism</span> to extract disease-related concepts from medical knowledge bases. This approach leverages prior medical knowledge to guide the learning process, ensuring that the model focuses on clinically relevant features associated with Alzheimer's Disease progression.</p>
+
+                <h3 style="font-size: 1.3rem; font-weight: 600; margin: 2rem 0 1rem 0; color: #34495e;">2. Slice Selection and Compression Module</h3>
+                <p>Given the 3D nature of brain imaging data, it's crucial to identify the most informative slices across different anatomical planes. Our slice selection and compression module intelligently selects and integrates key slice information to enhance critical representations.</p>
+
+                <div class="method-figure">
+                    <img src="imgs/ppal-Figure 2.png" alt="Slice Selection and Compression Module" style="max-width: 85%; height: auto; display: block; margin: 0 auto;">
+                    <div class="figure-caption">
+                        <strong>Figure 2.</strong> Slice selection and compression module. This component identifies and integrates the most informative slices from multi-planar brain imaging to create compact yet comprehensive feature representations.
+                    </div>
+                </div>
+
+                <h3 style="font-size: 1.3rem; font-weight: 600; margin: 2rem 0 1rem 0; color: #34495e;">3. Text-Aggregated Visual Module</h3>
+                <p>The core innovation of PPAL lies in the <span class="highlight">text-aggregated visual module</span>, which progressively aggregates visual features using text embeddings derived from disease-related concepts. This cross-modal fusion enables the model to learn more refined prototype feature representations that capture both visual patterns and semantic disease characteristics.</p>
+
+                <div class="method-figure">
+                    <img src="imgs/ppal-Figure 3.png" alt="Text-Aggregated Visual Module" style="max-width: 85%; height: auto; display: block; margin: 0 auto;">
+                    <div class="figure-caption">
+                        <strong>Figure 3.</strong> Text-aggregated visual module. This module progressively refines visual features by aggregating them with text embeddings, creating semantically meaningful prototype representations for disease classification.
+                    </div>
+                </div>
+
+                <h3 style="font-size: 1.3rem; font-weight: 600; margin: 2rem 0 1rem 0; color: #34495e;">4. Semantic Similarity-Based Classification</h3>
+                <p>Classification is performed based on <span class="highlight">semantic similarity measurements</span> between the learned prototypes and query samples. This approach provides interpretable predictions by explicitly comparing the similarity of patient scans to disease-specific prototype patterns.</p>
+            </div>
+
+            <h2 class="section-title">Results & Visualization</h2>
+            <div class="results-section">
+                <p>We evaluate PPAL on the <span class="highlight">ADNI (Alzheimer's Disease Neuroimaging Initiative)</span> dataset, which contains multi-modal brain imaging data from patients with various stages of Alzheimer's Disease progression.</p>
+
+                <h3 style="font-size: 1.3rem; font-weight: 600; margin: 2rem 0 1rem 0; color: #34495e;">Model Interpretability</h3>
+                <p>One of the key advantages of PPAL is its interpretability. The framework provides insights into the decision-making process through:</p>
+
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>Slice Attention Visualization:</strong> Shows which anatomical planes and slices the model focuses on for diagnosis</li>
+                    <li><strong>ROI Attention Maps:</strong> Highlights specific brain regions that contribute most to the classification decision</li>
+                    <li><strong>Prototype Similarity Analysis:</strong> Reveals how patient scans relate to learned disease prototypes</li>
+                </ul>
+
+                <div class="results-figure">
+                    <img src="imgs/ppal-Figure 4.png" alt="Visualization Results" style="max-width: 90%; height: auto; display: block; margin: 0 auto;">
+                    <div class="figure-caption">
+                        <strong>Figure 4.</strong> (a) Slice attention weight distribution across three planes (axial, sagittal, and coronal). The visualization demonstrates how the model adaptively focuses on different anatomical views. (b) Visualization of model attention on regions of interest (ROI), highlighting brain areas most relevant for Alzheimer's Disease diagnosis.
+                    </div>
+                </div>
+
+                <p>The attention visualizations in Figure 4 demonstrate that PPAL learns to focus on <span class="highlight">clinically relevant brain regions</span> known to be affected by Alzheimer's Disease, such as the hippocampus, entorhinal cortex, and temporal lobes. This alignment with medical knowledge validates the effectiveness of the prior-guided learning approach.</p>
+            </div>
+
+            <h2 class="section-title">Dataset & Code</h2>
+            <div class="abstract">
+                <h3 style="font-size: 1.3rem; font-weight: 600; margin: 1.5rem 0 1rem 0; color: #34495e;">ADNI Dataset</h3>
+                <p>The <span class="highlight">Alzheimer's Disease Neuroimaging Initiative (ADNI)</span> is a landmark study that has been collecting clinical, imaging, genetic, and biomarker data from thousands of participants. The dataset includes:</p>
+
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>Structural MRI:</strong> High-resolution T1-weighted brain imaging across multiple time points</li>
+                    <li><strong>Clinical Assessments:</strong> Comprehensive cognitive and functional evaluations</li>
+                    <li><strong>Multi-stage Diagnosis:</strong> Including normal cognition (CN), mild cognitive impairment (MCI), and Alzheimer's Disease (AD)</li>
+                </ul>
+
+                <p>Access to the ADNI data requires registration and agreement to data usage terms. Visit the <a href="https://adni.loni.usc.edu/" target="_blank" style="color: #3498db; text-decoration: underline;">ADNI website</a> for more information.</p>
+
+                <h3 style="font-size: 1.3rem; font-weight: 600; margin: 2rem 0 1rem 0; color: #34495e;">Code Availability</h3>
+                <p>The implementation of PPAL is available on GitHub. The repository includes:</p>
+
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>Model Architecture:</strong> Complete implementation of all PPAL components</li>
+                    <li><strong>Training Scripts:</strong> Code for training on ADNI dataset</li>
+                    <li><strong>Evaluation Tools:</strong> Scripts for model evaluation and visualization</li>
+                    <li><strong>Pre-trained Models:</strong> Checkpoints for reproducing results</li>
+                </ul>
+
+                <p>Visit the <a href="https://github.com/diaoyq121/PPAL" target="_blank" style="color: #3498db; text-decoration: underline;">GitHub repository</a> to access the code and documentation.</p>
+            </div>
+
+            <h2 class="section-title">Impact & Applications</h2>
+            <div class="abstract">
+                <p>PPAL addresses critical challenges in computer-aided diagnosis of Alzheimer's Disease by combining <span class="highlight">medical knowledge priors</span> with advanced deep learning techniques. The framework's potential applications include:</p>
+
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>Early Detection:</strong> Assisting clinicians in early identification of AD-related brain changes</li>
+                    <li><strong>Disease Staging:</strong> Differentiating between different stages of cognitive decline</li>
+                    <li><strong>Treatment Planning:</strong> Providing interpretable insights to support personalized treatment strategies</li>
+                    <li><strong>Clinical Research:</strong> Enabling large-scale analysis of brain imaging biomarkers in AD studies</li>
+                    <li><strong>Multi-disease Diagnosis:</strong> The framework's architecture can be adapted to other neurodegenerative diseases</li>
+                </ul>
+
+                <p>The interpretability of PPAL is particularly valuable in clinical settings, where understanding the reasoning behind AI predictions is essential for building trust and facilitating human-AI collaboration in medical decision-making.</p>
+            </div>
+
+            <h2 class="section-title">Citation</h2>
+            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; font-family: monospace; font-size: 0.9rem; overflow-x: auto;" class="citation-box">
+<pre style="margin: 0; color: #000;">@inproceedings{diao2025ppal,
+  title={Prior-guided Prototype Aggregation Learning for Alzheimer's Disease Diagnosis},
+  author={Diao, Yueqin and Fang, Huihui and Yu, Hanyi and Wang, Yuning and Tao, Yaling and Huang, Ziyan and Yeo, Si Yong and Xu, Yanwu},
+  booktitle={Medical Image Computing and Computer Assisted Intervention -- MICCAI 2025},
+  pages={483--492},
+  year={2025},
+  organization={Springer}
+}</pre>
+            </div>
+
+            <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 1rem;">
+                <h3 style="margin-bottom: 1rem;">Published in MICCAI 2025</h3>
+                <p style="margin: 0; font-size: 1.1rem;">Medical Image Computing and Computer Assisted Intervention</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-theme-light dark:bg-darkmode-theme-light">
+        <div class="container">
+            <div class="row items-center py-10">
+                <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:text-left">
+                    <a class="navbar-brand inline-block" href="../">
+                        <img fetchpriority="high" decoding="async" class="img logo-light" width="160" height="32"
+                            src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                            alt="MedVisAITechnologies"
+                            onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                        <img fetchpriority="high" decoding="async" class="img logo-dark" width="160" height="32"
+                            src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.png"
+                            alt="MedVisAITechnologies"
+                            onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                    </a>
+                </div>
+                <div class="lg:col-6 mb-8 text-center lg:mb-0">
+                    <ul>
+                        <li class="m-3 inline-block"><a href="../about/">About</a></li>
+                        <li class="m-3 inline-block"><a href="../eml">Contact</a></li>
+                        <li class="m-3 inline-block"><a href="../location/">Location</a></li>
+                    </ul>
+                </div>
+                <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:mt-0 lg:text-right">
+                    <ul class="social-icons">
+                        <li><a target="_blank" aria-label="facebook" rel="nofollow noopener" href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a></li>
+                        <li><a target="_blank" aria-label="twitter" rel="nofollow noopener" href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
+                        <li><a target="_blank" aria-label="github" rel="nofollow noopener" href="https://www.github.com/"><i class="fab fa-github"></i></a></li>
+                        <li><a target="_blank" aria-label="linkedin" rel="nofollow noopener" href="https://www.linkedin.com/"><i class="fab fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="border-border dark:border-darkmode-border border-t py-7">
+            <div class="text-light dark:text-darkmode-light container text-center">
+                <p></p>
+            </div>
+        </div>
+    </footer>
+
+    <script crossorigin="anonymous" integrity="sha256-HNvx23yefzYJie2GA7dzwBeKevXtramA+LX4E7XFReM="
+        src="../js/script.min.1cdbf1db7c9e7f360989ed8603b773c0178a7af5edada980f8b5f813b5c545e3.js"></script>
+    <script>"serviceWorker" in navigator && navigator.serviceWorker.register("../service-worker.js")</script>
+</body>
+
+</html>
