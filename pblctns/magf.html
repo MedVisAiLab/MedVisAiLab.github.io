@@ -351,13 +351,13 @@
                 <a href="https://doi.org/10.1016/j.eswa.2026.131388" class="link-btn" target="_blank">DOI</a>
             </div>
 
-            <h2 class="section-title">Abstract</h2>
+            <h2 class="section-title">Overview</h2>
             <div class="abstract">
-                <p>Glaucoma is one of the leading causes of irreversible blindness worldwide. <span class="highlight">Color fundus photography (CFP)</span> and <span class="highlight">optical coherence tomography (OCT)</span> are two primary imaging modalities for glaucoma diagnosis. Recently, multi-modal approaches that combine CFP and OCT have demonstrated higher diagnostic accuracy compared to single-modal methods.</p>
+                <p>Glaucoma is one of the leading causes of irreversible blindness worldwide. Clinical diagnosis typically relies on multiple imaging modalities, such as <span class="highlight">color fundus photography (CFP)</span> and <span class="highlight">optical coherence tomography (OCT)</span>, which provide complementary structural information about the optic nerve head and retinal nerve fiber layer.</p>
 
-                <p>However, the high similarity among medical image poses presents a challenge for extracting effective features. Additionally, low-quality features can degrade fusion performance, potentially leading to inaccurate grading results.</p>
+                <p>However, effectively integrating heterogeneous information from multiple modalities remains a challenging problem for automated glaucoma grading systems.</p>
 
-                <p>To address these challenges, we propose a <span class="highlight">Multi-scale Attention and Gated Fusion (MAGF)</span> framework, which incorporates a dual-branch feature extraction architecture with targeted attention, a Multi-scale Attention Fusion Module (MAFM) for enhancing OCT features, and a Gated Fusion Module (GFM) for adaptive integration of CFP and OCT modalities. Extensive experiments demonstrate that our method achieves <span class="highlight">state-of-the-art (SOTA) performance</span> in glaucoma grading.</p>
+                <p>We propose <span class="highlight">MAGF</span>, a multi-modal deep learning framework that integrates CFP and OCT volumetric scans through <span class="highlight">multi-scale attention and gated fusion mechanisms</span>. By enhancing modality-specific representations and dynamically balancing cross-modal contributions, MAGF provides a robust solution for multi-modal glaucoma severity grading.</p>
             </div>
 
             <!-- Figure 1: Dataset Examples -->
@@ -373,24 +373,24 @@
                 </div>
             </div>
 
-            <h2 class="section-title">Key Contributions</h2>
+            <h2 class="section-title">Highlights</h2>
             <div class="contributions">
                 <ul>
-                    <li><strong>Dual-branch Feature Extraction Architecture with Targeted Attention:</strong> A novel dual-branch architecture specifically designed to leverage the complementary nature of CFP and OCT data, with a specialised attention mechanism integrated into the OCT branch to amplify the discriminative power of extracted features.</li>
-                    <li><strong>Multi-scale Attention Fusion Module (MAFM) for OCT Feature Enhancement:</strong> The proposed MAFM applies attention across three different channel scales to capture fine-grained, mid-level, and global semantic details, which are then integrated and refined using a spatial attention mechanism.</li>
-                    <li><strong>Gated Fusion Module (GFM) for Adaptive Integration:</strong> A dynamic gating mechanism that weights the contributions of features extracted from CFP and OCT modalities, ensuring that low-quality or noisy features have less influence on the final decision.</li>
-                    <li><strong>State-of-the-Art Performance:</strong> Achieves the highest Kappa score of 0.9183 on the GAMMA dataset, outperforming existing methods.</li>
+                    <li>A multi-modal glaucoma grading framework integrating <strong>CFP and OCT volumetric scans</strong>.</li>
+                    <li>A <strong>Multi-scale Attention Fusion Module (MAFM)</strong> that enhances OCT structural feature representation.</li>
+                    <li>A <strong>Gated Fusion Module (GFM)</strong> that adaptively balances contributions from different modalities.</li>
+                    <li>Extensive evaluation on the <strong>GAMMA benchmark dataset</strong> demonstrates strong performance.</li>
                 </ul>
             </div>
 
             <h2 class="section-title">Method Overview</h2>
             <div class="method-section">
-                <p>MAGF employs a <span class="highlight">parallel dual-branch structure</span> to extract features from CFP and OCT images independently, with both branches utilizing EfficientNet as the feature extractor. The framework consists of three main components:</p>
+                <p>MAGF adopts a <span class="highlight">dual-branch architecture</span> to extract features from color fundus photographs and OCT volumetric scans. The framework consists of three main components:</p>
 
                 <ul style="margin: 1rem 0; padding-left: 2rem;">
-                    <li><strong>Dual-branch Feature Extraction:</strong> Parallel EfficientNet-based branches for modality-specific feature extraction</li>
-                    <li><strong>Multi-scale Attention Fusion Module (MAFM):</strong> Enhances OCT features using multi-scale 1D convolutions and spatial attention</li>
-                    <li><strong>Gated Fusion Module (GFM):</strong> Dynamically fuses features from both modalities with learned gating weights</li>
+                    <li><strong>Dual-branch Feature Extraction:</strong> Separate feature encoders are used to extract modality-specific representations from CFP and OCT images.</li>
+                    <li><strong>Multi-scale Attention Fusion Module (MAFM):</strong> Applied to the OCT branch, MAFM captures structural patterns using multi-scale channel attention and spatial attention mechanisms.</li>
+                    <li><strong>Gated Fusion Module (GFM):</strong> The GFM dynamically fuses features from CFP and OCT by learning adaptive gating weights that regulate the contribution of each modality.</li>
                 </ul>
 
                 <!-- Figure 2: MAGF Architecture -->
@@ -401,14 +401,26 @@
                     </div>
                 </div>
 
-                <p>The <span class="highlight">MAFM</span> employs three different scales of 1D convolution (kernel sizes 3, 7, and 13) to model channel attention for the input feature map. These convolution kernels capture relationships between channels at various scales, enhancing the representational capacity of the features. A spatial attention component is applied following channel attention to guide the model to focus on the most relevant spatial areas.</p>
+                <h3 style="margin-top: 2rem; color: #2c3e50;">Multi-scale Attention Fusion Module (MAFM)</h3>
+                <p>OCT images contain rich structural information about the retinal layers, but their representations may vary across scales. The <span class="highlight">MAFM</span> enhances OCT features through a combination of:</p>
+                <ul style="margin: 0.5rem 0 1rem 2rem;">
+                    <li><strong>Multi-scale channel attention</strong>, capturing patterns across different receptive fields (kernel sizes 3, 7, and 13)</li>
+                    <li><strong>Spatial attention</strong>, emphasizing informative anatomical regions</li>
+                </ul>
+                <p>This design allows the network to better capture structural variations relevant to glaucoma progression.</p>
 
-                <p>The <span class="highlight">GFM</span> dynamically weights the contributions of features from both modalities using two gating modules (GateA and GateB). The weights are normalized using softmax to ensure balanced fusion. Additionally, global max pooling (GMP) is applied to preserve detailed texture information from each modality.</p>
+                <h3 style="margin-top: 1.5rem; color: #2c3e50;">Gated Fusion Module (GFM)</h3>
+                <p>Simply concatenating features from multiple modalities may lead to suboptimal performance because each modality contributes differently across cases. The <span class="highlight">GFM</span> introduces an adaptive gating mechanism that dynamically balances the contributions of CFP and OCT features during feature fusion. By learning modality-specific weights, the model can:</p>
+                <ul style="margin: 0.5rem 0 1rem 2rem;">
+                    <li>Emphasize the most informative modality</li>
+                    <li>Suppress redundant or noisy information</li>
+                </ul>
+                <p>This adaptive fusion strategy improves the robustness of multi-modal glaucoma grading.</p>
             </div>
 
             <h2 class="section-title">Results & Visualization</h2>
             <div class="results-section">
-                <p>MAGF achieves <span class="highlight">state-of-the-art performance</span> on the GAMMA dataset with a Kappa score of 0.9183 and accuracy of 0.88, outperforming all existing methods including the GAMMA Challenge winner.</p>
+                <p>MAGF is evaluated on the <span class="highlight">GAMMA dataset</span>, a public benchmark for multi-modal glaucoma grading that contains paired CFP and OCT images. Experimental results show that MAGF achieves strong performance compared with existing multi-modal methods, demonstrating the effectiveness of multi-scale attention and gated feature fusion.</p>
 
                 <div class="requirements" style="background: #f0f4f8; border-left-color: #3498db;">
                     <h3 style="margin-bottom: 1rem;">Performance Comparison</h3>
@@ -444,7 +456,7 @@
                     </table>
                 </div>
 
-                <p style="margin-top: 1.5rem;">To interpret the model's decision behavior, Grad-CAM attention heatmaps are generated for representative CFP and OCT samples across the three glaucoma stages:</p>
+                <p style="margin-top: 1.5rem;">To better understand the model's behavior, Grad-CAM visualization is applied to highlight the regions that contribute most to the model's predictions:</p>
 
                 <!-- Figure 3: Grad-CAM Visualization -->
                 <div class="results-figure">
@@ -454,7 +466,7 @@
                     </div>
                 </div>
 
-                <p>These visualizations confirm that the MAGF framework effectively learns <span class="highlight">modality-specific and stage-dependent biomarkers</span>, providing meaningful interpretability for clinical decision support. The CFP attention progressively shifts and concentrates on the optic disc with glaucoma advancement, while the OCT attention primarily localizes on the RNFL and inner retinal boundaries.</p>
+                <p>The visualization results show that CFP attention maps focus on the <span class="highlight">optic disc and cup regions</span>, while OCT attention maps emphasize <span class="highlight">retinal nerve fiber layer structures</span>. These observations are consistent with clinical knowledge of glaucoma pathology.</p>
             </div>
 
             <h2 class="section-title">Technical Details</h2>
