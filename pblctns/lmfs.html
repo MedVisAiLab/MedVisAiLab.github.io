@@ -310,28 +310,29 @@
 
             <div class="authors">
                 <div style="margin-bottom: 1rem;">
-                    <span class="author-name">Conghao Xiong<sup>1</sup></span>
-                    <span class="author-name">Zhengrui Guo<sup>1</sup></span>
+                    <span class="author-name">Conghao Xiong<sup>1,2</sup></span>
+                    <span class="author-name">Zhengrui Guo<sup>3</sup></span>
                     <span class="author-name">Zhe Xu<sup>1</sup></span>
-                    <span class="author-name">Yifei Zhang<sup>2</sup></span>
+                    <span class="author-name">Yifei Zhang<sup>4</sup></span>
                     <span class="author-name">Raymond Kai-yu Tong<sup>1</sup></span>
-                    <span class="author-name">Si Yong Yeo<sup>3,4,5</sup></span>
-                    <span class="author-name">Hao Chen<sup>2</sup></span>
-                    <span class="author-name">Joseph J. Y. Sung<sup>1</sup></span>
+                    <span class="author-name">Si Yong Yeo<sup>2,5,6</sup></span>
+                    <span class="author-name">Hao Chen<sup>3</sup></span>
+                    <span class="author-name">Joseph J. Y. Sung<sup>2,5</sup></span>
                     <span class="author-name">Irwin King<sup>1</sup></span>
                 </div>
 
                 <div class="affiliation">
                     <sup>1</sup>The Chinese University of Hong Kong &nbsp;&nbsp;
-                    <sup>2</sup>The Hong Kong University of Science and Technology &nbsp;&nbsp;
-                    <sup>3</sup>Centre of AI in Medicine, Singapore &nbsp;&nbsp;
-                    <sup>4</sup>Lee Kong Chian School of Medicine, Nanyang Technological University, Singapore &nbsp;&nbsp;
-                    <sup>5</sup>MedVisAI Lab, Singapore
+                    <sup>2</sup>Centre of AI in Medicine, Singapore &nbsp;&nbsp;
+                    <sup>3</sup>The Hong Kong University of Science and Technology &nbsp;&nbsp;
+                    <sup>4</sup>Nanyang Technological University &nbsp;&nbsp;
+                    <sup>5</sup>Lee Kong Chian School of Medicine, Nanyang Technological University, Singapore &nbsp;&nbsp;
+                    <sup>6</sup>MedVisAI Lab, Singapore
                 </div>
             </div>
 
             <div class="links">
-                <a href="https://arxiv.org/pdf/2505.15504" class="link-btn paper" target="_blank">📄 ICLR 2026 Paper</a>
+                <a href="https://arxiv.org/pdf/2505.15504" class="link-btn paper" target="_blank">📄 Paper</a>
                 <a href="https://arxiv.org/abs/2505.15504" class="link-btn" target="_blank">📋 arXiv</a>
                 <a href="https://github.com/BearCleverProud/MR-Block" class="link-btn github" target="_blank">💻 Code</a>
             </div>
@@ -340,9 +341,11 @@
             <div class="abstract">
                 <p>Few-shot Whole Slide Image (WSI) classification is severely hampered by overfitting. We argue that this is not merely a data-scarcity issue but a <span class="highlight">fundamentally geometric problem</span>. Grounded in the manifold hypothesis, our analysis shows that features from pathology foundation models exhibit a low-dimensional manifold geometry that is easily perturbed by downstream models.</p>
 
-                <p>This insight reveals a key potential issue in downstream multiple instance learning models: <span class="highlight">linear layers are geometry-agnostic</span> and, as we show empirically, can distort the manifold geometry of the features. To address this, we propose the <span class="highlight">Manifold Residual (MR) block</span>, a plug-and-play module that is explicitly geometry-aware.</p>
+                <p>This reveals a key issue in downstream multiple instance learning models: <span class="highlight">linear layers are geometry-agnostic</span> and can distort the manifold geometry of the features. To address this, we propose the <span class="highlight">Manifold Residual (MR) block</span>, a plug-and-play module that is explicitly geometry-aware.</p>
 
-                <p>The MR block reframes the linear layer as residual learning and decouples it into two pathways: (1) a fixed, random matrix serving as a geometric anchor that approximately preserves topology while also acting as a spectral shaper to sharpen the feature spectrum; and (2) a trainable, low-rank residual pathway that acts as a residual learner for task-specific adaptation, with its structural bottleneck explicitly mirroring the low effective rank of the features. This decoupling imposes a structured inductive bias and reduces learning to a simpler residual fitting task.</p>
+                <p>The MR block reframes the linear layer as residual learning and decouples it into two pathways: (1) a fixed random matrix serving as a geometric anchor that approximately preserves topology while also acting as a spectral shaper; and (2) a trainable low-rank residual pathway for task-specific adaptation, with its structural bottleneck explicitly mirroring the low effective rank of the features.</p>
+
+                <p>This decoupling imposes a structured inductive bias, reduces learning to a simpler residual fitting task, and achieves strong performance with significantly fewer parameters.</p>
             </div>
 
             <h2 class="section-title">Motivation: Feature Geometry Analysis</h2>
@@ -367,10 +370,10 @@
             <h2 class="section-title">Key Contributions</h2>
             <div class="contributions">
                 <ul>
-                    <li><strong>Geometric reframing:</strong> Demonstrates that features from pathology foundation models lie on a low-dimensional manifold, and that standard linear layers disrupt this geometry, causing overfitting in few-shot settings.</li>
-                    <li><strong>Manifold Residual (MR) Block:</strong> A theoretically grounded, plug-and-play replacement for linear layers that preserves manifold geometry while enabling task-specific adaptation.</li>
-                    <li><strong>Parameter efficiency:</strong> MR-CATE (0.84M parameters) matches or exceeds much larger competing methods such as ViLaMIL (40.7M parameters) and FOCUS (86.9M parameters).</li>
-                    <li><strong>Broad applicability:</strong> The MR block is backbone-agnostic and can be integrated into any Multiple Instance Learning (MIL) framework.</li>
+                    <li><strong>Geometric reframing:</strong> We show that pathology foundation model features lie on a low-dimensional manifold and that standard linear layers can disrupt this fragile geometry in few-shot settings.</li>
+                    <li><strong>Manifold Residual (MR) block:</strong> We propose a theoretically grounded, plug-and-play replacement for internal linear layers that combines a geometric anchor with a low-rank residual pathway.</li>
+                    <li><strong>Parameter efficiency:</strong> MR-enhanced models match or surpass much larger competing methods while using substantially fewer trainable parameters.</li>
+                    <li><strong>Broad applicability:</strong> The MR block is backbone-agnostic and can be integrated into different multiple instance learning (MIL) frameworks.</li>
                 </ul>
             </div>
 
@@ -387,21 +390,20 @@
 
                 <p>The MR block consists of two components:</p>
                 <ul style="margin: 1rem 0; padding-left: 2rem;">
-                    <li><strong>Geometric Anchor (fixed random matrix):</strong> Initialized with Kaiming uniform and kept frozen throughout training. It approximately preserves the topology of the feature manifold and sharpens the eigenvalue spectrum, counteracting manifold distortion.</li>
-                    <li><strong>Low-Rank Residual Pathway (LRP):</strong> A trainable bottleneck with rank r ≪ min(d₀, d₁), explicitly mirroring the low effective rank of foundation model features. Initialized to zero, it learns task-specific adaptation as a residual on top of the geometric anchor.</li>
+                    <li><strong>Geometric Anchor (fixed random matrix):</strong> Initialized with a random distribution and kept frozen during training. It approximately preserves the topology of the feature manifold and also acts as a spectral shaper.</li>
+                    <li><strong>Low-Rank Residual Pathway (LRP):</strong> A trainable bottleneck with rank r ≪ min(d₀, d₁), explicitly reflecting the low effective rank of foundation model features. It learns task-specific adaptation as a residual on top of the geometric anchor.</li>
                 </ul>
-                <p>This decoupling imposes a structured inductive bias and simplifies learning to a residual fitting task, which is particularly beneficial in the few-shot setting where data is scarce.</p>
+                <p>This decoupling imposes a structured inductive bias and is particularly beneficial in the few-shot regime.</p>
             </div>
 
             <h2 class="section-title">Results & Performance</h2>
             <div class="results-section">
-                <p>MR variants consistently <span class="highlight">outperform baselines</span> across all datasets, shot counts, and MIL backbones. Performance gains are strongest in the extreme few-shot regime but remain positive at higher shot counts.</p>
+                <p>MR-enhanced variants consistently <span class="highlight">improve over their corresponding baselines</span> across multiple datasets, shot counts, and MIL backbones. The gains are strongest in the extreme few-shot regime and remain competitive at larger shot counts.</p>
 
                 <ul style="margin: 1rem 0; padding-left: 2rem;">
-                    <li><strong>Camelyon16</strong> (k=8, CONCH features): MR-CATE achieves AUC 88.0, F1 81.7, Acc 82.9, compared to ABMIL baseline AUC 49.2.</li>
-                    <li><strong>TCGA-NSCLC &amp; TCGA-RCC:</strong> Consistent improvements over backbone methods across all shot counts.</li>
-                    <li><strong>Treatment Response (Boehmk, Trastuzumab):</strong> State-of-the-art results in challenging clinical outcome prediction tasks.</li>
-                    <li><strong>Parameter efficiency:</strong> MR-CATE (0.84M params) consistently matches or exceeds ViLaMIL (40.7M) and FOCUS (86.9M).</li>
+                    <li><strong>Camelyon16, TCGA-NSCLC, and TCGA-RCC:</strong> MR-based models match or surpass strong recent methods while using far fewer trainable parameters.</li>
+                    <li><strong>Boehmk and Trastuzumab:</strong> MR-ABMIL and MR-CATE achieve strong treatment-response prediction performance in challenging clinical settings.</li>
+                    <li><strong>Parameter efficiency:</strong> Replacing vanilla linear layers with MR blocks reduces trainable parameters substantially while maintaining or improving performance.</li>
                 </ul>
 
                 <div class="results-figure">
@@ -411,7 +413,7 @@
                     </div>
                 </div>
 
-                <p>The rank sensitivity analysis shows that performance saturates around r=32, which aligns with the theoretical effective rank (~29.7) of the features, validating our design principle of mirroring the intrinsic dimensionality of the feature manifold.</p>
+                <p>Figure 3 illustrates the sensitivity analysis of the bottleneck rank r, and the empirical trend supports the design principle of aligning the residual bottleneck with the intrinsic effective rank of the feature manifold.</p>
             </div>
 
             <h2 class="section-title">Datasets</h2>
@@ -428,11 +430,10 @@
 
             <h2 class="section-title">Citation</h2>
             <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; font-family: monospace; font-size: 0.9rem; overflow-x: auto;" class="citation-box">
-<pre style="margin: 0; color: #000;">@article{xiong2026manifold,
+<pre style="margin: 0; color: #000;">@inproceedings{xiong2026lmfs,
   title={Exploiting Low-Dimensional Manifold of Features for Few-Shot Whole Slide Image Classification},
-  author={Xiong, Conghao and Guo, Zhengrui and Xu, Zhe and Zhang, Yifei and Tong, Raymond Kai-yu
-          and Yeo, Si Yong and Chen, Hao and Sung, Joseph J. Y. and King, Irwin},
-  journal={arXiv preprint arXiv:2505.15504},
+  author={Xiong, Conghao and Guo, Zhengrui and Xu, Zhe and Zhang, Yifei and Tong, Raymond Kai-yu and Yeo, Si Yong and Chen, Hao and Sung, Joseph J. Y. and King, Irwin},
+  booktitle={International Conference on Learning Representations (ICLR)},
   year={2026}
 }</pre>
             </div>
