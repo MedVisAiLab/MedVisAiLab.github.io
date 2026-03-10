@@ -1,0 +1,547 @@
+<!doctype html>
+<html itemscope lang="en-us" itemtype="http://schema.org/WebPage">
+
+<head>
+    <meta charset="utf-8">
+    <title>MAGF: Multi-scale Attention and Gated Fusion for Multi-modal Glaucoma Grading</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+    <meta name="theme-name" content="hugoplate">
+    <link rel="shortcut icon" href="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_96x0_resize_lanczos_3.png" type="image/x-icon">
+    <link rel="icon" href="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_96x0_resize_lanczos_3.png" type="image/x-icon">
+    <base href="https://medvisailab.github.io/pblctns/">
+
+    <meta name="description" content="MAGF: A novel multi-modal fusion framework with multi-scale attention and gated fusion for accurate glaucoma grading using CFP and OCT images">
+    <meta name="keywords" content="Glaucoma Classification, Multi-modal Learning, Multi-scale Attention, Gated Fusion, Medical Image Analysis, Deep Learning">
+    <meta name="author" content="MedVisAI Lab">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="MAGF: Multi-scale Attention and Gated Fusion for Multi-modal Glaucoma Grading">
+    <meta property="og:description" content="A novel multi-modal fusion framework with multi-scale attention and gated fusion for accurate glaucoma grading using CFP and OCT images">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://medvisailab.github.io/pblctns/magf.html">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:title" content="MAGF: Multi-scale Attention and Gated Fusion for Multi-modal Glaucoma Grading">
+    <meta name="twitter:description" content="A novel multi-modal fusion framework with multi-scale attention and gated fusion for accurate glaucoma grading using CFP and OCT images">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600&family=Signika:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link href="../css/style.min.80b93bb3a795f7194d0ca0c445309f1547c3c019264bfd28165ca93c97401b5d.css" rel="stylesheet">
+    <link href="../css/mvait-enhancements.css" rel="stylesheet">
+    <link href="../css/theme-fixes.css" rel="stylesheet">
+
+    <style>
+        .project-page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .project-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+
+        .dark .project-title {
+            color: #ecf0f1;
+        }
+
+        .authors {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #34495e;
+        }
+
+        .dark .authors {
+            color: #bdc3c7;
+        }
+
+        .author-name {
+            margin: 0 0.5rem;
+        }
+
+        .affiliation {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 0.5rem;
+        }
+
+        .dark .affiliation {
+            color: #95a5a6;
+        }
+
+        .links {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .link-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            margin: 0.5rem;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: background 0.3s ease;
+            font-weight: 600;
+        }
+
+        .link-btn:hover {
+            background: #2980b9;
+            color: white;
+        }
+
+        .link-btn.paper {
+            background: #e74c3c;
+        }
+
+        .link-btn.paper:hover {
+            background: #c0392b;
+        }
+
+        .link-btn.github {
+            background: #2c3e50;
+        }
+
+        .link-btn.github:hover {
+            background: #34495e;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1rem 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        .dark .section-title {
+            color: #ecf0f1;
+        }
+
+        .abstract, .method-section, .results-section {
+            margin-bottom: 2rem;
+            text-align: justify;
+        }
+
+        .method-figure, .results-figure {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .method-figure img, .results-figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .figure-caption {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .dark .figure-caption {
+            color: #95a5a6;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8e6cf 0%, #dcedc1 100%);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+        }
+
+        .dark .highlight {
+            background: linear-gradient(120deg, #2c3e50 0%, #34495e 100%);
+            color: #ecf0f1;
+        }
+
+        .citation-box {
+            background: #f8f9fa !important;
+        }
+
+        .dark .citation-box {
+            background: #2c3e50 !important;
+        }
+
+        .citation-box pre {
+            color: #000 !important;
+        }
+
+        .dark .citation-box pre {
+            color: #ecf0f1 !important;
+        }
+
+        .contributions {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #3498db;
+            margin: 1.5rem 0;
+        }
+
+        .dark .contributions {
+            background: #2c3e50;
+            color: #ecf0f1;
+        }
+
+        .contributions ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+
+        .contributions li {
+            margin-bottom: 0.5rem;
+        }
+
+        .requirements {
+            background: #e8f5e8;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #27ae60;
+            margin: 1.5rem 0;
+        }
+
+        .dark .requirements {
+            background: #2c3e50;
+            color: #ecf0f1;
+            border-left-color: #2ecc71;
+        }
+
+        @media (max-width: 768px) {
+            .project-page {
+                padding: 1rem;
+            }
+
+            .project-title {
+                font-size: 2rem;
+            }
+
+            .link-btn {
+                display: block;
+                margin: 0.5rem auto;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header sticky top-0 z-30">
+        <nav class="navbar container">
+            <div class="order-0">
+                <a class="navbar-brand block" href="../">
+                    <img fetchpriority="high" decoding="async" class="img logo-light" width="160" height="32"
+                        src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                        alt="MedVisAITechnologies"
+                        onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                    <img fetchpriority="high" decoding="async" class="img logo-dark" width="160" height="32"
+                        src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                        alt="MedVisAITechnologies"
+                        onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                </a>
+            </div>
+
+            <input id="nav-toggle" type="checkbox" class="hidden">
+            <label id="show-button" for="nav-toggle" class="order-2 flex cursor-pointer items-center md:order-1 md:hidden">
+                <svg class="h-6 fill-current" viewBox="0 0 20 20">
+                    <title>Menu Open</title>
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0V0z" />
+                </svg>
+            </label>
+
+            <label id="hide-button" for="nav-toggle" class="order-2 hidden cursor-pointer items-center md:order-1">
+                <svg class="h-6 fill-current" viewBox="0 0 20 20">
+                    <title>Menu Close</title>
+                    <polygon points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2" transform="rotate(45 10 10)" />
+                </svg>
+            </label>
+
+            <ul id="nav-menu" class="navbar-nav order-3 hidden w-full pb-6 lg:order-1 lg:flex lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8">
+                <li class="nav-item"><a class="nav-link" href="../">MVAIT</a></li>
+                <li class="nav-item"><a class="nav-link" href="../team">Team</a></li>
+                <li class="nav-item"><a class="nav-link" href="../research/">Research</a></li>
+                <li class="nav-item"><a class="nav-link" href="../projects">Project Funding</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pos/">Positions</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pblctns">Publications</a></li>
+                <li class="mt-4 inline-block lg:hidden"><a class="btn btn-outline-primary btn-sm" href="../eml">Contact</a></li>
+            </ul>
+
+            <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
+                <div class="theme-switcher mr-5">
+                    <input id="theme-switcher" data-theme-switcher type="checkbox">
+                    <label for="theme-switcher">
+                        <span class="sr-only">theme switcher</span>
+                        <span>
+                            <svg class="absolute left-[4px] top-[4px] z-10 opacity-100 dark:opacity-0" viewBox="0 0 56 56" fill="#fff" height="16" width="16">
+                                <path d="M30 4.6c0-1-.9-2-2-2a2 2 0 00-2 2v5c0 1 .9 2 2 2s2-1 2-2zm9.6 9a2 2 0 000 2.8c.8.8 2 .8 2.9.0L46 13a2 2 0 000-2.9 2 2 0 00-3 0zm-26 2.8c.7.8 2 .8 2.8.0.8-.7.8-2 0-2.9L13 10c-.7-.7-2-.8-2.9.0-.7.8-.7 2.1.0 3zM28 16A12 12 0 0016 28a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0028 16zm23.3 14c1.1.0 2-.9 2-2s-.9-2-2-2h-4.9a2 2 0 00-2 2c0 1.1 1 2 2 2zM4.7 26a2 2 0 00-2 2c0 1.1.9 2 2 2h4.9c1 0 2-.9 2-2s-1-2-2-2zm37.8 13.6a2 2 0 00-3 0 2 2 0 000 2.9l3.6 3.5a2 2 0 002.9.0c.8-.8.8-2.1.0-3zM10 43.1a2 2 0 000 2.9c.8.7 2.1.8 3 0l3.4-3.5c.8-.8.8-2.1.0-2.9s-2-.8-2.9.0zm20 3.4c0-1.1-.9-2-2-2a2 2 0 00-2 2v4.9c0 1 .9 2 2 2s2-1 2-2z" />
+                            </svg>
+                            <svg class="absolute left-[4px] top-[4px] z-10 opacity-0 dark:opacity-100" viewBox="0 0 24 24" fill="none" height="16" width="16">
+                                <path fill="#000" fill-rule="evenodd" clip-rule="evenodd" d="M8.2 2.2c1-.4 2 .6 1.6 1.5-1 3-.4 6.4 1.8 8.7a8.4 8.4.0 008.7 1.8c1-.3 2 .5 1.5 1.5v.1A10.3 10.3.0 0112.4 22 10.3 10.3.0 013.2 6.7c1-2 2.9-3.5 4.9-4.4z" />
+                            </svg>
+                        </span>
+                    </label>
+                </div>
+                <script>
+                    var themeSwitch, darkMode = !0;
+                    localStorage.getItem("theme") === "dark" ? darkMode = !0 : localStorage.getItem("theme") === "light" && (darkMode = !1);
+                    darkMode && document.documentElement.classList.toggle("dark");
+                    themeSwitch = document.querySelectorAll("[data-theme-switcher]");
+                    document.addEventListener("DOMContentLoaded", () => {
+                        [].forEach.call(themeSwitch, function (e) {
+                            e.checked = !!darkMode;
+                            e.addEventListener("click", () => {
+                                document.documentElement.classList.toggle("dark");
+                                localStorage.setItem("theme", document.documentElement.classList.contains("dark") ? "dark" : "light")
+                            })
+                        })
+                    });
+                </script>
+                <a href="../eml" class="btn btn-outline-primary btn-sm hidden lg:inline-block">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="project-page">
+            <h1 class="project-title">
+                MAGF: Multi-scale Attention and Gated Fusion for Multi-modal Glaucoma Grading
+            </h1>
+
+            <div class="authors">
+                <div style="margin-bottom: 1rem;">
+                    <span class="author-name">Haixi Cheng<sup>1</sup></span>
+                    <span class="author-name">Chaoqun Hong<sup>1,*</sup></span>
+                    <span class="author-name">Bo Zhang<sup>2</sup></span>
+                    <span class="author-name">Huihui Fang<sup>3,*</sup></span>
+                    <span class="author-name">Yanwu Xu<sup>3,4</sup></span>
+                    <span class="author-name">Si Yong Yeo<sup>5,6,7,*</sup></span>
+                </div>
+
+                <div class="affiliation">
+                    <sup>1</sup>Key Laboratory of Fujian Universities for Virtual Reality and 3D Visualization, Xiamen University of Technology, China &nbsp;&nbsp;
+                    <sup>2</sup>College of Computing and Data Science, Nanyang Technological University, Singapore &nbsp;&nbsp;
+                    <sup>3</sup>Pazhou Lab, China &nbsp;&nbsp;
+                    <sup>4</sup>School of Future Technology, South China University of Technology, China &nbsp;&nbsp;
+                    <sup>5</sup>MedVisAI Lab, Singapore &nbsp;&nbsp;
+                    <sup>6</sup>Centre of AI in Medicine, Singapore &nbsp;&nbsp;
+                    <sup>7</sup>Lee Kong Chian School of Medicine, Nanyang Technological University, Singapore
+                </div>
+                <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #7f8c8d;">
+                    <sup>*</sup>Corresponding authors
+                </div>
+            </div>
+
+            <div class="links">
+                <a href="https://www.sciencedirect.com/science/article/abs/pii/S0957417426003015" class="link-btn paper" target="_blank">Expert Systems With Applications</a>
+                <a href="https://doi.org/10.1016/j.eswa.2026.131388" class="link-btn" target="_blank">DOI</a>
+            </div>
+
+            <h2 class="section-title">Abstract</h2>
+            <div class="abstract">
+                <p>Glaucoma is one of the leading causes of irreversible blindness worldwide. <span class="highlight">Color fundus photography (CFP)</span> and <span class="highlight">optical coherence tomography (OCT)</span> are two primary imaging modalities for glaucoma diagnosis. Recently, multi-modal approaches that combine CFP and OCT have demonstrated higher diagnostic accuracy compared to single-modal methods.</p>
+
+                <p>However, the high similarity among medical image poses presents a challenge for extracting effective features. Additionally, low-quality features can degrade fusion performance, potentially leading to inaccurate grading results.</p>
+
+                <p>To address these challenges, we propose a <span class="highlight">Multi-scale Attention and Gated Fusion (MAGF)</span> framework, which incorporates a dual-branch feature extraction architecture with targeted attention, a Multi-scale Attention Fusion Module (MAFM) for enhancing OCT features, and a Gated Fusion Module (GFM) for adaptive integration of CFP and OCT modalities. Extensive experiments demonstrate that our method achieves <span class="highlight">state-of-the-art (SOTA) performance</span> in glaucoma grading.</p>
+            </div>
+
+            <!-- Figure 1: Dataset Examples -->
+            <h2 class="section-title">Dataset & Glaucoma Stages</h2>
+            <div class="method-section">
+                <p>The GAMMA dataset contains paired CFP and OCT images across three glaucoma severity stages. The following figure illustrates examples from each stage, highlighting key clinical indicators including optic cup-to-disc ratio and retinal nerve fiber layer (RNFL) thickness.</p>
+
+                <div class="method-figure">
+                    <img src="imgs/magf-Figure 1.png" alt="Examples from the GAMMA dataset across three glaucoma severity stages" style="max-width: 90%; height: auto; display: block; margin: 0 auto;">
+                    <div class="figure-caption">
+                        <strong>Figure 1.</strong> Examples from the GAMMA dataset across three glaucoma severity stages. (a) Images classified as no glaucoma, showing normal optic disc morphology and intact retinal nerve fiber layer (RNFL). (b) Images classified as early-stage glaucoma, where glaucomatous changes are evident, including an increased vertical cup-to-disc ratio (vCDR) in the CFP image and mild RNFL thinning in the OCT image. (c) Images classified as intermediate-to-advanced glaucoma, exhibiting more pronounced glaucomatous alterations, with a further enlarged vCDR and substantial RNFL thinning. The top row displays CFP images with annotated optic cup and optic disc regions, while the bottom row presents OCT slices with annotated RNFL regions.
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Key Contributions</h2>
+            <div class="contributions">
+                <ul>
+                    <li><strong>Dual-branch Feature Extraction Architecture with Targeted Attention:</strong> A novel dual-branch architecture specifically designed to leverage the complementary nature of CFP and OCT data, with a specialised attention mechanism integrated into the OCT branch to amplify the discriminative power of extracted features.</li>
+                    <li><strong>Multi-scale Attention Fusion Module (MAFM) for OCT Feature Enhancement:</strong> The proposed MAFM applies attention across three different channel scales to capture fine-grained, mid-level, and global semantic details, which are then integrated and refined using a spatial attention mechanism.</li>
+                    <li><strong>Gated Fusion Module (GFM) for Adaptive Integration:</strong> A dynamic gating mechanism that weights the contributions of features extracted from CFP and OCT modalities, ensuring that low-quality or noisy features have less influence on the final decision.</li>
+                    <li><strong>State-of-the-Art Performance:</strong> Achieves the highest Kappa score of 0.9183 on the GAMMA dataset, outperforming existing methods.</li>
+                </ul>
+            </div>
+
+            <h2 class="section-title">Method Overview</h2>
+            <div class="method-section">
+                <p>MAGF employs a <span class="highlight">parallel dual-branch structure</span> to extract features from CFP and OCT images independently, with both branches utilizing EfficientNet as the feature extractor. The framework consists of three main components:</p>
+
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>Dual-branch Feature Extraction:</strong> Parallel EfficientNet-based branches for modality-specific feature extraction</li>
+                    <li><strong>Multi-scale Attention Fusion Module (MAFM):</strong> Enhances OCT features using multi-scale 1D convolutions and spatial attention</li>
+                    <li><strong>Gated Fusion Module (GFM):</strong> Dynamically fuses features from both modalities with learned gating weights</li>
+                </ul>
+
+                <!-- Figure 2: MAGF Architecture -->
+                <div class="method-figure">
+                    <img src="imgs/magf-Figure 2.png" alt="MAGF Architecture" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+                    <div class="figure-caption">
+                        <strong>Figure 2.</strong> MAGF consists of three main modules: a dual-branch feature extraction module, the Multi-scale Attention Fusion Module (MAFM), and the Gated Fusion Module (GFM). CFP and OCT images are first fed into parallel EfficientNet-based branches to extract modality-specific features. The OCT branch is further refined by MAFM to improve its representation of retinal structures across multiple semantic levels. Subsequently, features from both modalities are dynamically fused through GFM, which also incorporates global max pooling (GMP) operations to retain fine-grained texture and edge information from each modality. The resulting fused representation is then forwarded to the classification head for final glaucoma grading.
+                    </div>
+                </div>
+
+                <p>The <span class="highlight">MAFM</span> employs three different scales of 1D convolution (kernel sizes 3, 7, and 13) to model channel attention for the input feature map. These convolution kernels capture relationships between channels at various scales, enhancing the representational capacity of the features. A spatial attention component is applied following channel attention to guide the model to focus on the most relevant spatial areas.</p>
+
+                <p>The <span class="highlight">GFM</span> dynamically weights the contributions of features from both modalities using two gating modules (GateA and GateB). The weights are normalized using softmax to ensure balanced fusion. Additionally, global max pooling (GMP) is applied to preserve detailed texture information from each modality.</p>
+            </div>
+
+            <h2 class="section-title">Results & Visualization</h2>
+            <div class="results-section">
+                <p>MAGF achieves <span class="highlight">state-of-the-art performance</span> on the GAMMA dataset with a Kappa score of 0.9183 and accuracy of 0.88, outperforming all existing methods including the GAMMA Challenge winner.</p>
+
+                <div class="requirements" style="background: #f0f4f8; border-left-color: #3498db;">
+                    <h3 style="margin-bottom: 1rem;">Performance Comparison</h3>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.95rem;">
+                        <tr style="background: #e8eef4;">
+                            <th style="padding: 0.5rem; text-align: left; border-bottom: 2px solid #3498db;">Method</th>
+                            <th style="padding: 0.5rem; text-align: center; border-bottom: 2px solid #3498db;">Kappa</th>
+                        </tr>
+                        <tr style="background: #d4edda; font-weight: bold;">
+                            <td style="padding: 0.5rem;">MAGF (Ours)</td>
+                            <td style="padding: 0.5rem; text-align: center;">0.9183</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.5rem;">ELF</td>
+                            <td style="padding: 0.5rem; text-align: center;">0.8960</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.5rem;">Mstnet</td>
+                            <td style="padding: 0.5rem; text-align: center;">0.8920</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.5rem;">GGUM</td>
+                            <td style="padding: 0.5rem; text-align: center;">0.8860</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.5rem;">ETSCL</td>
+                            <td style="padding: 0.5rem; text-align: center;">0.8844</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.5rem;">GAMMA Challenge Winner</td>
+                            <td style="padding: 0.5rem; text-align: center;">0.8649</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p style="margin-top: 1.5rem;">To interpret the model's decision behavior, Grad-CAM attention heatmaps are generated for representative CFP and OCT samples across the three glaucoma stages:</p>
+
+                <!-- Figure 3: Grad-CAM Visualization -->
+                <div class="results-figure">
+                    <img src="imgs/magf-Figure 3.png" alt="Grad-CAM attention heatmaps" style="max-width: 85%; height: auto; display: block; margin: 0 auto;">
+                    <div class="figure-caption">
+                        <strong>Figure 3.</strong> Grad-CAM attention heatmaps for CFP and OCT across Glaucoma Stages. Each row represents a stage: (a) No glaucoma. (b) Early-stage glaucoma. (c) Intermediate-to-advanced glaucoma. The CFP attention progressively concentrates on the optic disc with disease progression. Simultaneously, the OCT attention sharply highlights the RNFL and inner retinal boundaries.
+                    </div>
+                </div>
+
+                <p>These visualizations confirm that the MAGF framework effectively learns <span class="highlight">modality-specific and stage-dependent biomarkers</span>, providing meaningful interpretability for clinical decision support. The CFP attention progressively shifts and concentrates on the optic disc with glaucoma advancement, while the OCT attention primarily localizes on the RNFL and inner retinal boundaries.</p>
+            </div>
+
+            <h2 class="section-title">Technical Details</h2>
+            <div class="requirements">
+                <h3 style="margin-bottom: 1rem;">Implementation</h3>
+                <ul style="margin: 0; padding-left: 1.5rem;">
+                    <li><strong>Backbone:</strong> EfficientNet-B7 (ImageNet pretrained)</li>
+                    <li><strong>Optimizer:</strong> Adam with learning rate 0.0001</li>
+                    <li><strong>Loss Function:</strong> Cross-entropy loss</li>
+                    <li><strong>Batch Size:</strong> 3</li>
+                    <li><strong>Training Iterations:</strong> 1000</li>
+                    <li><strong>Hardware:</strong> NVIDIA GeForce RTX 4090 GPU</li>
+                </ul>
+
+                <h3 style="margin: 1.5rem 0 1rem 0;">Dataset</h3>
+                <ul style="margin: 0; padding-left: 1.5rem;">
+                    <li><strong>GAMMA Dataset:</strong> 300 CFP-OCT paired samples from Zhongshan Ophthalmic Center
+                        <br><a href="http://hdmilab.cn/ichallenge" target="_blank">Dataset Link</a></li>
+                    <li><strong>Training:</strong> 200 samples</li>
+                    <li><strong>Testing:</strong> 100 samples</li>
+                    <li><strong>Classes:</strong> Non-glaucoma, Early-stage, Intermediate-to-advanced</li>
+                </ul>
+            </div>
+
+            <h2 class="section-title">Citation</h2>
+            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; font-family: monospace; font-size: 0.9rem; overflow-x: auto;" class="citation-box">
+<pre style="margin: 0; color: #000;">@article{cheng2026magf,
+  title={MAGF: Multi-scale attention and gated fusion for multi-modal glaucoma grading},
+  author={Cheng, Haixi and Hong, Chaoqun and Zhang, Bo and Fang, Huihui and Xu, Yanwu and Yeo, Si Yong},
+  journal={Expert Systems With Applications},
+  volume={312},
+  pages={131388},
+  year={2026},
+  publisher={Elsevier},
+  doi={10.1016/j.eswa.2026.131388}
+}</pre>
+            </div>
+
+            <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 1rem;">
+                <h3 style="margin-bottom: 1rem;">Published in Expert Systems With Applications 2026</h3>
+                <p style="margin: 0; font-size: 1.1rem;">Volume 312, Article 131388</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-theme-light dark:bg-darkmode-theme-light">
+        <div class="container">
+            <div class="row items-center py-10">
+                <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:text-left">
+                    <a class="navbar-brand inline-block" href="../">
+                        <img fetchpriority="high" decoding="async" class="img logo-light" width="160" height="32"
+                            src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                            alt="MedVisAITechnologies"
+                            onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                        <img fetchpriority="high" decoding="async" class="img logo-dark" width="160" height="32"
+                            src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                            alt="MedVisAITechnologies"
+                            onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                    </a>
+                </div>
+                <div class="lg:col-6 mb-8 text-center lg:mb-0">
+                    <ul>
+                        <li class="m-3 inline-block"><a href="../about/">About</a></li>
+                        <li class="m-3 inline-block"><a href="../eml">Contact</a></li>
+                        <li class="m-3 inline-block"><a href="../location/">Location</a></li>
+                    </ul>
+                </div>
+                <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:mt-0 lg:text-right">
+                    <ul class="social-icons">
+                        <li><a target="_blank" aria-label="facebook" rel="nofollow noopener" href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a></li>
+                        <li><a target="_blank" aria-label="twitter" rel="nofollow noopener" href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
+                        <li><a target="_blank" aria-label="github" rel="nofollow noopener" href="https://www.github.com/"><i class="fab fa-github"></i></a></li>
+                        <li><a target="_blank" aria-label="linkedin" rel="nofollow noopener" href="https://www.linkedin.com/"><i class="fab fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="border-border dark:border-darkmode-border border-t py-7">
+            <div class="text-light dark:text-darkmode-light container text-center">
+                <p></p>
+            </div>
+        </div>
+    </footer>
+
+    <script crossorigin="anonymous" integrity="sha256-HNvx23yefzYJie2GA7dzwBeKevXtramA+LX4E7XFReM="
+        src="../js/script.min.1cdbf1db7c9e7f360989ed8603b773c0178a7af5edada980f8b5f813b5c545e3.js"></script>
+    <script>"serviceWorker" in navigator && navigator.serviceWorker.register("../service-worker.js")</script>
+</body>
+
+</html>
