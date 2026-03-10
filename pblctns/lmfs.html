@@ -1,0 +1,491 @@
+<!doctype html>
+<html itemscope lang="en-us" itemtype="http://schema.org/WebPage">
+
+<head>
+    <meta charset="utf-8">
+    <title>Exploiting Low-Dimensional Manifold of Features for Few-Shot Whole Slide Image Classification</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+    <meta name="theme-name" content="hugoplate">
+    <link rel="shortcut icon" href="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_96x0_resize_lanczos_3.png" type="image/x-icon">
+    <link rel="icon" href="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_96x0_resize_lanczos_3.png" type="image/x-icon">
+    <base href="https://medvisailab.github.io/pblctns/">
+
+    <meta name="description" content="Exploiting Low-Dimensional Manifold of Features for Few-Shot Whole Slide Image Classification - ICLR 2026">
+    <meta name="keywords" content="Computational Pathology, Whole Slide Image, Few-Shot Learning, Multiple Instance Learning, Manifold Learning, Deep Learning">
+    <meta name="author" content="MedVisAI Lab">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Exploiting Low-Dimensional Manifold of Features for Few-Shot Whole Slide Image Classification">
+    <meta property="og:description" content="A plug-and-play Manifold Residual (MR) block that preserves the intrinsic low-dimensional manifold geometry of pathology foundation model features for few-shot WSI classification.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://medvisailab.github.io/pblctns/lmfs.html">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:title" content="Exploiting Low-Dimensional Manifold of Features for Few-Shot Whole Slide Image Classification">
+    <meta name="twitter:description" content="A plug-and-play Manifold Residual (MR) block that preserves the intrinsic low-dimensional manifold geometry of pathology foundation model features for few-shot WSI classification.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600&family=Signika:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link href="../css/style.min.80b93bb3a795f7194d0ca0c445309f1547c3c019264bfd28165ca93c97401b5d.css" rel="stylesheet">
+    <link href="../css/mvait-enhancements.css" rel="stylesheet">
+    <link href="../css/theme-fixes.css" rel="stylesheet">
+
+    <style>
+        .project-page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .project-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+
+        .dark .project-title {
+            color: #ecf0f1;
+        }
+
+        .authors {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #34495e;
+        }
+
+        .dark .authors {
+            color: #bdc3c7;
+        }
+
+        .author-name {
+            margin: 0 0.5rem;
+        }
+
+        .affiliation {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 0.5rem;
+        }
+
+        .dark .affiliation {
+            color: #95a5a6;
+        }
+
+        .links {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .link-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            margin: 0.5rem;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: background 0.3s ease;
+            font-weight: 600;
+        }
+
+        .link-btn:hover {
+            background: #2980b9;
+            color: white;
+        }
+
+        .link-btn.paper {
+            background: #e74c3c;
+        }
+
+        .link-btn.paper:hover {
+            background: #c0392b;
+        }
+
+        .link-btn.github {
+            background: #2c3e50;
+        }
+
+        .link-btn.github:hover {
+            background: #34495e;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1rem 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        .dark .section-title {
+            color: #ecf0f1;
+        }
+
+        .abstract, .method-section, .results-section {
+            margin-bottom: 2rem;
+            text-align: justify;
+        }
+
+        .method-figure, .results-figure {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .method-figure img, .results-figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .figure-caption {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .dark .figure-caption {
+            color: #95a5a6;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8e6cf 0%, #dcedc1 100%);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+        }
+
+        .dark .highlight {
+            background: linear-gradient(120deg, #2c3e50 0%, #34495e 100%);
+            color: #ecf0f1;
+        }
+
+        .citation-box {
+            background: #f8f9fa !important;
+        }
+
+        .dark .citation-box {
+            background: #2c3e50 !important;
+        }
+
+        .citation-box pre {
+            color: #000 !important;
+        }
+
+        .dark .citation-box pre {
+            color: #ecf0f1 !important;
+        }
+
+        .contributions {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #3498db;
+            margin: 1.5rem 0;
+        }
+
+        .dark .contributions {
+            background: #2c3e50;
+            color: #ecf0f1;
+        }
+
+        .contributions ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+
+        .contributions li {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .project-page {
+                padding: 1rem;
+            }
+
+            .project-title {
+                font-size: 2rem;
+            }
+
+            .link-btn {
+                display: block;
+                margin: 0.5rem auto;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header sticky top-0 z-30">
+        <nav class="navbar container">
+            <div class="order-0">
+                <a class="navbar-brand block" href="../">
+                    <img fetchpriority="high" decoding="async" class="img logo-light" width="160" height="32"
+                        src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                        alt="MedVisAITechnologies"
+                        onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                    <img fetchpriority="high" decoding="async" class="img logo-dark" width="160" height="32"
+                        src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                        alt="MedVisAITechnologies"
+                        onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                </a>
+            </div>
+
+            <input id="nav-toggle" type="checkbox" class="hidden">
+            <label id="show-button" for="nav-toggle" class="order-2 flex cursor-pointer items-center md:order-1 md:hidden">
+                <svg class="h-6 fill-current" viewBox="0 0 20 20">
+                    <title>Menu Open</title>
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0V0z" />
+                </svg>
+            </label>
+
+            <label id="hide-button" for="nav-toggle" class="order-2 hidden cursor-pointer items-center md:order-1">
+                <svg class="h-6 fill-current" viewBox="0 0 20 20">
+                    <title>Menu Close</title>
+                    <polygon points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2" transform="rotate(45 10 10)" />
+                </svg>
+            </label>
+
+            <ul id="nav-menu" class="navbar-nav order-3 hidden w-full pb-6 lg:order-1 lg:flex lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8">
+                <li class="nav-item"><a class="nav-link" href="../">MVAIT</a></li>
+                <li class="nav-item"><a class="nav-link" href="../team">Team</a></li>
+                <li class="nav-item"><a class="nav-link" href="../research/">Research</a></li>
+                <li class="nav-item"><a class="nav-link" href="../projects">Project Funding</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pos/">Positions</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pblctns">Publications</a></li>
+                <li class="mt-4 inline-block lg:hidden"><a class="btn btn-outline-primary btn-sm" href="../eml">Contact</a></li>
+            </ul>
+
+            <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
+                <div class="theme-switcher mr-5">
+                    <input id="theme-switcher" data-theme-switcher type="checkbox">
+                    <label for="theme-switcher">
+                        <span class="sr-only">theme switcher</span>
+                        <span>
+                            <svg class="absolute left-[4px] top-[4px] z-10 opacity-100 dark:opacity-0" viewBox="0 0 56 56" fill="#fff" height="16" width="16">
+                                <path d="M30 4.6c0-1-.9-2-2-2a2 2 0 00-2 2v5c0 1 .9 2 2 2s2-1 2-2zm9.6 9a2 2 0 000 2.8c.8.8 2 .8 2.9.0L46 13a2 2 0 000-2.9 2 2 0 00-3 0zm-26 2.8c.7.8 2 .8 2.8.0.8-.7.8-2 0-2.9L13 10c-.7-.7-2-.8-2.9.0-.7.8-.7 2.1.0 3zM28 16A12 12 0 0016 28a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0028 16zm23.3 14c1.1.0 2-.9 2-2s-.9-2-2-2h-4.9a2 2 0 00-2 2c0 1.1 1 2 2 2zM4.7 26a2 2 0 00-2 2c0 1.1.9 2 2 2h4.9c1 0 2-.9 2-2s-1-2-2-2zm37.8 13.6a2 2 0 00-3 0 2 2 0 000 2.9l3.6 3.5a2 2 0 002.9.0c.8-.8.8-2.1.0-3zM10 43.1a2 2 0 000 2.9c.8.7 2.1.8 3 0l3.4-3.5c.8-.8.8-2.1.0-2.9s-2-.8-2.9.0zm20 3.4c0-1.1-.9-2-2-2a2 2 0 00-2 2v4.9c0 1 .9 2 2 2s2-1 2-2z" />
+                            </svg>
+                            <svg class="absolute left-[4px] top-[4px] z-10 opacity-0 dark:opacity-100" viewBox="0 0 24 24" fill="none" height="16" width="16">
+                                <path fill="#000" fill-rule="evenodd" clip-rule="evenodd" d="M8.2 2.2c1-.4 2 .6 1.6 1.5-1 3-.4 6.4 1.8 8.7a8.4 8.4.0 008.7 1.8c1-.3 2 .5 1.5 1.5v.1A10.3 10.3.0 0112.4 22 10.3 10.3.0 013.2 6.7c1-2 2.9-3.5 4.9-4.4z" />
+                            </svg>
+                        </span>
+                    </label>
+                </div>
+                <script>
+                    var themeSwitch, darkMode = !0;
+                    localStorage.getItem("theme") === "dark" ? darkMode = !0 : localStorage.getItem("theme") === "light" && (darkMode = !1);
+                    darkMode && document.documentElement.classList.toggle("dark");
+                    themeSwitch = document.querySelectorAll("[data-theme-switcher]");
+                    document.addEventListener("DOMContentLoaded", () => {
+                        [].forEach.call(themeSwitch, function (e) {
+                            e.checked = !!darkMode;
+                            e.addEventListener("click", () => {
+                                document.documentElement.classList.toggle("dark");
+                                localStorage.setItem("theme", document.documentElement.classList.contains("dark") ? "dark" : "light")
+                            })
+                        })
+                    });
+                </script>
+                <a href="../eml" class="btn btn-outline-primary btn-sm hidden lg:inline-block">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="project-page">
+            <h1 class="project-title">
+                Exploiting Low-Dimensional Manifold of Features for Few-Shot Whole Slide Image Classification
+            </h1>
+
+            <div class="authors">
+                <div style="margin-bottom: 1rem;">
+                    <span class="author-name">Conghao Xiong<sup>1</sup></span>
+                    <span class="author-name">Zhengrui Guo<sup>1</sup></span>
+                    <span class="author-name">Zhe Xu<sup>1</sup></span>
+                    <span class="author-name">Yifei Zhang<sup>2</sup></span>
+                    <span class="author-name">Raymond Kai-yu Tong<sup>1</sup></span>
+                    <span class="author-name">Si Yong Yeo<sup>3,4,5</sup></span>
+                    <span class="author-name">Hao Chen<sup>2</sup></span>
+                    <span class="author-name">Joseph J. Y. Sung<sup>1</sup></span>
+                    <span class="author-name">Irwin King<sup>1</sup></span>
+                </div>
+
+                <div class="affiliation">
+                    <sup>1</sup>The Chinese University of Hong Kong &nbsp;&nbsp;
+                    <sup>2</sup>The Hong Kong University of Science and Technology &nbsp;&nbsp;
+                    <sup>3</sup>Centre of AI in Medicine, Singapore &nbsp;&nbsp;
+                    <sup>4</sup>Lee Kong Chian School of Medicine, Nanyang Technological University, Singapore &nbsp;&nbsp;
+                    <sup>5</sup>MedVisAI Lab, Singapore
+                </div>
+            </div>
+
+            <div class="links">
+                <a href="https://arxiv.org/pdf/2505.15504" class="link-btn paper" target="_blank">📄 ICLR 2026 Paper</a>
+                <a href="https://arxiv.org/abs/2505.15504" class="link-btn" target="_blank">📋 arXiv</a>
+                <a href="https://github.com/BearCleverProud/MR-Block" class="link-btn github" target="_blank">💻 Code</a>
+            </div>
+
+            <h2 class="section-title">Abstract</h2>
+            <div class="abstract">
+                <p>Few-shot Whole Slide Image (WSI) classification is severely hampered by overfitting. We argue that this is not merely a data-scarcity issue but a <span class="highlight">fundamentally geometric problem</span>. Grounded in the manifold hypothesis, our analysis shows that features from pathology foundation models exhibit a low-dimensional manifold geometry that is easily perturbed by downstream models.</p>
+
+                <p>This insight reveals a key potential issue in downstream multiple instance learning models: <span class="highlight">linear layers are geometry-agnostic</span> and, as we show empirically, can distort the manifold geometry of the features. To address this, we propose the <span class="highlight">Manifold Residual (MR) block</span>, a plug-and-play module that is explicitly geometry-aware.</p>
+
+                <p>The MR block reframes the linear layer as residual learning and decouples it into two pathways: (1) a fixed, random matrix serving as a geometric anchor that approximately preserves topology while also acting as a spectral shaper to sharpen the feature spectrum; and (2) a trainable, low-rank residual pathway that acts as a residual learner for task-specific adaptation, with its structural bottleneck explicitly mirroring the low effective rank of the features. This decoupling imposes a structured inductive bias and reduces learning to a simpler residual fitting task.</p>
+            </div>
+
+            <h2 class="section-title">Motivation: Feature Geometry Analysis</h2>
+            <div class="method-section">
+                <p>A key insight of this work is that pathology foundation model features lie on a <span class="highlight">low-dimensional manifold</span>. Standard linear layers distort this intrinsic geometry, causing overfitting in the few-shot regime. Our analysis provides both theoretical and empirical evidence for this observation.</p>
+
+                <div class="method-figure">
+                    <img src="imgs/lmfs-Figure 1.png" alt="Feature geometric analysis" style="max-width: 90%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
+                    <div class="figure-caption">
+                        <strong>Figure 1.</strong> Feature geometric analysis reveals a low-dimensional manifold, which linear layers distort and our method preserves. (a) Spectral analysis confirms low-dimensionality. (b, c) t-SNE shows a cluster topology, and a random transformation preserves it. (d) Tangent space analysis visualizes this preservation: our MR block maintains the manifold curvature, while a linear layer causes distortion.
+                    </div>
+                </div>
+
+                <div class="method-figure">
+                    <img src="imgs/lmfs-Figure 4.png" alt="Random transformation preserves manifold" style="max-width: 90%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
+                    <div class="figure-caption">
+                        <strong>Figure 4.</strong> Random transformation preserves the intrinsic low-dimensional manifold of UNI features. (a) Spectral analysis confirms the low-rank structure. (b) t-SNE reveals the cluster topology of the manifold. (c) High ARI and consistent coloring visually and quantitatively prove this topology is robustly preserved.
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Key Contributions</h2>
+            <div class="contributions">
+                <ul>
+                    <li><strong>Geometric reframing:</strong> Demonstrates that features from pathology foundation models lie on a low-dimensional manifold, and that standard linear layers disrupt this geometry, causing overfitting in few-shot settings.</li>
+                    <li><strong>Manifold Residual (MR) Block:</strong> A theoretically grounded, plug-and-play replacement for linear layers that preserves manifold geometry while enabling task-specific adaptation.</li>
+                    <li><strong>Parameter efficiency:</strong> MR-CATE (0.84M parameters) matches or exceeds much larger competing methods such as ViLaMIL (40.7M parameters) and FOCUS (86.9M parameters).</li>
+                    <li><strong>Broad applicability:</strong> The MR block is backbone-agnostic and can be integrated into any Multiple Instance Learning (MIL) framework.</li>
+                </ul>
+            </div>
+
+            <h2 class="section-title">Method Overview</h2>
+            <div class="method-section">
+                <p>The core contribution is the <span class="highlight">Manifold Residual (MR) Block</span>, which reformulates a standard linear layer into two decoupled pathways. Rather than treating the transformation as a single learned mapping, the MR block separates geometric preservation from task-specific adaptation.</p>
+
+                <div class="method-figure">
+                    <img src="imgs/lmfs-Figure 2.png" alt="MR block illustration and pipeline" style="max-width: 95%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
+                    <div class="figure-caption">
+                        <strong>Figure 2.</strong> Illustration of the linear transformation (a), our proposed MR block (b), and the overall pipeline of MIL for WSI classification task and where our MR block takes effect (c). Specifically, the MR block is applied only to some of the internal linear layers within the MIL backbone, while the final linear classification head (the classifier) is left unchanged.
+                    </div>
+                </div>
+
+                <p>The MR block consists of two components:</p>
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>Geometric Anchor (fixed random matrix):</strong> Initialized with Kaiming uniform and kept frozen throughout training. It approximately preserves the topology of the feature manifold and sharpens the eigenvalue spectrum, counteracting manifold distortion.</li>
+                    <li><strong>Low-Rank Residual Pathway (LRP):</strong> A trainable bottleneck with rank r ≪ min(d₀, d₁), explicitly mirroring the low effective rank of foundation model features. Initialized to zero, it learns task-specific adaptation as a residual on top of the geometric anchor.</li>
+                </ul>
+                <p>This decoupling imposes a structured inductive bias and simplifies learning to a residual fitting task, which is particularly beneficial in the few-shot setting where data is scarce.</p>
+            </div>
+
+            <h2 class="section-title">Results & Performance</h2>
+            <div class="results-section">
+                <p>MR variants consistently <span class="highlight">outperform baselines</span> across all datasets, shot counts, and MIL backbones. Performance gains are strongest in the extreme few-shot regime but remain positive at higher shot counts.</p>
+
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>Camelyon16</strong> (k=8, CONCH features): MR-CATE achieves AUC 88.0, F1 81.7, Acc 82.9, compared to ABMIL baseline AUC 49.2.</li>
+                    <li><strong>TCGA-NSCLC &amp; TCGA-RCC:</strong> Consistent improvements over backbone methods across all shot counts.</li>
+                    <li><strong>Treatment Response (Boehmk, Trastuzumab):</strong> State-of-the-art results in challenging clinical outcome prediction tasks.</li>
+                    <li><strong>Parameter efficiency:</strong> MR-CATE (0.84M params) consistently matches or exceeds ViLaMIL (40.7M) and FOCUS (86.9M).</li>
+                </ul>
+
+                <div class="results-figure">
+                    <img src="imgs/lmfs-Figure 3.png" alt="Sensitivity analysis of parameter r" style="max-width: 85%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
+                    <div class="figure-caption">
+                        <strong>Figure 3.</strong> Sensitivity analysis of parameter r across multiple datasets using MR-ABMIL and MR-CATE. Dashed lines indicate the performance of the baseline methods (i.e., ABMIL and CATE).
+                    </div>
+                </div>
+
+                <p>The rank sensitivity analysis shows that performance saturates around r=32, which aligns with the theoretical effective rank (~29.7) of the features, validating our design principle of mirroring the intrinsic dimensionality of the feature manifold.</p>
+            </div>
+
+            <h2 class="section-title">Datasets</h2>
+            <div class="abstract">
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>Camelyon16:</strong> Tumor detection in breast lymph node whole slide images.</li>
+                    <li><strong>TCGA-NSCLC:</strong> Non-small cell lung cancer subtyping from The Cancer Genome Atlas.</li>
+                    <li><strong>TCGA-RCC:</strong> Renal cell carcinoma subtyping from The Cancer Genome Atlas.</li>
+                    <li><strong>Boehmk:</strong> Treatment response prediction dataset.</li>
+                    <li><strong>Trastuzumab:</strong> Treatment response prediction dataset.</li>
+                </ul>
+                <p>Experiments are conducted across few-shot settings with k ∈ {2, 4, 8, 16, 32, 64} shots, using multiple pathology foundation model feature extractors including CONCH and UNI.</p>
+            </div>
+
+            <h2 class="section-title">Citation</h2>
+            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; font-family: monospace; font-size: 0.9rem; overflow-x: auto;" class="citation-box">
+<pre style="margin: 0; color: #000;">@article{xiong2026manifold,
+  title={Exploiting Low-Dimensional Manifold of Features for Few-Shot Whole Slide Image Classification},
+  author={Xiong, Conghao and Guo, Zhengrui and Xu, Zhe and Zhang, Yifei and Tong, Raymond Kai-yu
+          and Yeo, Si Yong and Chen, Hao and Sung, Joseph J. Y. and King, Irwin},
+  journal={arXiv preprint arXiv:2505.15504},
+  year={2026}
+}</pre>
+            </div>
+
+            <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 1rem;">
+                <h3 style="margin-bottom: 1rem;">Accepted at ICLR 2026</h3>
+                <p style="margin: 0; font-size: 1.1rem;">International Conference on Learning Representations</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-theme-light dark:bg-darkmode-theme-light">
+        <div class="container">
+            <div class="row items-center py-10">
+                <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:text-left">
+                    <a class="navbar-brand inline-block" href="../">
+                        <img fetchpriority="high" decoding="async" class="img logo-light" width="160" height="32"
+                            src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                            alt="MedVisAITechnologies"
+                            onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                        <img fetchpriority="high" decoding="async" class="img logo-dark" width="160" height="32"
+                            src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                            alt="MedVisAITechnologies"
+                            onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                    </a>
+                </div>
+                <div class="lg:col-6 mb-8 text-center lg:mb-0">
+                    <ul>
+                        <li class="m-3 inline-block"><a href="../about/">About</a></li>
+                        <li class="m-3 inline-block"><a href="../eml">Contact</a></li>
+                        <li class="m-3 inline-block"><a href="../location/">Location</a></li>
+                    </ul>
+                </div>
+                <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:mt-0 lg:text-right">
+                    <ul class="social-icons">
+                        <li><a target="_blank" aria-label="facebook" rel="nofollow noopener" href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a></li>
+                        <li><a target="_blank" aria-label="twitter" rel="nofollow noopener" href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
+                        <li><a target="_blank" aria-label="github" rel="nofollow noopener" href="https://www.github.com/"><i class="fab fa-github"></i></a></li>
+                        <li><a target="_blank" aria-label="linkedin" rel="nofollow noopener" href="https://www.linkedin.com/"><i class="fab fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="border-border dark:border-darkmode-border border-t py-7">
+            <div class="text-light dark:text-darkmode-light container text-center">
+                <p></p>
+            </div>
+        </div>
+    </footer>
+
+    <script crossorigin="anonymous" integrity="sha256-HNvx23yefzYJie2GA7dzwBeKevXtramA+LX4E7XFReM="
+        src="../js/script.min.1cdbf1db7c9e7f360989ed8603b773c0178a7af5edada980f8b5f813b5c545e3.js"></script>
+    <script>"serviceWorker" in navigator && navigator.serviceWorker.register("../service-worker.js")</script>
+</body>
+
+</html>
