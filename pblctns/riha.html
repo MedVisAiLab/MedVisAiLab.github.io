@@ -388,6 +388,8 @@
 
                 <p>The results show that RIHA consistently outperforms existing state-of-the-art methods across both datasets. The improvements are attributed to the proposed hierarchical alignment mechanism, which enables more precise mapping between visual features and structured report components.</p>
 
+                <p>Figure 3 presents qualitative comparisons of generated reports on the MIMIC-CXR dataset. Compared with the baseline model, RIHA produces reports that more accurately reflect the findings in the ground truth, as evidenced by the higher overlap of highlighted clinical terms. Notably, RIHA demonstrates improved consistency in describing key observations, such as anatomical locations and pathological conditions, reducing both omission and hallucination errors. This indicates that hierarchical alignment enables more reliable mapping between visual features and structured report components.</p>
+
                 <div class="results-figure">
                     <img src="imgs/riha-Figure 3.png" alt="Cross-modal hierarchical alignment via optimal transport" style="max-width: 90%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
                     <div class="figure-caption">
@@ -395,7 +397,7 @@
                     </div>
                 </div>
 
-                <p>Figure 4 further illustrates the impact of relative positional encoding (RPE) on improving the structural consistency and coherence of generated reports. By explicitly modeling pairwise relationships between tokens, RPE enhances the model's ability to capture long-range dependencies and contextual interactions during decoding. This leads to more accurate sentence composition, reduced semantic inconsistencies, and improved alignment between visual findings and textual descriptions. In the context of radiology report generation, such improvements are critical for maintaining clinically meaningful narratives across sentences and ensuring that fine-grained observations are correctly organized within the hierarchical structure of the report.</p>
+                <p>Figure 4 provides further insight into how this improvement is achieved. The attention visualizations show that RIHA focuses more precisely on clinically relevant regions corresponding to each keyword, whereas the baseline model exhibits more diffuse or misaligned attention patterns. This improved localization suggests that hierarchical alignment enhances the model's ability to associate specific visual evidence with corresponding textual elements.</p>
 
                 <div class="results-figure">
                     <img src="imgs/riha-Figure 4.png" alt="Relative positional encoding in the transformer decoder" style="max-width: 82%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
@@ -403,6 +405,8 @@
                         <strong>Figure 4.</strong> Relative positional encoding in the transformer. Compared to absolute positional encoding, RPE captures contextual relationships between tokens, improving token-level alignment.
                     </div>
                 </div>
+
+                <p>Together, these results demonstrate that RIHA not only improves linguistic quality but also strengthens clinically meaningful visual-text alignment, which is essential for generating accurate and trustworthy radiology reports.</p>
             </div>
 
             <h2 class="section-title">Citation</h2>
