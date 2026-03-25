@@ -377,7 +377,7 @@
                 <div class="method-figure">
                     <img src="imgs/riha-Figure 2.png" alt="RIHA Architecture Overview" style="max-width: 95%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
                     <div class="figure-caption">
-                        <strong>Figure 2.</strong> Overview of the RIHA framework. Multi-scale visual features and multi-granularity textual representations are extracted by VFP and TFP, respectively, and aligned through the CHA module before report generation.
+                        <strong>Figure 2.</strong> The architecture of RIHA: An image is fed into the VFP Extractor to obtain shallow, middle, and high-level features. The multi-granularity text features of paragraph, sentence, and word-level features are extracted by the TFP extractor. Multi-granularity visual and textual features are then sent into CHA for hierarchical alignment. After that, refined visual and textual features are fed into a transformer encoder-decoder structure for report generation.
                     </div>
                 </div>
             </div>
