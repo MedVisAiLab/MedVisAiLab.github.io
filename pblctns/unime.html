@@ -334,20 +334,20 @@
 
             <h2 class="section-title">Abstract</h2>
             <div class="abstract">
-                <p>Multimodal MRI provides complementary information across FLAIR, T1, T1ce, and T2 sequences for accurate brain tumor segmentation. However, in clinical practice, one or more modalities are frequently unavailable due to acquisition failures, patient conditions, or protocol differences, which degrades segmentation performance. Existing methods typically trade off among three design goals: <span class="highlight">fine-grained structure capture</span>, cross-modal complementarity modeling, and effective exploitation of available modalities.</p>
+                <p>Multimodal MRI provides complementary information for brain tumor segmentation, but clinical scans often suffer from <span class="highlight">missing modalities</span>, which significantly degrades performance. Existing methods typically struggle to balance three key objectives: capturing fine-grained anatomical structures, modeling cross-modal complementarity, and effectively exploiting available modalities.</p>
 
-                <p>We propose <span class="highlight">UniME</span>, a two-stage heterogeneous framework that reconciles these trade-offs by decoupling representation learning from segmentation. In Stage 1, a single <span class="highlight">ViT Uni-Encoder</span> is pretrained using masked self-supervision with a lightweight auxiliary decoder. This pretraining builds strong, modality-agnostic representations that remain robust under diverse missing modality scenarios. In Stage 2, parallel <span class="highlight">modality-specific Multi-Encoders</span>, initialized from the pretrained weights, extract high-resolution, multi-scale fine-grained features from each available modality. These features are fused to produce precise tumor segmentations that capture both local anatomical structure and global cross-modal context.</p>
+                <p>We propose <span class="highlight">UniME</span> (Uni-Encoder Meets Multi-Encoders), a two-stage heterogeneous framework that explicitly decouples representation learning from segmentation. In Stage 1, a unified <span class="highlight">ViT-based encoder</span> is pretrained using masked self-supervision to learn modality-agnostic representations robust to missing modalities. In Stage 2, <span class="highlight">modality-specific CNN encoders</span> are introduced to extract high-resolution, multi-scale features, which are fused with the global representation for accurate segmentation.</p>
 
-                <p>Experiments on <strong>BraTS 2023</strong> demonstrate that UniME consistently outperforms prior methods across diverse incomplete multimodal scenarios.</p>
+                <p>This <span class="highlight">"representation before fusion"</span> paradigm enables UniME to simultaneously model global cross-modal semantics and fine-grained local structures. Extensive experiments on <strong>BraTS 2023</strong> and <strong>BraTS 2024</strong> demonstrate that UniME consistently outperforms existing state-of-the-art methods under incomplete modality settings.</p>
             </div>
 
             <h2 class="section-title">Key Contributions</h2>
             <div class="contributions">
                 <ul>
-                    <li>A two-stage heterogeneous design (UniME) that decouples representation learning from segmentation, reconciling the trade-offs among fine-grained structure capture, cross-modal complementarity, and exploitation of available modalities.</li>
-                    <li>A ViT Uni-Encoder pretrained with masked self-supervision that establishes strong, modality-agnostic representations, improving robustness to missing modalities without requiring modality-complete training data.</li>
-                    <li>Parallel modality-specific Multi-Encoders in Stage 2 that are initialized from pretrained Uni-Encoder weights and capture high-resolution, multi-scale features, bridging modality-agnostic representation learning with fine-grained segmentation.</li>
-                    <li>Strong and consistent performance on BraTS 2023 under a wide range of incomplete modality combinations, outperforming existing methods.</li>
+                    <li>We propose UniME, a two-stage heterogeneous framework that decouples representation learning from segmentation, addressing the fundamental trade-off in missing-modality segmentation.</li>
+                    <li>We introduce a unified ViT-based Uni-Encoder pretrained with masked self-supervision, enabling robust modality-agnostic representation learning under incomplete inputs.</li>
+                    <li>We design modality-specific Multi-Encoders to capture high-resolution, multi-scale features, complementing the global representation with fine-grained structural details.</li>
+                    <li>We establish a "representation before fusion" paradigm, which effectively integrates global semantic understanding and local structural modeling for improved segmentation performance.</li>
                 </ul>
             </div>
 
@@ -358,42 +358,46 @@
                 <div class="method-figure">
                     <img src="imgs/unime-Figure 1.png" alt="Motivation and trade-offs" style="max-width: 88%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
                     <div class="figure-caption">
-                        <strong>Figure 1.</strong> (a) Segmentation under missing MRI modalities. Colored regions indicate necrotic tissue, enhancing tumor, and edema, respectively. "Missing" denotes an unavailable modality. (b) Trade-offs among three design goals. Existing methods typically trade off among fine-grained structure capture, cross-modal complementarity modeling, and effective exploitation of available modalities. UniME reconciles these trade-offs by introducing a two-stage heterogeneous design that decouples representation learning from segmentation.
+                        <strong>Figure 1.</strong> Brain tumor segmentation under missing MRI modalities and the associated design trade-offs. Existing methods struggle to simultaneously capture fine-grained structures, model cross-modal complementarity, and fully exploit available modalities. UniME addresses this challenge by introducing a two-stage heterogeneous design that decouples representation learning from segmentation.
                     </div>
                 </div>
             </div>
 
             <h2 class="section-title">Method Overview</h2>
             <div class="method-section">
-                <p>UniME addresses the missing modality challenge through a <span class="highlight">two-stage heterogeneous design</span>. The key insight is to separate the problem of learning robust, modality-agnostic representations from the problem of extracting fine-grained, modality-specific features for segmentation.</p>
+                <p>UniME follows a <span class="highlight">two-stage heterogeneous design</span> that separates representation learning from segmentation.</p>
 
-                <p>In <span class="highlight">Stage 1</span>, a single ViT Uni-Encoder is pretrained using masked self-supervision across all available modalities, together with a lightweight auxiliary decoder. The auxiliary decoder is discarded after pretraining, leaving only the encoder weights that capture rich, cross-modal representations. In <span class="highlight">Stage 2</span>, these pretrained weights initialize parallel modality-specific encoders. Each encoder independently processes one available modality at high resolution, and the resulting multi-scale features are fused by a segmentation decoder to produce precise predictions.</p>
+                <p>In <span class="highlight">Stage 1</span>, a single ViT-based Uni-Encoder is pretrained using masked self-supervised learning. By combining modality-level and patch-level masking, the encoder learns a unified representation that is robust to missing modalities and captures global cross-modal semantics.</p>
+
+                <p>In <span class="highlight">Stage 2</span>, modality-specific CNN Multi-Encoders are introduced to extract high-resolution, multi-scale features from available modalities. These fine-grained features are fused with the global representation from the Uni-Encoder to produce accurate segmentation results.</p>
+
+                <p>This design follows a <span class="highlight">"representation before fusion"</span> principle: instead of directly fusing modality-specific features, UniME first learns a unified representation and then enhances it with modality-specific details, effectively balancing global semantics and local structures.</p>
 
                 <div class="method-figure">
                     <img src="imgs/unime-Figure 2.png" alt="UniME Architecture Overview" style="max-width: 95%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
                     <div class="figure-caption">
-                        <strong>Figure 2.</strong> UniME overview. Stage 1 pretrains a single ViT Uni-Encoder with masked self-supervision and a lightweight auxiliary decoder that is discarded after pretraining. Stage 2 introduces parallel modality-specific encoders and fuses multi-scale features for segmentation. Modules marked with a snowflake icon are initialized from pretraining weights; modules marked with a flame icon are trained from scratch.
+                        <strong>Figure 2.</strong> Overview of the proposed UniME framework. Stage 1 learns a unified representation using a ViT-based Uni-Encoder with masked self-supervision. Stage 2 introduces modality-specific CNN encoders to extract fine-grained features, which are fused with the global representation for segmentation. This design follows a "representation before fusion" paradigm.
                     </div>
                 </div>
             </div>
 
             <h2 class="section-title">Results</h2>
             <div class="results-section">
-                <p>UniME was evaluated on <strong>BraTS 2023</strong> under diverse incomplete modality scenarios, covering all 15 possible combinations of FLAIR, T1ce, T1, and T2. Qualitative comparisons show that UniME produces more complete and accurate segmentation masks across necrotic tissue, enhancing tumor, and edema regions, even when multiple modalities are absent.</p>
+                <p>We evaluate UniME on <strong>BraTS 2023</strong> and <strong>BraTS 2024</strong> under various missing-modality settings. The proposed method consistently outperforms state-of-the-art approaches across different tumor regions (WT, TC, ET).</p>
 
                 <div class="results-figure">
                     <img src="imgs/unime-Figure 3.png" alt="Visualization of segmentation results on BraTS 2023" style="max-width: 92%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
                     <div class="figure-caption">
-                        <strong>Figure 3.</strong> Visualization of segmentation results on BraTS 2023. Segmentation masks predicted by different methods for various modality combinations (FLAIR, T1ce, T1, T2) are shown within the red-framed regions of the input images. Each row represents a distinct patient case with different modality availabilities. Colored regions indicate necrotic tissue, enhancing tumor, and edema respectively. "Missing" denotes unavailable modalities.
+                        <strong>Figure 3.</strong> Qualitative segmentation results on BraTS 2023 under different missing-modality settings. Compared with existing methods, UniME produces more accurate and consistent segmentation, especially when multiple modalities are missing.
                     </div>
                 </div>
 
-                <p>An ablation study systematically examines the contribution of each architectural component, comparing different design choices for the two-stage heterogeneous architecture to validate the effectiveness of the Uni-Encoder pretraining strategy and the Multi-Encoder fusion design.</p>
+                <p>Figure 4 further validates the effectiveness of the two-stage design. The combination of Uni-Encoder and Multi-Encoders significantly improves performance compared to single-encoder or multi-encoder-only designs, highlighting their complementary roles.</p>
 
                 <div class="results-figure">
                     <img src="imgs/unime-Figure 4.png" alt="Ablation study architectural designs" style="max-width: 80%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
                     <div class="figure-caption">
-                        <strong>Figure 4.</strong> Architectural designs corresponding to the ablation study. Modules initialized from pretrained weights and modules trained from scratch are distinguished visually, illustrating how different initialization strategies affect performance.
+                        <strong>Figure 4.</strong> Ablation study on the two-stage heterogeneous design. Combining the Uni-Encoder and Multi-Encoders yields the best performance, demonstrating the effectiveness of decoupling representation learning and segmentation.
                     </div>
                 </div>
             </div>
