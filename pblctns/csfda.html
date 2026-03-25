@@ -333,30 +333,30 @@
 
             <h2 class="section-title">Abstract</h2>
             <div class="abstract">
-                <p>Multi-site schizophrenia diagnosis from resting-state fMRI faces a critical practical challenge: <span class="highlight">source domain data are often unavailable during adaptation</span> due to privacy constraints and data-sharing restrictions, making conventional domain adaptation methods inapplicable. Source-free domain adaptation (SFDA) addresses this by adapting a pretrained source model to an unlabeled target domain without revisiting source data, but this setting demands robust feature encoders and reliable augmentation strategies.</p>
+                <p>Multi-site schizophrenia classification from resting-state fMRI faces a practical adaptation challenge: <span class="highlight">source-domain data are often unavailable during deployment</span> due to privacy and data-sharing constraints. Source-free domain adaptation (SFDA) addresses this setting by adapting a pretrained source model to an unlabeled target domain without revisiting source data, but this requires robust feature extraction and effective target-domain regularization.</p>
 
-                <p>We propose a two-stage framework. In the first stage, a <span class="highlight">scale-free transformer</span> is pretrained on labeled source-domain brain functional networks (BFNs). The attention mechanism is guided by a scale-free prior that biases the attention distribution toward high-degree hub nodes, reflecting the known power-law topology of functional brain connectivity and extracting discriminative inter-regional features. The pretrained encoder and classifier are then transferred to initialize the target-domain model.</p>
+                <p>We propose a two-stage framework for schizophrenia classification based on brain functional networks (BFNs). In Stage 1, a <span class="highlight">scale-free transformer</span> is pretrained on labeled source-domain BFNs. Its attention mechanism is guided by a scale-free prior that biases attention toward high-degree hub nodes, reflecting the topology commonly observed in functional brain networks and improving discriminative feature learning. In Stage 2, the pretrained encoder and classifier are transferred to the unlabeled target domain for source-free adaptation.</p>
 
-                <p>In the second stage, <span class="highlight">causal-augmented SFDA</span> adapts the transferred model to the unlabeled target domain. The encoder learns latent representations that capture inter-regional interactions, which are used to construct causal graphs. These graphs are perturbed through random permutation and counterfactual interventions to generate diverse augmented views. The resulting augmentations, combined with entropy minimization, jointly optimize the encoder and classifier to promote stable, site-invariant decision boundaries.</p>
+                <p>To improve robustness under target-domain shift, we introduce a <span class="highlight">causal-augmented adaptation strategy</span>. Latent representations are used to construct causal graphs, which are then perturbed through random permutation and counterfactual interventions to produce diverse augmented views. Together with entropy minimization, these augmentations encourage more stable target-domain decision boundaries.</p>
 
-                <p>Experiments on two independent schizophrenia datasets, <strong>FBIRN</strong> and <strong>BSNIP</strong>, demonstrate that the proposed method achieves classification accuracies of <span class="highlight">87.18%±0.91%</span> and <span class="highlight">88.39%±0.13%</span>, respectively, outperforming multiple domain adaptation and transformer baselines.</p>
+                <p>Experiments on <strong>FBIRN</strong> and <strong>BSNIP</strong> show that the proposed method achieves strong target-domain performance, reaching <span class="highlight">87.18%±0.91%</span> and <span class="highlight">88.39%±0.13%</span> accuracy, respectively.</p>
             </div>
 
             <h2 class="section-title">Key Contributions</h2>
             <div class="contributions">
                 <ul>
-                    <li>A source-free domain adaptation framework for multi-site schizophrenia classification that requires no access to source data during target-domain adaptation, addressing a practical privacy constraint.</li>
-                    <li>A scale-free transformer encoder that incorporates a scale-free graph prior into the attention mechanism, biasing feature extraction toward high-degree hub nodes consistent with the power-law topology of brain functional networks.</li>
-                    <li>A causal-augmented adaptation strategy that constructs causal graphs from target-domain latent representations and generates augmented training samples via random permutation and counterfactual interventions to enhance adaptation robustness.</li>
-                    <li>A joint optimization objective combining causal augmentation and entropy minimization to stabilize decision boundaries across sites without source supervision.</li>
+                    <li>A source-free domain adaptation framework for multi-site schizophrenia classification that adapts to unlabeled target domains without revisiting source-domain data.</li>
+                    <li>A scale-free transformer encoder that incorporates a scale-free prior into self-attention, emphasizing high-degree hub nodes in brain functional networks.</li>
+                    <li>A causal-augmented adaptation strategy that constructs causal graphs from target-domain latent features and generates augmented views through random permutation and counterfactual intervention.</li>
+                    <li>A joint optimization scheme combining causal augmentation and entropy minimization to improve robustness and target-domain generalization.</li>
                 </ul>
             </div>
 
             <h2 class="section-title">Method Overview</h2>
             <div class="method-section">
-                <p>The framework operates in two sequential stages. In <span class="highlight">Stage 1</span>, BFNs are constructed from resting-state fMRI recordings collected across multiple source sites. A transformer encoder with a scale-free attention prior is trained on these labeled source-domain data to produce discriminative subject-level embeddings. The scale-free prior steers attention toward high-degree hub nodes, which play disproportionately important roles in functional brain organization. The pretrained encoder and classifier weights are preserved and carried over to initialize the target-domain model.</p>
+                <p>The framework operates in two stages. In <span class="highlight">Stage 1</span>, BFNs constructed from resting-state fMRI across multiple source sites are used to train a transformer encoder and classifier. A scale-free prior is injected into the attention mechanism so that the encoder focuses more strongly on hub-like regions, which are important for global information integration in functional brain networks.</p>
 
-                <p>In <span class="highlight">Stage 2</span>, the model is adapted to an unlabeled target site without revisiting any source data. The encoder extracts latent representations that capture inter-regional interactions, which are used to construct causal graphs. Random permutation and <span class="highlight">counterfactual interventions</span> on these graphs generate diverse augmented samples that expose the model to plausible distribution variations. Entropy minimization further pushes target-domain predictions toward confident, low-entropy outputs. Together, these components drive the encoder and classifier toward site-invariant decision boundaries.</p>
+                <p>In <span class="highlight">Stage 2</span>, the pretrained encoder and classifier are transferred to an unlabeled target site under the source-free domain adaptation setting. The encoder extracts latent features that are used to construct causal graphs. These graphs are perturbed by <span class="highlight">random permutation and counterfactual intervention</span> to generate diverse target-domain augmentations. Entropy minimization is further applied to encourage confident target predictions. Together, these components improve robustness to target-domain distribution shift without requiring access to source data.</p>
 
                 <div class="method-figure">
                     <img src="imgs/csfda-Figure 1.png" alt="CSFDA Framework Flowchart" style="max-width: 95%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
@@ -368,32 +368,34 @@
 
             <h2 class="section-title">Results &amp; Performance</h2>
             <div class="results-section">
-                <p>The framework was evaluated under a leave-one-site-out protocol on two independent multi-site schizophrenia datasets, FBIRN and BSNIP. The proposed method was compared against a range of transformer model variants and domain adaptation baselines. Classification accuracy was measured on the held-out target site for each fold.</p>
+                <p>The proposed framework was evaluated under a multi-site adaptation setting on two independent schizophrenia datasets, FBIRN and BSNIP. The method was compared against multiple transformer variants and domain adaptation baselines, with classification accuracy measured on the target site.</p>
 
                 <div class="results-figure">
                     <img src="imgs/csfda-Figure 2.png" alt="Classification performance comparison with different transformer models" style="max-width: 85%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
                     <div class="figure-caption">
-                        <strong>Figure 2.</strong> Classification performance in comparison with different transformer models on two datasets. (a) FBIRN, (b) BSNIP. The proposed scale-free transformer with causal-augmented SFDA achieves consistently strong performance across both datasets.
+                        <strong>Figure 2.</strong> Classification performance in comparison with different transformer variants on FBIRN and BSNIP. The proposed scale-free transformer with causal-augmented source-free adaptation achieves the strongest overall performance.
                     </div>
                 </div>
 
-                <p>An ablation study was conducted to evaluate the individual contributions of the scale-free transformer, causal graph construction, random permutation augmentation, counterfactual intervention, and entropy minimization, assessed separately on each target site across both datasets.</p>
+                <p>Figure 3 presents the ablation study across target domains. The results show that the scale-free prior, causal graph construction, random permutation, counterfactual intervention, and entropy minimization each contribute positively to the final performance.</p>
 
                 <div class="results-figure">
                     <img src="imgs/csfda-Figure 3.png" alt="Ablation study results on different target domains" style="max-width: 88%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
                     <div class="figure-caption">
-                        <strong>Figure 3.</strong> Ablation study results on different target domains across two datasets. (a) FBIRN, (b) BSNIP. Each component contributes positively to the final performance, with causal augmentation and entropy minimization providing complementary gains.
+                        <strong>Figure 3.</strong> Ablation study across different target domains on FBIRN and BSNIP. Removing the scale-free prior, causal graph construction, random permutation, counterfactual intervention, or entropy minimization leads to consistent performance degradation.
                     </div>
                 </div>
 
-                <p>Sensitivity analysis was performed on key hyperparameters across all target sites in both datasets, confirming that the method maintains robust performance over a wide range of parameter settings.</p>
+                <p>Figure 4 shows parameter sensitivity across target sites. The method remains stable over a broad range of hyperparameter settings, indicating good robustness in practical adaptation scenarios.</p>
 
                 <div class="results-figure">
                     <img src="imgs/csfda-Figure 4.png" alt="Classification accuracies with varying parameter values" style="max-width: 80%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
                     <div class="figure-caption">
-                        <strong>Figure 4.</strong> Classification accuracies on different target domains with varying parameter values across two datasets. (a) FBIRN, (b) BSNIP. The model demonstrates stable performance over a broad range of hyperparameter configurations.
+                        <strong>Figure 4.</strong> Sensitivity analysis of key hyperparameters across target domains on FBIRN and BSNIP. The proposed method maintains stable accuracy over a broad parameter range.
                     </div>
                 </div>
+
+                <p>On the two benchmark datasets, the proposed framework achieved <span class="highlight">87.18%±0.91%</span> accuracy on FBIRN and <span class="highlight">88.39%±0.13%</span> accuracy on BSNIP.</p>
             </div>
 
             <h2 class="section-title">Citation</h2>
