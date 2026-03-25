@@ -1,0 +1,456 @@
+<!doctype html>
+<html itemscope lang="en-us" itemtype="http://schema.org/WebPage">
+
+<head>
+    <meta charset="utf-8">
+    <title>RIHA: Report-Image Hierarchical Alignment for Radiology Report Generation</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+    <meta name="theme-name" content="hugoplate">
+    <link rel="shortcut icon" href="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_96x0_resize_lanczos_3.png" type="image/x-icon">
+    <link rel="icon" href="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_96x0_resize_lanczos_3.png" type="image/x-icon">
+    <base href="https://medvisailab.github.io/pblctns/">
+
+    <meta name="description" content="RIHA: a hierarchical alignment transformer that performs multi-level cross-modal alignment between chest X-ray images and radiology reports at paragraph, sentence, and word levels for improved report generation">
+    <meta name="keywords" content="Radiology Report Generation, Cross-modal Alignment, Visual Feature Pyramid, Hierarchical Alignment, Optimal Transport, Chest X-ray, MIMIC-CXR, Medical AI">
+    <meta name="author" content="MedVisAI Lab">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="RIHA: Report-Image Hierarchical Alignment for Radiology Report Generation">
+    <meta property="og:description" content="A novel end-to-end framework performing multi-level alignment between radiological images and reports at paragraph, sentence, and word levels via optimal transport">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://medvisailab.github.io/pblctns/riha.html">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:title" content="RIHA: Report-Image Hierarchical Alignment for Radiology Report Generation">
+    <meta name="twitter:description" content="A novel end-to-end framework performing multi-level alignment between radiological images and reports at paragraph, sentence, and word levels via optimal transport">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600&family=Signika:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link href="../css/style.min.80b93bb3a795f7194d0ca0c445309f1547c3c019264bfd28165ca93c97401b5d.css" rel="stylesheet">
+    <link href="../css/mvait-enhancements.css" rel="stylesheet">
+    <link href="../css/theme-fixes.css" rel="stylesheet">
+
+    <style>
+        .project-page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .project-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+
+        .dark .project-title {
+            color: #ecf0f1;
+        }
+
+        .authors {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #34495e;
+        }
+
+        .dark .authors {
+            color: #bdc3c7;
+        }
+
+        .author-name {
+            margin: 0 0.5rem;
+        }
+
+        .affiliation {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 0.5rem;
+        }
+
+        .dark .affiliation {
+            color: #95a5a6;
+        }
+
+        .links {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .link-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            margin: 0.5rem;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: background 0.3s ease;
+            font-weight: 600;
+        }
+
+        .link-btn:hover {
+            background: #2980b9;
+            color: white;
+        }
+
+        .link-btn.paper {
+            background: #e74c3c;
+        }
+
+        .link-btn.paper:hover {
+            background: #c0392b;
+        }
+
+        .link-btn.github {
+            background: #2c3e50;
+        }
+
+        .link-btn.github:hover {
+            background: #34495e;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1rem 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        .dark .section-title {
+            color: #ecf0f1;
+        }
+
+        .abstract, .method-section, .results-section {
+            margin-bottom: 2rem;
+            text-align: justify;
+        }
+
+        .method-figure, .results-figure {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .method-figure img, .results-figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .figure-caption {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .dark .figure-caption {
+            color: #95a5a6;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8e6cf 0%, #dcedc1 100%);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+        }
+
+        .dark .highlight {
+            background: linear-gradient(120deg, #2c3e50 0%, #34495e 100%);
+            color: #ecf0f1;
+        }
+
+        .citation-box {
+            background: #f8f9fa !important;
+        }
+
+        .dark .citation-box {
+            background: #2c3e50 !important;
+        }
+
+        .citation-box pre {
+            color: #000 !important;
+        }
+
+        .dark .citation-box pre {
+            color: #ecf0f1 !important;
+        }
+
+        .contributions {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #3498db;
+            margin: 1.5rem 0;
+        }
+
+        .dark .contributions {
+            background: #2c3e50;
+            color: #ecf0f1;
+        }
+
+        .contributions ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+
+        .contributions li {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .project-page {
+                padding: 1rem;
+            }
+
+            .project-title {
+                font-size: 2rem;
+            }
+
+            .link-btn {
+                display: block;
+                margin: 0.5rem auto;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header sticky top-0 z-30">
+        <nav class="navbar container">
+            <div class="order-0">
+                <a class="navbar-brand block" href="../">
+                    <img fetchpriority="high" decoding="async" class="img logo-light" width="160" height="32"
+                        src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                        alt="MedVisAITechnologies"
+                        onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                    <img fetchpriority="high" decoding="async" class="img logo-dark" width="160" height="32"
+                        src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                        alt="MedVisAITechnologies"
+                        onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                </a>
+            </div>
+
+            <input id="nav-toggle" type="checkbox" class="hidden">
+            <label id="show-button" for="nav-toggle" class="order-2 flex cursor-pointer items-center md:order-1 md:hidden">
+                <svg class="h-6 fill-current" viewBox="0 0 20 20">
+                    <title>Menu Open</title>
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0V0z" />
+                </svg>
+            </label>
+
+            <label id="hide-button" for="nav-toggle" class="order-2 hidden cursor-pointer items-center md:order-1">
+                <svg class="h-6 fill-current" viewBox="0 0 20 20">
+                    <title>Menu Close</title>
+                    <polygon points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2" transform="rotate(45 10 10)" />
+                </svg>
+            </label>
+
+            <ul id="nav-menu" class="navbar-nav order-3 hidden w-full pb-6 lg:order-1 lg:flex lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8">
+                <li class="nav-item"><a class="nav-link" href="../">MVAIT</a></li>
+                <li class="nav-item"><a class="nav-link" href="../team">Team</a></li>
+                <li class="nav-item"><a class="nav-link" href="../research/">Research</a></li>
+                <li class="nav-item"><a class="nav-link" href="../projects">Project Funding</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pos/">Positions</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pblctns">Publications</a></li>
+                <li class="mt-4 inline-block lg:hidden"><a class="btn btn-outline-primary btn-sm" href="../eml">Contact</a></li>
+            </ul>
+
+            <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
+                <div class="theme-switcher mr-5">
+                    <input id="theme-switcher" data-theme-switcher type="checkbox">
+                    <label for="theme-switcher">
+                        <span class="sr-only">theme switcher</span>
+                        <span>
+                            <svg class="absolute left-[4px] top-[4px] z-10 opacity-100 dark:opacity-0" viewBox="0 0 56 56" fill="#fff" height="16" width="16">
+                                <path d="M30 4.6c0-1-.9-2-2-2a2 2 0 00-2 2v5c0 1 .9 2 2 2s2-1 2-2zm9.6 9a2 2 0 000 2.8c.8.8 2 .8 2.9.0L46 13a2 2 0 000-2.9 2 2 0 00-3 0zm-26 2.8c.7.8 2 .8 2.8.0.8-.7.8-2 0-2.9L13 10c-.7-.7-2-.8-2.9.0-.7.8-.7 2.1.0 3zM28 16A12 12 0 0016 28a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0028 16zm23.3 14c1.1.0 2-.9 2-2s-.9-2-2-2h-4.9a2 2 0 00-2 2c0 1.1 1 2 2 2zM4.7 26a2 2 0 00-2 2c0 1.1.9 2 2 2h4.9c1 0 2-.9 2-2s-1-2-2-2zm37.8 13.6a2 2 0 00-3 0 2 2 0 000 2.9l3.6 3.5a2 2 0 002.9.0c.8-.8.8-2.1.0-3zM10 43.1a2 2 0 000 2.9c.8.7 2.1.8 3 0l3.4-3.5c.8-.8.8-2.1.0-2.9s-2-.8-2.9.0zm20 3.4c0-1.1-.9-2-2-2a2 2 0 00-2 2v4.9c0 1 .9 2 2 2s2-1 2-2z" />
+                            </svg>
+                            <svg class="absolute left-[4px] top-[4px] z-10 opacity-0 dark:opacity-100" viewBox="0 0 24 24" fill="none" height="16" width="16">
+                                <path fill="#000" fill-rule="evenodd" clip-rule="evenodd" d="M8.2 2.2c1-.4 2 .6 1.6 1.5-1 3-.4 6.4 1.8 8.7a8.4 8.4.0 008.7 1.8c1-.3 2 .5 1.5 1.5v.1A10.3 10.3.0 0112.4 22 10.3 10.3.0 013.2 6.7c1-2 2.9-3.5 4.9-4.4z" />
+                            </svg>
+                        </span>
+                    </label>
+                </div>
+                <script>
+                    var themeSwitch, darkMode = !0;
+                    localStorage.getItem("theme") === "dark" ? darkMode = !0 : localStorage.getItem("theme") === "light" && (darkMode = !1);
+                    darkMode && document.documentElement.classList.toggle("dark");
+                    themeSwitch = document.querySelectorAll("[data-theme-switcher]");
+                    document.addEventListener("DOMContentLoaded", () => {
+                        [].forEach.call(themeSwitch, function (e) {
+                            e.checked = !!darkMode;
+                            e.addEventListener("click", () => {
+                                document.documentElement.classList.toggle("dark");
+                                localStorage.setItem("theme", document.documentElement.classList.contains("dark") ? "dark" : "light")
+                            })
+                        })
+                    });
+                </script>
+                <a href="../eml" class="btn btn-outline-primary btn-sm hidden lg:inline-block">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="project-page">
+            <h1 class="project-title">
+                RIHA: Report-Image Hierarchical Alignment for Radiology Report Generation
+            </h1>
+
+            <div class="authors">
+                <div style="margin-bottom: 1rem;">
+                    <span class="author-name">Yucheng Chen<sup>1</sup></span>
+                    <span class="author-name">Yang Yu<sup>2</sup></span>
+                    <span class="author-name">Yufei Shi<sup>1</sup></span>
+                    <span class="author-name">Conghao Xiong<sup>3</sup></span>
+                    <span class="author-name">Xulei Yang<sup>2</sup></span>
+                    <span class="author-name">Si Yong Yeo<sup>1</sup><sup style="font-size: 0.7em;">(✉)</sup></span>
+                </div>
+
+                <div class="affiliation">
+                    <sup>1</sup>MedVisAI Lab, Lee Kong Chian School of Medicine, Nanyang Technological University (NTU), Singapore; Centre of AI in Medicine, Singapore &nbsp;&nbsp;
+                    <sup>2</sup>Department of Machine Intellection, Institute for Infocomm Research (I²R), A*STAR, Singapore &nbsp;&nbsp;
+                    <sup>3</sup>Department of Computer Science and Engineering, The Chinese University of Hong Kong, Hong Kong SAR, China
+                </div>
+            </div>
+
+            <div class="links">
+                <a href="https://doi.org/10.1109/JBHI.2026.3670023" target="_blank" class="link-btn paper">📄 Paper</a>
+            </div>
+
+            <h2 class="section-title">Abstract</h2>
+            <div class="abstract">
+                <p>Radiology report generation (RRG) has emerged as a promising approach to alleviate radiologists' workload and reduce human errors by automatically generating diagnostic reports from medical images. A key challenge in RRG is achieving <span class="highlight">fine-grained alignment</span> between complex visual features and the hierarchical structure of long-form radiology reports. Although recent methods have improved image-text representation learning, they often treat reports as flat sequences, overlooking their structured sections and semantic hierarchies. This simplification hinders precise cross-modal alignment and weakens RRG accuracy.</p>
+
+                <p>To address this challenge, we propose <span class="highlight">RIHA</span> (Report-Image Hierarchical Alignment Transformer), a novel end-to-end framework that performs <span class="highlight">multi-level alignment</span> between radiological images and their corresponding reports across paragraph, sentence, and word levels. This hierarchical alignment enables more precise cross-modal mapping, essential for capturing the nuanced semantics embedded in clinical narratives. Specifically, RIHA introduces a <span class="highlight">Visual Feature Pyramid (VFP)</span> to extract multi-scale visual features and a <span class="highlight">Text Feature Pyramid (TFP)</span> to represent multi-granularity textual structures. These components are integrated through a <span class="highlight">Cross-modal Hierarchical Alignment (CHA)</span> module, leveraging optimal transport to effectively align visual and textual features across various levels. Furthermore, we incorporate <span class="highlight">Relative Positional Encoding (RPE)</span> into the decoder to model spatial and semantic relationships among tokens, enhancing token-level alignment between visual features and generated text. Extensive experiments on two benchmark chest X-ray datasets, <strong>IU-Xray</strong> and <strong>MIMIC-CXR</strong>, demonstrate that RIHA outperforms existing state-of-the-art models in both natural language generation and clinical efficacy metrics.</p>
+            </div>
+
+            <h2 class="section-title">Key Contributions</h2>
+            <div class="contributions">
+                <ul>
+                    <li>We propose a novel end-to-end RIHA framework for improving fine-grained alignment between paired chest X-ray images and long-text radiology reports, capturing hierarchical correspondences at three levels of granularity: shallow (word-level), intermediate (sentence-level), and high (paragraph-level).</li>
+                    <li>We design a Visual Feature Pyramid (VFP) and a Text Feature Pyramid (TFP) to capture multi-granularity visual and textual features, integrated through a Cross-modal Hierarchical Alignment (CHA) module that leverages optimal transport for effective cross-modal semantic alignment.</li>
+                    <li>We incorporate a Relative Positional Encoding (RPE) strategy into the decoder to enhance token-level alignment, enabling the model to generate contextually accurate radiology descriptions by capturing both spatial and semantic token relationships.</li>
+                    <li>We conduct comprehensive experiments on two publicly available chest X-ray datasets to demonstrate substantial performance improvements over existing state-of-the-art approaches, further validated through detailed ablation studies.</li>
+                </ul>
+            </div>
+
+            <h2 class="section-title">Motivation</h2>
+            <div class="method-section">
+                <p>Radiology reports are inherently hierarchical: paragraph-level impressions provide overall clinical context, sentence-level descriptions detail specific anatomical findings, and word-level terminology captures precise medical measurements. Existing RRG methods typically treat reports as flat token sequences, missing the opportunity to leverage this structured hierarchy. RIHA is motivated by the need to establish synchronized cross-modal correspondences at multiple semantic levels simultaneously, mirroring the hierarchical reasoning process of clinical radiologists.</p>
+
+                <div class="method-figure">
+                    <img src="imgs/riha-Figure 1.png" alt="Motivation: Multi-level visual-textual alignment in radiology reports" style="max-width: 92%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
+                    <div class="figure-caption">
+                        <strong>Figure 1.</strong> A chest X-ray image alongside its corresponding radiology report. The boxes on the right display the individual sentences and extracted keywords from the report. Multi-level visual-textual alignments are indicated using matching colours to highlight their associations, motivating the need for hierarchical cross-modal alignment in RRG.
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Method Overview</h2>
+            <div class="method-section">
+                <p>RIHA is an end-to-end transformer-based framework built around three core components: a <span class="highlight">Visual Feature Pyramid (VFP)</span>, a <span class="highlight">Text Feature Pyramid (TFP)</span>, and a <span class="highlight">Cross-modal Hierarchical Alignment (CHA)</span> module.</p>
+
+                <p>The <span class="highlight">VFP</span> extracts multi-scale visual representations from chest X-ray images, capturing features at different levels of spatial granularity. The <span class="highlight">TFP</span> encodes the report text at multiple granularities — word, sentence, and paragraph — to construct a structured textual hierarchy. The <span class="highlight">CHA</span> module then performs joint hierarchical alignment between the visual and textual pyramids using optimal transport, ensuring that each level of visual abstraction is precisely matched to the corresponding textual granularity.</p>
+
+                <p>Additionally, <span class="highlight">Relative Positional Encoding (RPE)</span> is integrated into the autoregressive decoder to model spatial and semantic token relationships, further strengthening token-level correspondence between visual features and generated text during report decoding.</p>
+
+                <div class="method-figure">
+                    <img src="imgs/riha-Figure 2.png" alt="RIHA Architecture Overview" style="max-width: 95%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
+                    <div class="figure-caption">
+                        <strong>Figure 2.</strong> Overview of the RIHA framework. The Visual Feature Pyramid (VFP) and Text Feature Pyramid (TFP) capture multi-granularity representations from images and reports, respectively. The Cross-modal Hierarchical Alignment (CHA) module leverages optimal transport to align visual and textual features at paragraph, sentence, and word levels. Relative Positional Encoding (RPE) in the decoder enhances token-level alignment during report generation.
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Results</h2>
+            <div class="results-section">
+                <p>We evaluate RIHA on <strong>IU-Xray</strong> and <strong>MIMIC-CXR</strong>, two widely used chest X-ray report generation benchmarks. RIHA consistently outperforms existing state-of-the-art methods on both natural language generation metrics (BLEU, METEOR, ROUGE-L) and clinical efficacy metrics.</p>
+
+                <div class="results-figure">
+                    <img src="imgs/riha-Figure 3.png" alt="Qualitative results of generated radiology reports" style="max-width: 90%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
+                    <div class="figure-caption">
+                        <strong>Figure 3.</strong> Qualitative comparison of generated radiology reports on MIMIC-CXR. RIHA produces more accurate and clinically coherent reports compared to existing methods, with better alignment between described findings and underlying image regions.
+                    </div>
+                </div>
+
+                <p>Figure 4 visualises the cross-modal attention maps, demonstrating that RIHA learns meaningful keyword-to-region correspondences. The hierarchical alignment mechanism effectively directs attention to clinically relevant image regions when generating specific medical terms, validating the interpretability and clinical fidelity of the model.</p>
+
+                <div class="results-figure">
+                    <img src="imgs/riha-Figure 4.png" alt="Keyword attention visualization" style="max-width: 82%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
+                    <div class="figure-caption">
+                        <strong>Figure 4.</strong> Visualization of keyword attention maps generated by RIHA. The model attends to clinically relevant image regions when generating specific medical terms, demonstrating effective multi-level cross-modal alignment and interpretable report generation.
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Citation</h2>
+            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; font-family: monospace; font-size: 0.9rem; overflow-x: auto;" class="citation-box">
+<pre style="margin: 0; color: #000;">@article{chen2026riha,
+  title={RIHA: Report-Image Hierarchical Alignment for Radiology Report Generation},
+  author={Chen, Yucheng and Yu, Yang and Shi, Yufei and Xiong, Conghao and Yang, Xulei and Yeo, Si Yong},
+  journal={IEEE Journal of Biomedical and Health Informatics},
+  year={2026},
+  doi={10.1109/JBHI.2026.3670023}
+}</pre>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-theme-light dark:bg-darkmode-theme-light">
+        <div class="container">
+            <div class="row items-center py-10">
+                <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:text-left">
+                    <a class="navbar-brand inline-block" href="../">
+                        <img fetchpriority="high" decoding="async" class="img logo-light" width="160" height="32"
+                            src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                            alt="MedVisAITechnologies"
+                            onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                        <img fetchpriority="high" decoding="async" class="img logo-dark" width="160" height="32"
+                            src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                            alt="MedVisAITechnologies"
+                            onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                    </a>
+                </div>
+                <div class="lg:col-6 mb-8 text-center lg:mb-0">
+                    <ul>
+                        <li class="m-3 inline-block"><a href="../about/">About</a></li>
+                        <li class="m-3 inline-block"><a href="../eml">Contact</a></li>
+                        <li class="m-3 inline-block"><a href="../location/">Location</a></li>
+                    </ul>
+                </div>
+                <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:mt-0 lg:text-right">
+                    <ul class="social-icons">
+                        <li><a target="_blank" aria-label="facebook" rel="nofollow noopener" href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a></li>
+                        <li><a target="_blank" aria-label="twitter" rel="nofollow noopener" href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
+                        <li><a target="_blank" aria-label="github" rel="nofollow noopener" href="https://www.github.com/"><i class="fab fa-github"></i></a></li>
+                        <li><a target="_blank" aria-label="linkedin" rel="nofollow noopener" href="https://www.linkedin.com/"><i class="fab fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="border-border dark:border-darkmode-border border-t py-7">
+            <div class="text-light dark:text-darkmode-light container text-center">
+                <p></p>
+            </div>
+        </div>
+    </footer>
+
+    <script crossorigin="anonymous" integrity="sha256-HNvx23yefzYJie2GA7dzwBeKevXtramA+LX4E7XFReM="
+        src="../js/script.min.1cdbf1db7c9e7f360989ed8603b773c0178a7af5edada980f8b5f813b5c545e3.js"></script>
+    <script>"serviceWorker" in navigator && navigator.serviceWorker.register("../service-worker.js")</script>
+</body>
+
+</html>
