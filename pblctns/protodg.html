@@ -1,0 +1,467 @@
+<!doctype html>
+<html itemscope lang="en-us" itemtype="http://schema.org/WebPage">
+
+<head>
+    <meta charset="utf-8">
+    <title>Prototypical Representation Learning for Multi-Site Domain Generalization in Schizophrenia Diagnosis</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+    <meta name="theme-name" content="hugoplate">
+    <link rel="shortcut icon" href="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_96x0_resize_lanczos_3.png" type="image/x-icon">
+    <link rel="icon" href="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_96x0_resize_lanczos_3.png" type="image/x-icon">
+    <base href="https://medvisailab.github.io/pblctns/">
+
+    <meta name="description" content="Prototypical representation learning framework for multi-site domain generalization in schizophrenia diagnosis using resting-state fMRI brain functional networks">
+    <meta name="keywords" content="Schizophrenia, Domain Generalization, Prototype Learning, fMRI, Brain Functional Networks, Multi-site, Deep Learning, Medical AI">
+    <meta name="author" content="MedVisAI Lab">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Prototypical Representation Learning for Multi-Site Domain Generalization in Schizophrenia Diagnosis">
+    <meta property="og:description" content="A novel domain generalization framework combining transformer encoders with prototype learning for multi-site schizophrenia diagnosis from resting-state fMRI data">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://medvisailab.github.io/pblctns/protodg.html">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:title" content="Prototypical Representation Learning for Multi-Site Domain Generalization in Schizophrenia Diagnosis">
+    <meta name="twitter:description" content="A novel domain generalization framework combining transformer encoders with prototype learning for multi-site schizophrenia diagnosis from resting-state fMRI data">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600&family=Signika:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link href="../css/style.min.80b93bb3a795f7194d0ca0c445309f1547c3c019264bfd28165ca93c97401b5d.css" rel="stylesheet">
+    <link href="../css/mvait-enhancements.css" rel="stylesheet">
+    <link href="../css/theme-fixes.css" rel="stylesheet">
+
+    <style>
+        .project-page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .project-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+
+        .dark .project-title {
+            color: #ecf0f1;
+        }
+
+        .authors {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #34495e;
+        }
+
+        .dark .authors {
+            color: #bdc3c7;
+        }
+
+        .author-name {
+            margin: 0 0.5rem;
+        }
+
+        .affiliation {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 0.5rem;
+        }
+
+        .dark .affiliation {
+            color: #95a5a6;
+        }
+
+        .links {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .link-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            margin: 0.5rem;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: background 0.3s ease;
+            font-weight: 600;
+        }
+
+        .link-btn:hover {
+            background: #2980b9;
+            color: white;
+        }
+
+        .link-btn.paper {
+            background: #e74c3c;
+        }
+
+        .link-btn.paper:hover {
+            background: #c0392b;
+        }
+
+        .link-btn.pubmed {
+            background: #27ae60;
+        }
+
+        .link-btn.pubmed:hover {
+            background: #219a52;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1rem 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        .dark .section-title {
+            color: #ecf0f1;
+        }
+
+        .abstract, .method-section, .results-section {
+            margin-bottom: 2rem;
+            text-align: justify;
+        }
+
+        .method-figure, .results-figure {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .method-figure img, .results-figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .figure-caption {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .dark .figure-caption {
+            color: #95a5a6;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8e6cf 0%, #dcedc1 100%);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+        }
+
+        .dark .highlight {
+            background: linear-gradient(120deg, #2c3e50 0%, #34495e 100%);
+            color: #ecf0f1;
+        }
+
+        .citation-box {
+            background: #f8f9fa !important;
+        }
+
+        .dark .citation-box {
+            background: #2c3e50 !important;
+        }
+
+        .citation-box pre {
+            color: #000 !important;
+        }
+
+        .dark .citation-box pre {
+            color: #ecf0f1 !important;
+        }
+
+        .contributions {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #3498db;
+            margin: 1.5rem 0;
+        }
+
+        .dark .contributions {
+            background: #2c3e50;
+            color: #ecf0f1;
+        }
+
+        .contributions ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+
+        .contributions li {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .project-page {
+                padding: 1rem;
+            }
+
+            .project-title {
+                font-size: 2rem;
+            }
+
+            .link-btn {
+                display: block;
+                margin: 0.5rem auto;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header sticky top-0 z-30">
+        <nav class="navbar container">
+            <div class="order-0">
+                <a class="navbar-brand block" href="../">
+                    <img fetchpriority="high" decoding="async" class="img logo-light" width="160" height="32"
+                        src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                        alt="MedVisAITechnologies"
+                        onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                    <img fetchpriority="high" decoding="async" class="img logo-dark" width="160" height="32"
+                        src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                        alt="MedVisAITechnologies"
+                        onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                </a>
+            </div>
+
+            <input id="nav-toggle" type="checkbox" class="hidden">
+            <label id="show-button" for="nav-toggle" class="order-2 flex cursor-pointer items-center md:order-1 md:hidden">
+                <svg class="h-6 fill-current" viewBox="0 0 20 20">
+                    <title>Menu Open</title>
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0V0z" />
+                </svg>
+            </label>
+
+            <label id="hide-button" for="nav-toggle" class="order-2 hidden cursor-pointer items-center md:order-1">
+                <svg class="h-6 fill-current" viewBox="0 0 20 20">
+                    <title>Menu Close</title>
+                    <polygon points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2" transform="rotate(45 10 10)" />
+                </svg>
+            </label>
+
+            <ul id="nav-menu" class="navbar-nav order-3 hidden w-full pb-6 lg:order-1 lg:flex lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8">
+                <li class="nav-item"><a class="nav-link" href="../">MVAIT</a></li>
+                <li class="nav-item"><a class="nav-link" href="../team">Team</a></li>
+                <li class="nav-item"><a class="nav-link" href="../research/">Research</a></li>
+                <li class="nav-item"><a class="nav-link" href="../projects">Project Funding</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pos/">Positions</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pblctns">Publications</a></li>
+                <li class="mt-4 inline-block lg:hidden"><a class="btn btn-outline-primary btn-sm" href="../eml">Contact</a></li>
+            </ul>
+
+            <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
+                <div class="theme-switcher mr-5">
+                    <input id="theme-switcher" data-theme-switcher type="checkbox">
+                    <label for="theme-switcher">
+                        <span class="sr-only">theme switcher</span>
+                        <span>
+                            <svg class="absolute left-[4px] top-[4px] z-10 opacity-100 dark:opacity-0" viewBox="0 0 56 56" fill="#fff" height="16" width="16">
+                                <path d="M30 4.6c0-1-.9-2-2-2a2 2 0 00-2 2v5c0 1 .9 2 2 2s2-1 2-2zm9.6 9a2 2 0 000 2.8c.8.8 2 .8 2.9.0L46 13a2 2 0 000-2.9 2 2 0 00-3 0zm-26 2.8c.7.8 2 .8 2.8.0.8-.7.8-2 0-2.9L13 10c-.7-.7-2-.8-2.9.0-.7.8-.7 2.1.0 3zM28 16A12 12 0 0016 28a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0028 16zm23.3 14c1.1.0 2-.9 2-2s-.9-2-2-2h-4.9a2 2 0 00-2 2c0 1.1 1 2 2 2zM4.7 26a2 2 0 00-2 2c0 1.1.9 2 2 2h4.9c1 0 2-.9 2-2s-1-2-2-2zm37.8 13.6a2 2 0 00-3 0 2 2 0 000 2.9l3.6 3.5a2 2 0 002.9.0c.8-.8.8-2.1.0-3zM10 43.1a2 2 0 000 2.9c.8.7 2.1.8 3 0l3.4-3.5c.8-.8.8-2.1.0-2.9s-2-.8-2.9.0zm20 3.4c0-1.1-.9-2-2-2a2 2 0 00-2 2v4.9c0 1 .9 2 2 2s2-1 2-2z" />
+                            </svg>
+                            <svg class="absolute left-[4px] top-[4px] z-10 opacity-0 dark:opacity-100" viewBox="0 0 24 24" fill="none" height="16" width="16">
+                                <path fill="#000" fill-rule="evenodd" clip-rule="evenodd" d="M8.2 2.2c1-.4 2 .6 1.6 1.5-1 3-.4 6.4 1.8 8.7a8.4 8.4.0 008.7 1.8c1-.3 2 .5 1.5 1.5v.1A10.3 10.3.0 0112.4 22 10.3 10.3.0 013.2 6.7c1-2 2.9-3.5 4.9-4.4z" />
+                            </svg>
+                        </span>
+                    </label>
+                </div>
+                <script>
+                    var themeSwitch, darkMode = !0;
+                    localStorage.getItem("theme") === "dark" ? darkMode = !0 : localStorage.getItem("theme") === "light" && (darkMode = !1);
+                    darkMode && document.documentElement.classList.toggle("dark");
+                    themeSwitch = document.querySelectorAll("[data-theme-switcher]");
+                    document.addEventListener("DOMContentLoaded", () => {
+                        [].forEach.call(themeSwitch, function (e) {
+                            e.checked = !!darkMode;
+                            e.addEventListener("click", () => {
+                                document.documentElement.classList.toggle("dark");
+                                localStorage.setItem("theme", document.documentElement.classList.contains("dark") ? "dark" : "light")
+                            })
+                        })
+                    });
+                </script>
+                <a href="../eml" class="btn btn-outline-primary btn-sm hidden lg:inline-block">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="project-page">
+            <h1 class="project-title">
+                Prototypical Representation Learning for Multi-Site Domain Generalization in Schizophrenia Diagnosis
+            </h1>
+
+            <div class="authors">
+                <div style="margin-bottom: 1rem;">
+                    <span class="author-name">Yixin Ji<sup>1</sup></span>
+                    <span class="author-name">Vince D. Calhoun<sup>2</sup></span>
+                    <span class="author-name">Jin Zhang<sup>1</sup></span>
+                    <span class="author-name">Qi Zhu<sup>1</sup></span>
+                    <span class="author-name">Shengrong Li<sup>1</sup></span>
+                    <span class="author-name">Daniel H. Mathalon<sup>3</sup></span>
+                    <span class="author-name">Si Yong Yeo<sup>4</sup></span>
+                    <span class="author-name">Daoqiang Zhang<sup>1</sup></span>
+                    <span class="author-name">Shile Qi<sup>1</sup><sup style="font-size: 0.7em;">(✉)</sup></span>
+                </div>
+
+                <div class="affiliation">
+                    <sup>1</sup>Nanjing University of Aeronautics and Astronautics, Nanjing, China &nbsp;&nbsp;
+                    <sup>2</sup>Tri-institutional Center for Translational Research in Neuroimaging and Data Science, Atlanta, GA, USA &nbsp;&nbsp;
+                    <sup>3</sup>University of California San Francisco, San Francisco, CA, USA &nbsp;&nbsp;
+                    <sup>4</sup>MedVisAI Lab, Lee Kong Chian School of Medicine, Nanyang Technological University, Singapore
+                </div>
+            </div>
+
+            <div class="links">
+                <a href="https://doi.org/10.1109/TBME.2026.3658874" class="link-btn paper" target="_blank">📄 IEEE TBME Paper</a>
+                <a href="https://pubmed.ncbi.nlm.nih.gov/41605185/" class="link-btn pubmed" target="_blank">🔬 PubMed</a>
+                <a href="imgs/protodg.pdf" class="link-btn" target="_blank">📑 PDF</a>
+            </div>
+
+            <h2 class="section-title">Abstract</h2>
+            <div class="abstract">
+                <p>Schizophrenia diagnosis from resting-state fMRI data is challenged by substantial <span class="highlight">site-induced distribution shifts</span> in multi-site studies, where scanner differences, imaging protocols, and demographic variations introduce spurious domain-specific features that hinder model generalization.</p>
+
+                <p>We propose a <span class="highlight">prototypical domain generalization (ProtoDG)</span> framework that learns site-invariant, class-discriminative representations from brain functional networks (BFNs) without accessing target domain data during training. A transformer encoder captures global inter-regional dependencies to produce rich subject-level embeddings, which are then projected into a regularized feature space using HSIC-based site-independence constraints.</p>
+
+                <p>A prototype learning module maps projected features to class-specific prototypes via the <span class="highlight">Sinkhorn-Knopp algorithm</span>, with prototypes refined iteratively through exponential moving average (EMA) updates. Maximum likelihood estimation (MLE) loss optimizes feature-to-prototype matching in a probabilistic space, while contrastive and alignment losses further promote inter-class separation and intra-class compactness. The model is evaluated directly on unseen target sites without any fine-tuning.</p>
+
+                <p>Experiments on two independent datasets — <strong>FBIRN</strong> and <strong>BSNIP</strong> — demonstrate that our method achieves classification accuracies of <span class="highlight">88.89%±2.22%</span> and <span class="highlight">86.05%±1.64%</span>, respectively, surpassing state-of-the-art domain generalization, domain adaptation, and multi-site approaches.</p>
+            </div>
+
+            <h2 class="section-title">Key Contributions</h2>
+            <div class="contributions">
+                <ul>
+                    <li><strong>Prototypical Domain Generalization:</strong> A unified framework that combines prototype learning with domain generalization for multi-site fMRI schizophrenia classification, enabling direct evaluation on unseen target sites.</li>
+                    <li><strong>Sinkhorn-Knopp Prototype Assignment:</strong> Soft feature-to-prototype assignments via the Sinkhorn-Knopp algorithm, refined with EMA updates and MLE loss for stable and probabilistically principled prototype learning.</li>
+                    <li><strong>HSIC Site-Independence Regularization:</strong> Projected feature representations are constrained by Hilbert-Schmidt Independence Criterion (HSIC) to disentangle site-specific factors and learn site-invariant embeddings.</li>
+                    <li><strong>Multi-Objective Loss Design:</strong> Contrastive and alignment losses are jointly optimized to maximize inter-class separation and intra-class compactness, complementing the prototype matching objective.</li>
+                    <li><strong>Discriminative Brain Region Identification:</strong> The model highlights neurologically meaningful brain regions that are consistently discriminative across multiple sites, providing interpretable insights for schizophrenia biomarker discovery.</li>
+                </ul>
+            </div>
+
+            <h2 class="section-title">Method Overview</h2>
+            <div class="method-section">
+                <p>The proposed framework operates on <span class="highlight">brain functional networks (BFNs)</span> constructed from resting-state fMRI recordings collected across multiple scanner sites. The pipeline consists of four main stages: feature extraction, site-invariant projection, prototype-based classification, and direct evaluation on unseen target domains.</p>
+
+                <div class="method-figure">
+                    <img src="imgs/protodg-Figure 1.png" alt="ProtoDG Framework Flowchart" style="max-width: 95%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
+                    <div class="figure-caption">
+                        <strong>Figure 1.</strong> Flowchart of the proposed domain generalization framework. (a) BFNs were constructed from resting-state fMRI across multiple sites and used as model input. (b) A transformer encoder extracted subject-level embeddings by modeling global inter-regional dependencies. (c) Extracted features were projected with HSIC regularization to encourage site-invariant representations; a prototype learning module assigned projected features to class-specific prototypes via the Sinkhorn-Knopp algorithm, with soft assignments guiding prototype updates through EMA; MLE loss optimized feature-to-prototype matching probabilities, while contrastive and alignment losses promoted inter-class separation and intra-class compactness. (d) The model was directly evaluated on unseen target domains for classification.
+                    </div>
+                </div>
+
+                <p>The <span class="highlight">transformer encoder</span> captures long-range functional connectivity patterns across brain regions, producing expressive subject-level representations. These are projected into a regularized feature space where HSIC-based constraints suppress site-specific information. The prototype learning module then performs soft assignment of projected features to learnable class prototypes using the Sinkhorn-Knopp algorithm — an optimal transport technique that produces balanced, stable assignments. Prototypes are updated continuously through EMA, and the MLE loss encourages tight clustering of features around their matched prototypes in a probabilistic manner. Contrastive loss pushes features of different classes apart, while alignment loss pulls same-class features together, jointly enhancing class separability across site boundaries.</p>
+            </div>
+
+            <h2 class="section-title">Results &amp; Performance</h2>
+            <div class="results-section">
+                <p>The framework was evaluated in a leave-one-site-out cross-validation protocol, where the model is trained on all but one site and tested on the held-out site. Comparisons were conducted against state-of-the-art domain generalization (DG), domain adaptation (DA), and multi-site methods.</p>
+
+                <div class="results-figure">
+                    <img src="imgs/protodg-Figure 2.png" alt="Classification performance comparison on FBIRN and BSNIP" style="max-width: 88%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
+                    <div class="figure-caption">
+                        <strong>Figure 2.</strong> Classification performance in comparison with different DA methods on two datasets. (a) FBIRN, (b) BSNIP. The proposed method consistently achieves the highest accuracy across both datasets, outperforming all domain adaptation and domain generalization baselines.
+                    </div>
+                </div>
+
+                <p>Extensive ablation experiments were conducted to analyze the sensitivity of the model to key hyperparameters, including the number of prototypes, the EMA momentum coefficient, the HSIC regularization weight, and the loss balancing factors. The model demonstrates stable performance across a broad range of parameter values, confirming robustness.</p>
+
+                <div class="results-figure">
+                    <img src="imgs/protodg-Figure 3.png" alt="Classification accuracies with different parameter values" style="max-width: 72%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
+                    <div class="figure-caption">
+                        <strong>Figure 3.</strong> Classification accuracies with respect to different parameter values. The model maintains competitive performance across varying hyperparameter settings, demonstrating robustness to parameter choices.
+                    </div>
+                </div>
+
+                <p>To provide neurological interpretability, the model identifies the top-10 most discriminative brain regions for schizophrenia classification. The highlighted regions are consistent with known schizophrenia-associated functional connectivity abnormalities reported in the clinical neuroscience literature.</p>
+
+                <div class="results-figure">
+                    <img src="imgs/protodg-Figure 4.png" alt="Visualization of top 10 most discriminative brain regions" style="max-width: 82%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
+                    <div class="figure-caption">
+                        <strong>Figure 4.</strong> Visualization of the top 10 most discriminative brain regions on two datasets. (a) FBIRN, (b) BSNIP. The identified regions are consistent with neurological findings in schizophrenia research, supporting the biological plausibility of the learned representations.
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Citation</h2>
+            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; font-family: monospace; font-size: 0.9rem; overflow-x: auto;" class="citation-box">
+<pre style="margin: 0; color: #000;">@article{ji2026protodg,
+  title={Prototypical Representation Learning for Multi-Site Domain Generalization in Schizophrenia Diagnosis},
+  author={Ji, Yixin and Calhoun, Vince D and Zhang, Jin and Zhu, Qi and Li, Shengrong and Mathalon, Daniel H and Yeo, Si Yong and Zhang, Daoqiang and Qi, Shile},
+  journal={IEEE Transactions on Biomedical Engineering},
+  year={2026},
+  doi={10.1109/TBME.2026.3658874},
+  publisher={IEEE}
+}</pre>
+            </div>
+
+            <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 1rem;">
+                <h3 style="margin-bottom: 1rem;">Published in IEEE Transactions on Biomedical Engineering, 2026</h3>
+                <p style="margin: 0; font-size: 1.1rem;">DOI: <a href="https://doi.org/10.1109/TBME.2026.3658874" style="color: #fff; text-decoration: underline;" target="_blank">10.1109/TBME.2026.3658874</a></p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-theme-light dark:bg-darkmode-theme-light">
+        <div class="container">
+            <div class="row items-center py-10">
+                <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:text-left">
+                    <a class="navbar-brand inline-block" href="../">
+                        <img fetchpriority="high" decoding="async" class="img logo-light" width="160" height="32"
+                            src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                            alt="MedVisAITechnologies"
+                            onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                        <img fetchpriority="high" decoding="async" class="img logo-dark" width="160" height="32"
+                            src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                            alt="MedVisAITechnologies"
+                            onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                    </a>
+                </div>
+                <div class="lg:col-6 mb-8 text-center lg:mb-0">
+                    <ul>
+                        <li class="m-3 inline-block"><a href="../about/">About</a></li>
+                        <li class="m-3 inline-block"><a href="../eml">Contact</a></li>
+                        <li class="m-3 inline-block"><a href="../location/">Location</a></li>
+                    </ul>
+                </div>
+                <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:mt-0 lg:text-right">
+                    <ul class="social-icons">
+                        <li><a target="_blank" aria-label="facebook" rel="nofollow noopener" href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a></li>
+                        <li><a target="_blank" aria-label="twitter" rel="nofollow noopener" href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
+                        <li><a target="_blank" aria-label="github" rel="nofollow noopener" href="https://www.github.com/"><i class="fab fa-github"></i></a></li>
+                        <li><a target="_blank" aria-label="linkedin" rel="nofollow noopener" href="https://www.linkedin.com/"><i class="fab fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="border-border dark:border-darkmode-border border-t py-7">
+            <div class="text-light dark:text-darkmode-light container text-center">
+                <p></p>
+            </div>
+        </div>
+    </footer>
+
+    <script crossorigin="anonymous" integrity="sha256-HNvx23yefzYJie2GA7dzwBeKevXtramA+LX4E7XFReM="
+        src="../js/script.min.1cdbf1db7c9e7f360989ed8603b773c0178a7af5edada980f8b5f813b5c545e3.js"></script>
+    <script>"serviceWorker" in navigator && navigator.serviceWorker.register("../service-worker.js")</script>
+</body>
+
+</html>
