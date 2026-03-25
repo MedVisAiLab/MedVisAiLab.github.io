@@ -331,18 +331,22 @@
 
             <h2 class="section-title">Abstract</h2>
             <div class="abstract">
-                <p>Radiology report generation (RRG) has emerged as a promising approach to alleviate radiologists' workload and reduce human errors by automatically generating diagnostic reports from medical images. A key challenge in RRG is achieving <span class="highlight">fine-grained alignment</span> between complex visual features and the hierarchical structure of long-form radiology reports. Although recent methods have improved image-text representation learning, they often treat reports as flat sequences, overlooking their structured sections and semantic hierarchies. This simplification hinders precise cross-modal alignment and weakens RRG accuracy.</p>
+                <p>Radiology report generation (RRG) aims to automatically generate clinically accurate reports from medical images, but remains challenging due to the need for <span class="highlight">fine-grained alignment</span> between complex visual features and long-form, structured textual descriptions. Existing approaches often treat reports as flat sequences, ignoring their inherent hierarchical structure and limiting cross-modal alignment.</p>
 
-                <p>To address this challenge, we propose <span class="highlight">RIHA</span> (Report-Image Hierarchical Alignment Transformer), a novel end-to-end framework that performs <span class="highlight">multi-level alignment</span> between radiological images and their corresponding reports across paragraph, sentence, and word levels. This hierarchical alignment enables more precise cross-modal mapping, essential for capturing the nuanced semantics embedded in clinical narratives. Specifically, RIHA introduces a <span class="highlight">Visual Feature Pyramid (VFP)</span> to extract multi-scale visual features and a <span class="highlight">Text Feature Pyramid (TFP)</span> to represent multi-granularity textual structures. These components are integrated through a <span class="highlight">Cross-modal Hierarchical Alignment (CHA)</span> module, leveraging optimal transport to effectively align visual and textual features across various levels. Furthermore, we incorporate <span class="highlight">Relative Positional Encoding (RPE)</span> into the decoder to model spatial and semantic relationships among tokens, enhancing token-level alignment between visual features and generated text. Extensive experiments on two benchmark chest X-ray datasets, <strong>IU-Xray</strong> and <strong>MIMIC-CXR</strong>, demonstrate that RIHA outperforms existing state-of-the-art models in both natural language generation and clinical efficacy metrics.</p>
+                <p>We propose <span class="highlight">RIHA</span> (Report-Image Hierarchical Alignment Transformer), a novel end-to-end framework that performs <span class="highlight">multi-level alignment</span> between radiological images and reports at paragraph, sentence, and word levels. This hierarchical alignment enables more precise cross-modal correspondence, reflecting the multi-stage reasoning process in clinical practice.</p>
+
+                <p>Specifically, RIHA introduces a <span class="highlight">Visual Feature Pyramid (VFP)</span> and a <span class="highlight">Text Feature Pyramid (TFP)</span> to extract multi-scale visual features and multi-granularity textual representations. These features are aligned through a <span class="highlight">Cross-modal Hierarchical Alignment (CHA)</span> module using optimal transport, enabling distribution-level alignment across modalities. Additionally, a <span class="highlight">Relative Positional Encoding (RPE)</span> mechanism is integrated into the decoder to enhance token-level alignment.</p>
+
+                <p>Experiments on <strong>IU-Xray</strong> and <strong>MIMIC-CXR</strong> demonstrate that RIHA achieves superior performance across both natural language generation and clinical efficacy metrics.</p>
             </div>
 
             <h2 class="section-title">Key Contributions</h2>
             <div class="contributions">
                 <ul>
-                    <li>We propose a novel end-to-end RIHA framework for improving fine-grained alignment between paired chest X-ray images and long-text radiology reports, capturing hierarchical correspondences at three levels of granularity: shallow (word-level), intermediate (sentence-level), and high (paragraph-level).</li>
-                    <li>We design a Visual Feature Pyramid (VFP) and a Text Feature Pyramid (TFP) to capture multi-granularity visual and textual features, integrated through a Cross-modal Hierarchical Alignment (CHA) module that leverages optimal transport for effective cross-modal semantic alignment.</li>
-                    <li>We incorporate a Relative Positional Encoding (RPE) strategy into the decoder to enhance token-level alignment, enabling the model to generate contextually accurate radiology descriptions by capturing both spatial and semantic token relationships.</li>
-                    <li>We conduct comprehensive experiments on two publicly available chest X-ray datasets to demonstrate substantial performance improvements over existing state-of-the-art approaches, further validated through detailed ablation studies.</li>
+                    <li>We propose RIHA, a hierarchical cross-modal alignment framework for radiology report generation, aligning visual and textual features at paragraph, sentence, and word levels.</li>
+                    <li>We design a Visual Feature Pyramid (VFP) and a Text Feature Pyramid (TFP) to extract multi-scale visual features and multi-granularity textual representations.</li>
+                    <li>We introduce a Cross-modal Hierarchical Alignment (CHA) module based on optimal transport, enabling distribution-level alignment across modalities and semantic levels.</li>
+                    <li>We incorporate Relative Positional Encoding (RPE) into the decoder to improve token-level alignment and enhance semantic consistency in generated reports.</li>
                 </ul>
             </div>
 
@@ -353,44 +357,50 @@
                 <div class="method-figure">
                     <img src="imgs/riha-Figure 1.png" alt="Motivation: Multi-level visual-textual alignment in radiology reports" style="max-width: 92%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
                     <div class="figure-caption">
-                        <strong>Figure 1.</strong> A chest X-ray image alongside its corresponding radiology report. The boxes on the right display the individual sentences and extracted keywords from the report. Multi-level visual-textual alignments are indicated using matching colours to highlight their associations, motivating the need for hierarchical cross-modal alignment in RRG.
+                        <strong>Figure 1.</strong> A chest X-ray image and its corresponding radiology report, illustrating the hierarchical structure of paragraph-, sentence-, and word-level information. This highlights the need for multi-level visual-textual alignment.
                     </div>
                 </div>
             </div>
 
             <h2 class="section-title">Method Overview</h2>
             <div class="method-section">
-                <p>RIHA is an end-to-end transformer-based framework built around three core components: a <span class="highlight">Visual Feature Pyramid (VFP)</span>, a <span class="highlight">Text Feature Pyramid (TFP)</span>, and a <span class="highlight">Cross-modal Hierarchical Alignment (CHA)</span> module.</p>
+                <p>RIHA is designed to explicitly model the hierarchical structure of radiology reports and align it with visual representations at multiple levels.</p>
 
-                <p>The <span class="highlight">VFP</span> extracts multi-scale visual representations from chest X-ray images, capturing features at different levels of spatial granularity. The <span class="highlight">TFP</span> encodes the report text at multiple granularities — word, sentence, and paragraph — to construct a structured textual hierarchy. The <span class="highlight">CHA</span> module then performs joint hierarchical alignment between the visual and textual pyramids using optimal transport, ensuring that each level of visual abstraction is precisely matched to the corresponding textual granularity.</p>
+                <p>In the first stage, a <span class="highlight">Visual Feature Pyramid (VFP)</span> extracts multi-scale visual features, while a <span class="highlight">Text Feature Pyramid (TFP)</span> decomposes radiology reports into paragraph-, sentence-, and word-level representations. This design captures the hierarchical nature of both modalities.</p>
 
-                <p>Additionally, <span class="highlight">Relative Positional Encoding (RPE)</span> is integrated into the autoregressive decoder to model spatial and semantic token relationships, further strengthening token-level correspondence between visual features and generated text during report decoding.</p>
+                <p>In the second stage, a <span class="highlight">Cross-modal Hierarchical Alignment (CHA)</span> module aligns visual and textual features at each semantic level. This alignment is formulated as an optimal transport problem, allowing the model to establish fine-grained correspondences between visual regions and textual elements across different granularities.</p>
+
+                <p>In the third stage, the aligned features are used by a transformer-based encoder-decoder to generate reports. <span class="highlight">Relative Positional Encoding (RPE)</span> is incorporated to enhance token-level alignment by modeling contextual relationships between tokens.</p>
+
+                <p>This hierarchical alignment framework bridges the gap between visual features and structured clinical narratives, enabling more accurate and coherent report generation.</p>
 
                 <div class="method-figure">
                     <img src="imgs/riha-Figure 2.png" alt="RIHA Architecture Overview" style="max-width: 95%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
                     <div class="figure-caption">
-                        <strong>Figure 2.</strong> Overview of the RIHA framework. The Visual Feature Pyramid (VFP) and Text Feature Pyramid (TFP) capture multi-granularity representations from images and reports, respectively. The Cross-modal Hierarchical Alignment (CHA) module leverages optimal transport to align visual and textual features at paragraph, sentence, and word levels. Relative Positional Encoding (RPE) in the decoder enhances token-level alignment during report generation.
+                        <strong>Figure 2.</strong> Overview of the RIHA framework. Multi-scale visual features and multi-granularity textual representations are extracted by VFP and TFP, respectively, and aligned through the CHA module before report generation.
                     </div>
                 </div>
             </div>
 
             <h2 class="section-title">Results</h2>
             <div class="results-section">
-                <p>We evaluate RIHA on <strong>IU-Xray</strong> and <strong>MIMIC-CXR</strong>, two widely used chest X-ray report generation benchmarks. RIHA consistently outperforms existing state-of-the-art methods on both natural language generation metrics (BLEU, METEOR, ROUGE-L) and clinical efficacy metrics.</p>
+                <p>We evaluate RIHA on two benchmark datasets, <strong>IU-Xray</strong> and <strong>MIMIC-CXR</strong>, using both natural language generation (BLEU, METEOR, ROUGE-L, CIDEr) and clinical efficacy metrics.</p>
+
+                <p>The results show that RIHA consistently outperforms existing state-of-the-art methods across both datasets. The improvements are attributed to the proposed hierarchical alignment mechanism, which enables more precise mapping between visual features and structured report components.</p>
 
                 <div class="results-figure">
-                    <img src="imgs/riha-Figure 3.png" alt="Qualitative results of generated radiology reports" style="max-width: 90%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
+                    <img src="imgs/riha-Figure 3.png" alt="Cross-modal hierarchical alignment via optimal transport" style="max-width: 90%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
                     <div class="figure-caption">
-                        <strong>Figure 3.</strong> Qualitative comparison of generated radiology reports on MIMIC-CXR. RIHA produces more accurate and clinically coherent reports compared to existing methods, with better alignment between described findings and underlying image regions.
+                        <strong>Figure 3.</strong> Cross-modal hierarchical alignment using optimal transport. Visual features are treated as suppliers and textual features as customers, enabling fine-grained distribution-level alignment across modalities.
                     </div>
                 </div>
 
-                <p>Figure 4 visualises the cross-modal attention maps, demonstrating that RIHA learns meaningful keyword-to-region correspondences. The hierarchical alignment mechanism effectively directs attention to clinically relevant image regions when generating specific medical terms, validating the interpretability and clinical fidelity of the model.</p>
+                <p>Figure 4 further demonstrates the effectiveness of relative positional encoding in improving token-level alignment and report coherence.</p>
 
                 <div class="results-figure">
-                    <img src="imgs/riha-Figure 4.png" alt="Keyword attention visualization" style="max-width: 82%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
+                    <img src="imgs/riha-Figure 4.png" alt="Relative positional encoding in the transformer decoder" style="max-width: 82%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
                     <div class="figure-caption">
-                        <strong>Figure 4.</strong> Visualization of keyword attention maps generated by RIHA. The model attends to clinically relevant image regions when generating specific medical terms, demonstrating effective multi-level cross-modal alignment and interpretable report generation.
+                        <strong>Figure 4.</strong> Relative positional encoding in the transformer. Compared to absolute positional encoding, RPE captures contextual relationships between tokens, improving token-level alignment.
                     </div>
                 </div>
             </div>
