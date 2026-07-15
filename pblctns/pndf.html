@@ -1,0 +1,460 @@
+<!doctype html>
+<html itemscope lang="en-us" itemtype="http://schema.org/WebPage">
+
+<head>
+    <meta charset="utf-8">
+    <title>Seeing Through Multiple Views: Parameter-Efficient Fine-Tuning via Selective Neurons for Consistent Radiology Report Generation</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+    <meta name="theme-name" content="hugoplate">
+    <link rel="shortcut icon" href="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_96x0_resize_lanczos_3.png" type="image/x-icon">
+    <link rel="icon" href="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_96x0_resize_lanczos_3.png" type="image/x-icon">
+    <base href="https://medvisailab.github.io/pblctns/">
+
+    <meta name="description" content="View-PNDF is a parameter-efficient framework for view-consistent radiology report generation that detects, verifies, and fine-tunes view-specific neurons.">
+    <meta name="keywords" content="Radiology Report Generation, Chest X-ray, Multi-view Learning, Parameter-Efficient Fine-Tuning, View-specific Neurons, Medical AI, MICCAI 2026">
+    <meta name="author" content="MedVisAI Lab">
+
+    <meta property="og:title" content="Seeing Through Multiple Views: Parameter-Efficient Fine-Tuning via Selective Neurons for Consistent Radiology Report Generation">
+    <meta property="og:description" content="View-PNDF detects and fine-tunes view-specific neurons for consistent multi-view radiology report generation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://medvisailab.github.io/pblctns/pndf.html">
+
+    <meta name="twitter:title" content="Seeing Through Multiple Views: Parameter-Efficient Fine-Tuning via Selective Neurons for Consistent Radiology Report Generation">
+    <meta name="twitter:description" content="View-PNDF detects and fine-tunes view-specific neurons for consistent multi-view radiology report generation.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600&family=Signika:wght@500;700&display=swap" rel="stylesheet">
+
+    <link href="../css/style.min.80b93bb3a795f7194d0ca0c445309f1547c3c019264bfd28165ca93c97401b5d.css" rel="stylesheet">
+    <link href="../css/mvait-enhancements.css" rel="stylesheet">
+    <link href="../css/theme-fixes.css" rel="stylesheet">
+
+    <style>
+        .project-page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .project-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+
+        .dark .project-title {
+            color: #ecf0f1;
+        }
+
+        .authors {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #34495e;
+        }
+
+        .dark .authors {
+            color: #bdc3c7;
+        }
+
+        .author-name {
+            margin: 0 0.5rem;
+        }
+
+        .affiliation {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 0.5rem;
+        }
+
+        .dark .affiliation {
+            color: #95a5a6;
+        }
+
+        .links {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .link-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            margin: 0.5rem;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: background 0.3s ease;
+            font-weight: 600;
+        }
+
+        .link-btn:hover {
+            background: #2980b9;
+            color: white;
+        }
+
+        .link-btn.paper {
+            background: #e74c3c;
+        }
+
+        .link-btn.paper:hover {
+            background: #c0392b;
+        }
+
+        .link-btn.arxiv {
+            background: #9b59b6;
+        }
+
+        .link-btn.arxiv:hover {
+            background: #8e44ad;
+        }
+
+        .link-btn.github {
+            background: #2c3e50;
+        }
+
+        .link-btn.github:hover {
+            background: #34495e;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1rem 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        .dark .section-title {
+            color: #ecf0f1;
+        }
+
+        .abstract, .method-section, .results-section {
+            margin-bottom: 2rem;
+            text-align: justify;
+        }
+
+        .method-figure, .results-figure {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .method-figure img, .results-figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .figure-caption {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .dark .figure-caption {
+            color: #95a5a6;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8e6cf 0%, #dcedc1 100%);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+        }
+
+        .dark .highlight {
+            background: linear-gradient(120deg, #2c3e50 0%, #34495e 100%);
+            color: #ecf0f1;
+        }
+
+        .citation-box {
+            background: #f8f9fa !important;
+        }
+
+        .dark .citation-box {
+            background: #2c3e50 !important;
+        }
+
+        .citation-box pre {
+            color: #000 !important;
+        }
+
+        .dark .citation-box pre {
+            color: #ecf0f1 !important;
+        }
+
+        .contributions {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #3498db;
+            margin: 1.5rem 0;
+        }
+
+        .dark .contributions {
+            background: #2c3e50;
+            color: #ecf0f1;
+        }
+
+        .contributions ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+
+        .contributions li {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .project-page {
+                padding: 1rem;
+            }
+
+            .project-title {
+                font-size: 2rem;
+            }
+
+            .link-btn {
+                display: block;
+                margin: 0.5rem auto;
+                max-width: 220px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header sticky top-0 z-30">
+        <nav class="navbar container">
+            <div class="order-0">
+                <a class="navbar-brand block" href="../">
+                    <img fetchpriority="high" decoding="async" class="img logo-light" width="160" height="32"
+                        src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                        alt="MedVisAITechnologies"
+                        onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                    <img fetchpriority="high" decoding="async" class="img logo-dark" width="160" height="32"
+                        src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                        alt="MedVisAITechnologies"
+                        onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                </a>
+            </div>
+
+            <input id="nav-toggle" type="checkbox" class="hidden">
+            <label id="show-button" for="nav-toggle" class="order-2 flex cursor-pointer items-center md:order-1 md:hidden">
+                <svg class="h-6 fill-current" viewBox="0 0 20 20">
+                    <title>Menu Open</title>
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0V0z" />
+                </svg>
+            </label>
+
+            <label id="hide-button" for="nav-toggle" class="order-2 hidden cursor-pointer items-center md:order-1">
+                <svg class="h-6 fill-current" viewBox="0 0 20 20">
+                    <title>Menu Close</title>
+                    <polygon points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2" transform="rotate(45 10 10)" />
+                </svg>
+            </label>
+
+            <ul id="nav-menu" class="navbar-nav order-3 hidden w-full pb-6 lg:order-1 lg:flex lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8">
+                <li class="nav-item"><a class="nav-link" href="../">MVAIT</a></li>
+                <li class="nav-item"><a class="nav-link" href="../team">Team</a></li>
+                <li class="nav-item"><a class="nav-link" href="../research/">Research</a></li>
+                <li class="nav-item"><a class="nav-link" href="../projects">Project Funding</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pos/">Positions</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pblctns">Publications</a></li>
+                <li class="mt-4 inline-block lg:hidden"><a class="btn btn-outline-primary btn-sm" href="../eml">Contact</a></li>
+            </ul>
+
+            <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
+                <div class="theme-switcher mr-5">
+                    <input id="theme-switcher" data-theme-switcher type="checkbox">
+                    <label for="theme-switcher">
+                        <span class="sr-only">theme switcher</span>
+                        <span>
+                            <svg class="absolute left-[4px] top-[4px] z-10 opacity-100 dark:opacity-0" viewBox="0 0 56 56" fill="#fff" height="16" width="16">
+                                <path d="M30 4.6c0-1-.9-2-2-2a2 2 0 00-2 2v5c0 1 .9 2 2 2s2-1 2-2zm9.6 9a2 2 0 000 2.8c.8.8 2 .8 2.9.0L46 13a2 2 0 000-2.9 2 2 0 00-3 0zm-26 2.8c.7.8 2 .8 2.8.0.8-.7.8-2 0-2.9L13 10c-.7-.7-2-.8-2.9.0-.7.8-.7 2.1.0 3zM28 16A12 12 0 0016 28a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0028 16zm23.3 14c1.1.0 2-.9 2-2s-.9-2-2-2h-4.9a2 2 0 00-2 2c0 1.1 1 2 2 2zM4.7 26a2 2 0 00-2 2c0 1.1.9 2 2 2h4.9c1 0 2-.9 2-2s-1-2-2-2zm37.8 13.6a2 2 0 00-3 0 2 2 0 000 2.9l3.6 3.5a2 2 0 002.9.0c.8-.8.8-2.1.0-3zM10 43.1a2 2 0 000 2.9c.8.7 2.1.8 3 0l3.4-3.5c.8-.8.8-2.1.0-2.9s-2-.8-2.9.0zm20 3.4c0-1.1-.9-2-2-2a2 2 0 00-2 2v4.9c0 1 .9 2 2 2s2-1 2-2z" />
+                            </svg>
+                            <svg class="absolute left-[4px] top-[4px] z-10 opacity-0 dark:opacity-100" viewBox="0 0 24 24" fill="none" height="16" width="16">
+                                <path fill="#000" fill-rule="evenodd" clip-rule="evenodd" d="M8.2 2.2c1-.4 2 .6 1.6 1.5-1 3-.4 6.4 1.8 8.7a8.4 8.4.0 008.7 1.8c1-.3 2 .5 1.5 1.5v.1A10.3 10.3.0 0112.4 22 10.3 10.3.0 013.2 6.7c1-2 2.9-3.5 4.9-4.4z" />
+                            </svg>
+                        </span>
+                    </label>
+                </div>
+                <script>
+                    var themeSwitch, darkMode = !0;
+                    localStorage.getItem("theme") === "dark" ? darkMode = !0 : localStorage.getItem("theme") === "light" && (darkMode = !1);
+                    darkMode && document.documentElement.classList.toggle("dark");
+                    themeSwitch = document.querySelectorAll("[data-theme-switcher]");
+                    document.addEventListener("DOMContentLoaded", () => {
+                        [].forEach.call(themeSwitch, function (e) {
+                            e.checked = !!darkMode;
+                            e.addEventListener("click", () => {
+                                document.documentElement.classList.toggle("dark");
+                                localStorage.setItem("theme", document.documentElement.classList.contains("dark") ? "dark" : "light")
+                            })
+                        })
+                    });
+                </script>
+                <a href="../eml" class="btn btn-outline-primary btn-sm hidden lg:inline-block">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="project-page">
+            <h1 class="project-title">
+                Seeing Through Multiple Views: Parameter-Efficient Fine-Tuning via Selective Neurons for Consistent Radiology Report Generation
+            </h1>
+
+            <div class="authors">
+                <div style="margin-bottom: 1rem;">
+                    <span class="author-name">Yucheng Chen</span>
+                    <span class="author-name">Jinjing Zhu</span>
+                    <span class="author-name">Yang Yu</span>
+                    <span class="author-name">Yufei Shi</span>
+                    <span class="author-name">Hane Naghshbandi</span>
+                    <span class="author-name">Jinhua Liu</span>
+                    <span class="author-name">Angela S. Koh</span>
+                    <span class="author-name">Fang Fen</span>
+                    <span class="author-name">Kian Eng Ong</span>
+                    <span class="author-name">Si Yong Yeo</span>
+                </div>
+
+                <div class="affiliation">
+                    MedVisAI Lab, Nanyang Technological University, Singapore; Centre of AI in Medicine, Singapore; and collaborating clinical partners
+                </div>
+            </div>
+
+            <div class="links">
+                <a href="https://arxiv.org/pdf/2606.31099" class="link-btn paper" target="_blank">📄 Paper</a>
+                <a href="https://arxiv.org/abs/2606.31099" class="link-btn arxiv" target="_blank">📚 arXiv</a>
+                <a href="https://doi.org/10.48550/arXiv.2606.31099" class="link-btn" target="_blank">🔗 DOI</a>
+            </div>
+
+            <h2 class="section-title">Abstract</h2>
+            <div class="abstract">
+                <p>Radiology report generation from <span class="highlight">multi-view chest X-rays</span> remains challenging because most existing methods directly fuse visual features across views. This often ignores view-specific behaviors inside the model and may lead to inconsistent findings across frontal and lateral studies.</p>
+
+                <p>To address this, the paper proposes <span class="highlight">View-PNDF</span>, a parameter-efficient framework that studies report generation from a neuronal perspective. Instead of updating the whole model, View-PNDF identifies view-sensitive neurons, verifies whether they truly encode view-specific patterns, and then selectively fine-tunes only those neurons to improve report consistency and clinical reliability.</p>
+
+                <p>The framework further uses large language models to consolidate view-specific reports into a complete radiology report, and demonstrates strong gains on benchmark radiology report generation tasks while preserving robust general-view performance.</p>
+            </div>
+
+            <h2 class="section-title">Key Contributions</h2>
+            <div class="contributions">
+                <ul>
+                    <li><strong>Neuron-level view modeling:</strong> The paper reframes multi-view radiology report generation through the lens of view-specific neurons rather than only feature fusion.</li>
+                    <li><strong>View-PNDF framework:</strong> It introduces a three-part pipeline with view-specific neuron detection (VND), verification (VNV), and fine-tuning (VNF).</li>
+                    <li><strong>Parameter-efficient adaptation:</strong> Only detected view-specific neurons are updated, reducing computational overhead while preserving view-agnostic knowledge.</li>
+                    <li><strong>Better view consistency:</strong> The method improves report quality for different chest X-ray views and supports more reliable integrated reporting.</li>
+                </ul>
+            </div>
+
+            <h2 class="section-title">Method Overview</h2>
+            <div class="method-section">
+                <p>View-PNDF is designed for <span class="highlight">consistent multi-view radiology report generation</span>. The core idea is that a vision-language model for report generation contains neurons that respond differently to frontal and lateral chest X-rays. If these neurons can be found and selectively adapted, the model can become more view-aware without expensive end-to-end retraining.</p>
+
+                <div class="method-figure">
+                    <img src="imgs/pndf-Figure 1.png" alt="Overall framework of View-PNDF" style="max-width: 95%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
+                    <div class="figure-caption">
+                        <strong>Figure 1.</strong> The overall framework of View-PNDF, which consists of four components: the transformer structure in VLMs for RRG; View-specific Neuron Detection (VND) module identifies neurons associated with the specific views of chest X-rays; View-specific Neuron Verification (VNV) module verifies the detected pattern neurons; and View-specific Neuron Fine-tuning (VNF) module fine-tunes the detected view-specific neurons for RRG network.
+                    </div>
+                </div>
+
+                <p>The full framework contains three key modules:</p>
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>VND:</strong> detects neurons that react strongly to a particular chest X-ray view.</li>
+                    <li><strong>VNV:</strong> validates whether these neurons indeed encode view-specific patterns rather than noise.</li>
+                    <li><strong>VNF:</strong> selectively fine-tunes those neurons for report generation while retaining view-agnostic representations.</li>
+                </ul>
+
+                <p>This structure gives the model a cleaner balance between <span class="highlight">specialization for each view</span> and <span class="highlight">shared medical knowledge</span>, which is especially useful when generating consistent findings across multi-view studies.</p>
+            </div>
+
+            <h2 class="section-title">Results & Ablation</h2>
+            <div class="results-section">
+                <p>The paper evaluates View-PNDF on benchmark radiology report generation settings and shows that neuron-level selective tuning can improve view-specific reporting quality without sacrificing the broader performance of the base model.</p>
+
+                <p>A particularly important part of the study is the ablation analysis on <strong>MIMIC-CXR</strong>, which examines whether the proposed detection, verification, and fine-tuning pipeline is genuinely necessary.</p>
+
+                <div class="results-figure">
+                    <img src="imgs/pndf-Figure 2.png" alt="Ablation studies of VND, VNV, and VNF on MIMIC-CXR" style="max-width: 90%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
+                    <div class="figure-caption">
+                        <strong>Figure 2.</strong> Ablation studies of VND, VNV, and VNF on MIMIC-CXR dataset. (a) VND yields steeper performance drops than random deactivation, confirming neuron specificity. (b) VNF boosts lateral metrics while maintaining frontal quality. (c) Sample output from InternVL-DA-Medical-4B.
+                    </div>
+                </div>
+
+                <p>These results support three main findings: the detected neurons are not random, the fine-tuning strategy benefits harder lateral-view generation in particular, and the final model produces more consistent view-specific reports that are easier to integrate into a coherent final report.</p>
+            </div>
+
+            <h2 class="section-title">Citation</h2>
+            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; font-family: monospace; font-size: 0.9rem; overflow-x: auto;" class="citation-box">
+<pre style="margin: 0; color: #000;">@misc{chen2026viewpndf,
+  title={Seeing Through Multiple Views: Parameter-Efficient Fine-Tuning via Selective Neurons for Consistent Radiology Report Generation},
+  author={Chen, Yucheng and Zhu, Jinjing and Yu, Yang and Shi, Yufei and Naghshbandi, Hane and Liu, Jinhua and Koh, Angela S. and Fen, Fang and Ong, Kian Eng and Yeo, Si Yong},
+  year={2026},
+  eprint={2606.31099},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV},
+  doi={10.48550/arXiv.2606.31099},
+  note={Accepted by MICCAI 2026}
+}</pre>
+            </div>
+
+            <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 1rem;">
+                <h3 style="margin-bottom: 1rem;">Accepted by MICCAI 2026</h3>
+                <p style="margin: 0; font-size: 1.1rem;">Medical Image Computing and Computer Assisted Intervention</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-theme-light dark:bg-darkmode-theme-light">
+        <div class="container">
+            <div class="row items-center py-10">
+                <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:text-left">
+                    <a class="navbar-brand inline-block" href="../">
+                        <img fetchpriority="high" decoding="async" class="img logo-light" width="160" height="32"
+                            src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                            alt="MedVisAITechnologies"
+                            onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                        <img fetchpriority="high" decoding="async" class="img logo-dark" width="160" height="32"
+                            src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_q90_h2_lanczos_3.webp"
+                            alt="MedVisAITechnologies"
+                            onerror='this.onerror=null,this.src="../imgs/logo_hu1e0a0ed9ef631b29b11507eedded13fb_83803_320x0_resize_lanczos_3.png"'>
+                    </a>
+                </div>
+                <div class="lg:col-6 mb-8 text-center lg:mb-0">
+                    <ul>
+                        <li class="m-3 inline-block"><a href="../about/">About</a></li>
+                        <li class="m-3 inline-block"><a href="../eml">Contact</a></li>
+                        <li class="m-3 inline-block"><a href="../location/">Location</a></li>
+                    </ul>
+                </div>
+                <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:mt-0 lg:text-right">
+                    <ul class="social-icons">
+                        <li><a target="_blank" aria-label="facebook" rel="nofollow noopener" href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a></li>
+                        <li><a target="_blank" aria-label="twitter" rel="nofollow noopener" href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
+                        <li><a target="_blank" aria-label="github" rel="nofollow noopener" href="https://www.github.com/"><i class="fab fa-github"></i></a></li>
+                        <li><a target="_blank" aria-label="linkedin" rel="nofollow noopener" href="https://www.linkedin.com/"><i class="fab fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="border-border dark:border-darkmode-border border-t py-7">
+            <div class="text-light dark:text-darkmode-light container text-center">
+                <p></p>
+            </div>
+        </div>
+    </footer>
+
+    <script crossorigin="anonymous" integrity="sha256-HNvx23yefzYJie2GA7dzwBeKevXtramA+LX4E7XFReM="
+        src="../js/script.min.1cdbf1db7c9e7f360989ed8603b773c0178a7af5edada980f8b5f813b5c545e3.js"></script>
+</body>
+
+</html>
