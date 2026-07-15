@@ -62,13 +62,18 @@
         }
 
         .author-name {
-            margin: 0 0.5rem;
+            display: inline-block;
+            margin: 0 0.3rem 0.4rem;
         }
 
         .affiliation {
-            font-style: italic;
             color: #7f8c8d;
-            margin-top: 0.5rem;
+            margin-top: 0.75rem;
+            line-height: 1.5;
+        }
+
+        .affiliation-line {
+            display: block;
         }
 
         .dark .affiliation {
@@ -314,27 +319,31 @@
 
             <div class="authors">
                 <div style="margin-bottom: 1rem;">
-                    <span class="author-name">Yucheng Chen</span>
-                    <span class="author-name">Jinjing Zhu</span>
-                    <span class="author-name">Yang Yu</span>
-                    <span class="author-name">Yufei Shi</span>
-                    <span class="author-name">Hane Naghshbandi</span>
-                    <span class="author-name">Jinhua Liu</span>
-                    <span class="author-name">Angela S. Koh</span>
-                    <span class="author-name">Fang Fen</span>
-                    <span class="author-name">Kian Eng Ong</span>
-                    <span class="author-name">Si Yong Yeo</span>
+                    <span class="author-name">Yucheng Chen<sup>1,2,3</sup>,</span>
+                    <span class="author-name">Jinjing Zhu<sup>4</sup>,</span>
+                    <span class="author-name">Yang Yu<sup>5</sup>,</span>
+                    <span class="author-name">Yufei Shi<sup>1,2</sup>,</span>
+                    <span class="author-name">Hane Naghshbandi<sup>1,2,3</sup>,</span>
+                    <span class="author-name">Jinhua Liu<sup>1,2</sup>,</span>
+                    <span class="author-name">Angela S. Koh<sup>6</sup>,</span>
+                    <span class="author-name">Fang Fen<sup>5</sup>,</span>
+                    <span class="author-name">Kian Eng Ong<sup>1</sup>,</span>
+                    <span class="author-name">and Si Yong Yeo<sup>1,2,3</sup><sup style="font-size: 0.7em;">*</sup></span>
                 </div>
 
                 <div class="affiliation">
-                    MedVisAI Lab, Nanyang Technological University, Singapore; Centre of AI in Medicine, Singapore; and collaborating clinical partners
+                    <span class="affiliation-line"><sup>1</sup> MedVisAI Lab</span>
+                    <span class="affiliation-line"><sup>2</sup> Lee Kong Chian School of Medicine, Nanyang Technological University, Singapore</span>
+                    <span class="affiliation-line"><sup>3</sup> Centre of AI in Medicine, Singapore</span>
+                    <span class="affiliation-line"><sup>4</sup> The Chinese University of Hong Kong, Sha Tin, New Territories, Hong Kong</span>
+                    <span class="affiliation-line"><sup>5</sup> Institute for Infocomm Research (I<sup>2</sup>R), A*STAR, Singapore</span>
+                    <span class="affiliation-line"><sup>6</sup> National Heart Centre Singapore (NHCS), Singapore</span>
                 </div>
             </div>
 
             <div class="links">
                 <a href="https://arxiv.org/pdf/2606.31099" class="link-btn paper" target="_blank">📄 Paper</a>
                 <a href="https://arxiv.org/abs/2606.31099" class="link-btn arxiv" target="_blank">📚 arXiv</a>
-                <a href="https://doi.org/10.48550/arXiv.2606.31099" class="link-btn" target="_blank">🔗 DOI</a>
             </div>
 
             <h2 class="section-title">Abstract</h2>
